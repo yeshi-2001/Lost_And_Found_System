@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import FoundItemForm from './components/FoundItemForm';
 import LostItemForm from './components/LostItemForm';
+import Profile from './components/Profile';
 import Matches from './components/Matches';
 import Verification from './components/Verification';
 import Navbar from './components/Navbar';
@@ -72,11 +73,15 @@ function App() {
           />
           <Route 
             path="/found-item" 
-            element={user ? <FoundItemForm token={token} /> : <Navigate to="/login" />} 
+            element={user ? <FoundItemForm token={token} user={user} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/lost-item" 
-            element={user ? <LostItemForm token={token} /> : <Navigate to="/login" />} 
+            element={user ? <LostItemForm token={token} user={user} /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/profile" 
+            element={user ? <Profile user={user} token={token} onLogout={logout} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/matches" 
@@ -88,7 +93,7 @@ function App() {
           />
           <Route 
             path="/" 
-            element={<Navigate to="/home" />} 
+            element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} 
           />
         </Routes>
       </div>

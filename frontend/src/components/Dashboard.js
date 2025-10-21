@@ -21,23 +21,25 @@ const Dashboard = ({ user }) => {
   const loadDashboardData = async () => {
     try {
       const [foundResponse, lostResponse, matchesResponse] = await Promise.all([
-        itemsAPI.getFoundItems(),
-        itemsAPI.getLostItems(),
-        verificationAPI.getMatches(user.id)
+        itemsAPI.getFoundItems().catch(err => ({ data: { items: [] } })),
+        itemsAPI.getLostItems().catch(err => ({ data: { items: [] } })),
+        verificationAPI.getMatches(user.id).catch(err => ({ data: { matches: [] } }))
       ]);
 
       setStats({
-        foundItems: foundResponse.data.items.length,
-        lostItems: lostResponse.data.items.length,
-        matches: matchesResponse.data.matches.length
+        foundItems: foundResponse.data.items?.length || 0,
+        lostItems: lostResponse.data.items?.length || 0,
+        matches: matchesResponse.data.matches?.length || 0
       });
 
       setRecentItems({
-        found: foundResponse.data.items.slice(0, 3),
-        lost: lostResponse.data.items.slice(0, 3)
+        found: foundResponse.data.items?.slice(0, 3) || [],
+        lost: lostResponse.data.items?.slice(0, 3) || []
       });
     } catch (error) {
       console.error('Error loading dashboard data:', error);
+      setStats({ foundItems: 0, lostItems: 0, matches: 0 });
+      setRecentItems({ found: [], lost: [] });
     } finally {
       setLoading(false);
     }
@@ -117,10 +119,24 @@ const Dashboard = ({ user }) => {
           {recentItems.found.length > 0 ? (
             recentItems.found.map(item => (
               <div key={item.id} style={{ padding: '15px', borderBottom: '1px solid #eee' }}>
-                <h4 style={{ margin: '0 0 5px 0' }}>{item.item_name}</h4>
-                <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
-                  {item.category} • {item.location_found} • {item.reference_number}
-                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 5px 0' }}>{item.item_name}</h4>
+                    <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+                      {item.category} • {item.location} • {item.reference_id}
+                    </p>
+                  </div>
+                  <span style={{
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    background: item.status === 'returned' ? '#d4edda' : '#e7f3ff',
+                    color: item.status === 'returned' ? '#155724' : '#0066cc'
+                  }}>
+                    {item.status === 'returned' ? '✅ Returned' : '📱 Active'}
+                  </span>
+                </div>
               </div>
             ))
           ) : (
@@ -138,10 +154,24 @@ const Dashboard = ({ user }) => {
           {recentItems.lost.length > 0 ? (
             recentItems.lost.map(item => (
               <div key={item.id} style={{ padding: '15px', borderBottom: '1px solid #eee' }}>
-                <h4 style={{ margin: '0 0 5px 0' }}>{item.item_name}</h4>
-                <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
-                  {item.category} • {item.location_lost} • {item.reference_number}
-                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 5px 0' }}>{item.item_name}</h4>
+                    <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+                      {item.category} • {item.location} • {item.reference_id}
+                    </p>
+                  </div>
+                  <span style={{
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    background: item.status === 'recovered' ? '#d4edda' : '#fff3cd',
+                    color: item.status === 'recovered' ? '#155724' : '#856404'
+                  }}>
+                    {item.status === 'recovered' ? '✅ Recovered' : '🔍 Searching'}
+                  </span>
+                </div>
               </div>
             ))
           ) : (

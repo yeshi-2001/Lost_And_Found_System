@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://postgres:yeshika@localhost:5432/lost_found_db')
 
 def add_verification_tables():
     try:
@@ -56,10 +56,10 @@ def add_verification_tables():
         cur.close()
         conn.close()
         
-        print("✅ Verification tables created successfully!")
+        print("Verification tables created successfully!")
         
     except Exception as e:
-        print(f"❌ Error creating verification tables: {e}")
+        print(f"Error creating verification tables: {e}")
 
 if __name__ == '__main__':
     add_verification_tables()

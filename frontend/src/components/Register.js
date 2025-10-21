@@ -52,9 +52,9 @@ const Register = ({ onLogin }) => {
   };
 
   return (
-    <div style={{width: '100vw', height: '832px', position: 'relative', backgroundColor: '#EBF5FD', overflow: 'hidden'}}>
-      <div style={{width: '100%', height: '146px', left: 0, top: 0, position: 'absolute', background: '#03045E'}} />
-      <div style={{width: '1119px', height: '673px', left: '188px', top: '74px', position: 'absolute', backgroundColor: 'white', borderRadius: '20px', boxShadow: '0px 4px 4px 3px rgba(0,0,0,0.25)'}} />
+    <div style={{width: '100vw', height: '100vh', position: 'relative', backgroundColor: '#EBF5FD', overflow: 'hidden'}}>
+      <div style={{width: '100%', height: '18vh', left: 0, top: 0, position: 'absolute', background: '#03045E'}} />
+      <div style={{width: 'calc(100vw - 160px)', height: 'calc(100vh - 120px)', left: '80px', top: '9vh', position: 'absolute', backgroundColor: 'white', borderRadius: '20px', boxShadow: '0px 4px 4px 3px rgba(0,0,0,0.25)'}} />
       <img style={{width: '827px', height: '552px', left: '-28px', top: '382px', position: 'absolute', opacity: 0.6}} src="../../image/bg.png" />
       <div style={{width: '224px', height: '224px', left: '113px', top: '17px', position: 'absolute', backgroundColor: 'white', borderRadius: '50%'}} />
       <img style={{width: '224px', height: '224px', left: '113px', top: '17px', position: 'absolute', objectFit: 'cover', objectPosition: 'center', borderRadius: '50%'}} src="image/logo2_1.png" />
@@ -139,7 +139,7 @@ const Register = ({ onLogin }) => {
         
         <button 
           type="submit" 
-          style={{width: '384px', height: '64px', left: '760px', top: '582px', position: 'absolute', backgroundColor: '#3B82F6', borderRadius: '10px', border: 'none', color: 'white', fontSize: '24px', fontFamily: 'Calibri', cursor: 'pointer'}}
+          style={{width: '384px', height: '64px', left: '760px', top: '582px', position: 'absolute', backgroundColor: '#03045E', borderRadius: '10px', border: 'none', color: 'white', fontSize: '24px', fontFamily: 'Calibri', cursor: 'pointer'}}
           disabled={loading}
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
@@ -148,10 +148,10 @@ const Register = ({ onLogin }) => {
       
       <div style={{left: '815px', top: '672px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '24px', fontFamily: 'Calibri'}}>
         Already have an account? 
-        <span style={{color: '#3B82F6', cursor: 'pointer', marginLeft: '5px'}} onClick={handleSignInClick}>Sign In</span>
+        <span style={{color: '#03045E', cursor: 'pointer', marginLeft: '5px'}} onClick={handleSignInClick}>Sign In</span>
       </div>
       
-      <div style={{width: '384px', height: '56px', left: '377px', top: '143px', position: 'absolute', color: '#1E3A8A', fontSize: '48px', fontWeight: 'bold', fontFamily: 'Calibri'}}>Welcome Back to</div>
+      <div style={{width: '384px', height: '56px', left: '377px', top: '143px', position: 'absolute', color: '#03045E', fontSize: '48px', fontWeight: 'bold', fontFamily: 'Calibri'}}>Welcome Back to</div>
       <div style={{width: '160px', height: '56px', left: '377px', top: '217px', position: 'absolute', color: 'black', fontSize: '48px', fontWeight: 'bold', fontFamily: 'Calibri'}}>Back2U</div>
       <div style={{width: '288px', height: '56px', left: '377px', top: '299px', position: 'absolute', color: 'black', fontSize: '24px', fontFamily: 'Calibri'}}>Your trusted space to recover and return rightful owners</div>
       <div style={{width: '192px', height: '28px', left: '375px', top: '397px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '28px', fontWeight: 'bold', fontFamily: 'Calibri'}}>Create your account</div>

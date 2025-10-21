@@ -23,8 +23,7 @@ const Verification = ({ token }) => {
       const response = await verificationAPI.generateQuestions(matchId);
       setQuestions(response.data.questions);
       setAnswers(new Array(response.data.questions.length).fill(''));
-      setAttemptId(response.data.attempt_id);
-      setMatchInfo(response.data.match_info);
+      setMatchInfo({ match_id: matchId, similarity_score: 85 }); // Mock data for now
     } catch (error) {
       setError(error.response?.data?.error || 'Failed to generate questions');
     } finally {
@@ -52,8 +51,14 @@ const Verification = ({ token }) => {
     setError('');
 
     try {
-      const response = await verificationAPI.submitAnswers(attemptId, answers);
-      setResult(response.data);
+      const response = await verificationAPI.submitAnswers(matchId, answers);
+      setResult({
+        verified: response.data.verified,
+        verification_result: {
+          overall_percentage: response.data.score
+        },
+        message: response.data.message
+      });
     } catch (error) {
       setError(error.response?.data?.error || 'Failed to submit answers');
     } finally {
@@ -88,33 +93,26 @@ const Verification = ({ token }) => {
                 <p><strong>Questions Answered:</strong> {questions.length} of {questions.length}</p>
                 <p><strong>Accuracy:</strong> {Math.round(result.verification_result.overall_percentage)}%</p>
                 <p><strong>Status:</strong> ✅ VERIFIED</p>
+                <p><strong>Message:</strong> {result.message}</p>
               </div>
 
-              {result.contact_info && (
-                <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
-                  <h3>Finder's Contact Information:</h3>
-                  <p><strong>📱 Name:</strong> {result.contact_info.finder.name}</p>
-                  <p><strong>📞 Phone:</strong> {result.contact_info.finder.phone}</p>
-                  <p><strong>📧 Registration:</strong> {result.contact_info.finder.registration}</p>
-                  
-                  <div style={{ marginTop: '20px', padding: '15px', background: '#e7f3ff', borderRadius: '8px' }}>
-                    <h4>Next Steps:</h4>
-                    <ol style={{ textAlign: 'left', margin: '10px 0' }}>
-                      <li>Contact the finder to arrange pickup</li>
-                      <li>Verify the item in person</li>
-                      <li>Mark as "Successfully Recovered" after receiving</li>
-                    </ol>
-                  </div>
-                </div>
-              )}
+              <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
+                <h3>Next Steps:</h3>
+                <ol style={{ textAlign: 'left', margin: '10px 0' }}>
+                  <li>Go back to matches to see contact information</li>
+                  <li>Contact the finder to arrange pickup</li>
+                  <li>Verify the item in person</li>
+                  <li>Mark as "Successfully Recovered" after receiving</li>
+                </ol>
+              </div>
 
               <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <a 
-                  href={`tel:${result.contact_info?.finder.phone}`}
+                <button 
+                  onClick={() => navigate('/matches')}
                   className="btn btn-success"
                 >
-                  📞 Call Finder
-                </a>
+                  📞 View Contact Info
+                </button>
                 <button 
                   onClick={() => navigate('/dashboard')}
                   className="btn btn-primary"
@@ -137,6 +135,7 @@ const Verification = ({ token }) => {
                 <p><strong>Questions Answered:</strong> {questions.length} of {questions.length}</p>
                 <p><strong>Accuracy:</strong> {Math.round(result.verification_result.overall_percentage)}%</p>
                 <p><strong>Status:</strong> ❌ NOT VERIFIED</p>
+                <p><strong>Message:</strong> {result.message}</p>
               </div>
 
               <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>

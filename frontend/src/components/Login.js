@@ -34,9 +34,9 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div style={{width: '100vw', height: '832px', position: 'relative', background: '#EBF5FD', overflow: 'hidden'}}>
-      <div style={{width: '100%', height: '146px', left: 0, top: 0, position: 'absolute', background: '#03045E'}} />
-      <div style={{width: 1119, height: 673, left: 188, top: 74, position: 'absolute', background: 'white', boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', borderRadius: 20}} />
+    <div style={{width: '100vw', height: '100vh', position: 'relative', background: '#EBF5FD', overflow: 'hidden'}}>
+      <div style={{width: '100%', height: '18vh', left: 0, top: 0, position: 'absolute', background: '#03045E'}} />
+      <div style={{width: 'calc(100vw - 160px)', height: 'calc(100vh - 120px)', left: '80px', top: '9vh', position: 'absolute', background: 'white', boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', borderRadius: 20}} />
       <div style={{left: 377, top: 130, position: 'absolute', color: '#03045E', fontSize: 50, fontFamily: 'Calibri', fontWeight: '700', wordWrap: 'break-word'}}>Welcome Back to </div>
       <div style={{left: 377, top: 202, position: 'absolute', color: 'black', fontSize: 50, fontFamily: 'Calibri', fontWeight: '700', wordWrap: 'break-word'}}>Back2U</div>
       <img style={{width: 827, height: 552, left: -49, top: 399, position: 'absolute', opacity: 0.60}} src="../../image/bg.png" />
@@ -76,7 +76,7 @@ const Login = ({ onLogin }) => {
         
         <button 
           type="submit" 
-          style={{width: 420, height: 66, left: 760, top: 515, position: 'absolute', background: '#2E72F9', borderRadius: 10, border: 'none', color: 'white', fontSize: 28, fontFamily: 'Calibri', cursor: 'pointer'}}
+          style={{width: 420, height: 66, left: 760, top: 515, position: 'absolute', background: '#03045E', borderRadius: 10, border: 'none', color: 'white', fontSize: 28, fontFamily: 'Calibri', cursor: 'pointer'}}
           disabled={loading}
         >
           {loading ? 'Logging in...' : 'Login'}
@@ -84,7 +84,7 @@ const Login = ({ onLogin }) => {
       </form>
       
       <div style={{left: 802, top: 610, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 24, fontFamily: 'Calibri', fontWeight: '400', wordWrap: 'break-word'}}>Don't have an account? 
-        <Link to="/register" style={{color: '#2E72F9', textDecoration: 'none'}}>Sign Up</Link>
+        <Link to="/register" style={{color: '#03045E', textDecoration: 'none'}}>Sign Up</Link>
       </div>
     </div>
   );

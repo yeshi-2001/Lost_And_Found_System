@@ -59,8 +59,12 @@ export const authAPI = {
 
 // Items API
 export const itemsAPI = {
-  submitFoundItem: (itemData) => api.post('/found-items', itemData),
-  submitLostItem: (itemData) => api.post('/lost-items', itemData),
+  submitFoundItem: (itemData) => api.post('/found-items', itemData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
+  submitLostItem: (itemData) => api.post('/lost-items', itemData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
   getFoundItems: () => api.get('/found-items'),
   getLostItems: () => api.get('/lost-items'),
   getFormOptions: () => api.get('/form-options'),
@@ -71,9 +75,15 @@ export const itemsAPI = {
 
 // Verification API
 export const verificationAPI = {
-  getMatches: (userId) => api.get(`/matches/${userId}`),
-  generateQuestions: (matchId) => api.post(`/verification/questions/${matchId}`, {}),
-  submitAnswers: (attemptId, answers) => api.post(`/verification/submit/${attemptId}`, { answers }),
+  getMatches: () => api.get('/matches/user'),
+  generateQuestions: (matchId) => api.post('/verification/generate-questions', { match_id: matchId }),
+  submitAnswers: (matchId, answers) => api.post('/verification/verify-answers', { match_id: matchId, answers }),
+};
+
+// Returns API
+export const returnsAPI = {
+  confirmReturn: (matchId) => api.post(`/returns/confirm/${matchId}`, {}),
+  getReturnStatus: (matchId) => api.get(`/returns/status/${matchId}`),
 };
 
 // Debug API

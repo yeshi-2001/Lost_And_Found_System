@@ -46,7 +46,7 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #03045E;
 }
 
 .form-group textarea {
@@ -69,12 +69,12 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #03045E;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #001D3D;
 }
 
 .btn-success {
@@ -126,10 +126,11 @@
 
 /* Navbar */
 .navbar {
-  background-color: #007bff;
+  background-color: #03045E;
   color: white;
-  padding: 15px 0;
+  padding: 37px 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1;
 }
 
 .navbar-content {
@@ -248,7 +249,7 @@
 }
 
 .question-number {
-  background: #007bff;
+  background: #03045E;
   color: white;
   width: 30px;
   height: 30px;
@@ -293,7 +294,7 @@
 
 .spinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
+  border-top: 4px solid #03045E;
   border-radius: 50%;
   width: 40px;
   height: 40px;
