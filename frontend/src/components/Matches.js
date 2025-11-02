@@ -7,6 +7,8 @@ const Matches = ({ user, token }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [contactInfo, setContactInfo] = useState({});
+  const [showingContact, setShowingContact] = useState({});
 
   useEffect(() => {
     loadMatches();
@@ -31,6 +33,20 @@ const Matches = ({ user, token }) => {
     } catch (error) {
       setError(error.response?.data?.error || 'Failed to confirm return');
     }
+  };
+
+  const handleViewContact = async (matchId) => {
+    try {
+      const response = await verificationAPI.getContactInfo(matchId);
+      setContactInfo(prev => ({ ...prev, [matchId]: response.data }));
+      setShowingContact(prev => ({ ...prev, [matchId]: true }));
+    } catch (error) {
+      setError(error.response?.data?.error || 'Failed to load contact information');
+    }
+  };
+
+  const hideContact = (matchId) => {
+    setShowingContact(prev => ({ ...prev, [matchId]: false }));
   };
 
   if (loading) {
@@ -130,16 +146,33 @@ const Matches = ({ user, token }) => {
                       </Link>
                     )}
                     {match.status === 'verified' && (
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                        <input 
-                          type="checkbox"
-                          onChange={() => handleConfirmReturn(match.id)}
-                          style={{ transform: 'scale(1.2)' }}
-                        />
-                        <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#28a745' }}>
-                          Mark as Received
-                        </span>
-                      </label>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-end' }}>
+                        <button
+                          onClick={() => handleViewContact(match.id)}
+                          style={{
+                            background: '#28a745',
+                            color: 'white',
+                            padding: '8px 16px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            fontSize: '14px',
+                            cursor: 'pointer',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          📞 View Contact
+                        </button>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input 
+                            type="checkbox"
+                            onChange={() => handleConfirmReturn(match.id)}
+                            style={{ transform: 'scale(1.2)' }}
+                          />
+                          <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#28a745' }}>
+                            Mark as Received
+                          </span>
+                        </label>
+                      </div>
                     )}
                     {(match.status === 'returned_to_owner' || match.status === 'returned_by_finder') && (
                       <div style={{ 
@@ -157,16 +190,33 @@ const Matches = ({ user, token }) => {
                 ) : (
                   <div style={{ textAlign: 'right' }}>
                     {match.status === 'verified' && (
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px' }}>
-                        <input 
-                          type="checkbox"
-                          onChange={() => handleConfirmReturn(match.id)}
-                          style={{ transform: 'scale(1.2)' }}
-                        />
-                        <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#28a745' }}>
-                          Mark as Returned
-                        </span>
-                      </label>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-end', marginBottom: '8px' }}>
+                        <button
+                          onClick={() => handleViewContact(match.id)}
+                          style={{
+                            background: '#28a745',
+                            color: 'white',
+                            padding: '8px 16px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            fontSize: '14px',
+                            cursor: 'pointer',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          📞 View Contact
+                        </button>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input 
+                            type="checkbox"
+                            onChange={() => handleConfirmReturn(match.id)}
+                            style={{ transform: 'scale(1.2)' }}
+                          />
+                          <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#28a745' }}>
+                            Mark as Returned
+                          </span>
+                        </label>
+                      </div>
                     )}
                     <div style={{ 
                       background: match.status === 'verified' ? '#d4edda' : 
@@ -221,6 +271,58 @@ const Matches = ({ user, token }) => {
                   </div>
                 </div>
               </div>
+
+              {/* Contact Information Display */}
+              {showingContact[match.id] && contactInfo[match.id] && (
+                <div style={{ marginTop: '20px', padding: '20px', background: '#e8f5e8', borderRadius: '12px', border: '2px solid #28a745' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                    <h4 style={{ margin: 0, color: '#155724', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      📞 Contact Information - {contactInfo[match.id].role === 'finder' ? 'Finder' : 'Owner'}
+                    </h4>
+                    <button
+                      onClick={() => hideContact(match.id)}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        fontSize: '20px',
+                        cursor: 'pointer',
+                        color: '#666'
+                      }}
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+                    <div>
+                      <strong style={{ color: '#155724' }}>Name:</strong>
+                      <p style={{ margin: '5px 0', fontSize: '16px', fontWeight: 'bold' }}>
+                        {contactInfo[match.id].contact_name}
+                      </p>
+                    </div>
+                    <div>
+                      <strong style={{ color: '#155724' }}>Phone:</strong>
+                      <p style={{ margin: '5px 0', fontSize: '16px', fontWeight: 'bold' }}>
+                        <a href={`tel:${contactInfo[match.id].contact_number}`} style={{ color: '#28a745', textDecoration: 'none' }}>
+                          {contactInfo[match.id].contact_number}
+                        </a>
+                      </p>
+                    </div>
+                    <div>
+                      <strong style={{ color: '#155724' }}>Email:</strong>
+                      <p style={{ margin: '5px 0', fontSize: '16px', fontWeight: 'bold' }}>
+                        <a href={`mailto:${contactInfo[match.id].contact_email}`} style={{ color: '#28a745', textDecoration: 'none' }}>
+                          {contactInfo[match.id].contact_email}
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: '15px', padding: '10px', background: '#d4edda', borderRadius: '6px' }}>
+                    <p style={{ margin: 0, fontSize: '14px', color: '#155724' }}>
+                      📞 <strong>Next Step:</strong> Contact them to arrange {match.user_role === 'owner' ? 'pickup' : 'handover'} of the item.
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Show different next steps based on match status and user role */}
               {match.user_role === 'owner' ? (

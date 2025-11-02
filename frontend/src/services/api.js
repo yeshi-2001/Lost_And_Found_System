@@ -78,6 +78,7 @@ export const verificationAPI = {
   getMatches: () => api.get('/matches/user'),
   generateQuestions: (matchId) => api.post('/verification/generate-questions', { match_id: matchId }),
   submitAnswers: (matchId, answers) => api.post('/verification/verify-answers', { match_id: matchId, answers }),
+  getContactInfo: (matchId) => api.get(`/matches/${matchId}/contact`),
 };
 
 // Returns API

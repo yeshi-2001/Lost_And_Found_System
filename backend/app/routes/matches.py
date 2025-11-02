@@ -92,8 +92,55 @@ def get_user_matches():
             'found_description': match.found_item.description or '',
             'user_role': user_role
         }
+        
+        # Add contact information only if verified
+        if match.status == 'verified':
+            if user_role == 'owner':
+                # Owner can see finder's contact
+                match_data['contact_name'] = match.found_item.user.name
+                match_data['contact_number'] = match.found_item.user.contact_number
+                match_data['contact_email'] = match.found_item.user.email
+            else:
+                # Finder can see owner's contact
+                match_data['contact_name'] = match.lost_item.user.name
+                match_data['contact_number'] = match.lost_item.user.contact_number
+                match_data['contact_email'] = match.lost_item.user.email
+        
         match_list.append(match_data)
     
     return jsonify({
         'matches': match_list
+    }), 200
+
+@matches_bp.route('/<int:match_id>/contact', methods=['GET'])
+@jwt_required()
+def get_contact_info(match_id):
+    """Get contact information for verified matches"""
+    user_id = int(get_jwt_identity())
+    match = Match.query.get_or_404(match_id)
+    
+    # Check if user is involved in this match
+    if (match.lost_item.user_id != user_id and 
+        match.found_item.user_id != user_id):
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    # Only show contact info if verified
+    if match.status != 'verified':
+        return jsonify({'error': 'Match not yet verified'}), 400
+    
+    # Determine user role and return appropriate contact
+    if match.lost_item.user_id == user_id:
+        # User is the owner, show finder's contact
+        contact_user = match.found_item.user
+        role = 'finder'
+    else:
+        # User is the finder, show owner's contact
+        contact_user = match.lost_item.user
+        role = 'owner'
+    
+    return jsonify({
+        'contact_name': contact_user.name,
+        'contact_number': contact_user.contact_number,
+        'contact_email': contact_user.email,
+        'role': role
     }), 200
