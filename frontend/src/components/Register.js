@@ -13,6 +13,13 @@ const Register = ({ onLogin }) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [passwordValidation, setPasswordValidation] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false
+  });
 
   const departments = [
     'Department of Computer Science',
@@ -23,17 +30,40 @@ const Register = ({ onLogin }) => {
     'Faculty of Siddha Medicine'
   ];
 
+  const validatePassword = (password) => {
+    return {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
+    if (name === 'password') {
+      setPasswordValidation(validatePassword(value));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    // Check password validation
+    const isPasswordValid = Object.values(passwordValidation).every(Boolean);
+    if (!isPasswordValid) {
+      setError('Please ensure your password meets all security requirements');
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await authAPI.register(formData);
@@ -125,7 +155,29 @@ const Register = ({ onLogin }) => {
           />
         </div>
         
-        <div style={{width: '384px', height: '48px', left: '760px', top: '514px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
+        {/* Password Validation */}
+        {formData.password && (
+          <div style={{width: '384px', left: '760px', top: '490px', position: 'absolute', backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '4px', padding: '10px', fontSize: '14px', fontFamily: 'Calibri'}}>
+            <div style={{fontWeight: 'bold', marginBottom: '8px', color: '#03045E'}}>Password Requirements:</div>
+            <div style={{color: passwordValidation.length ? '#28a745' : '#dc3545'}}>
+              {passwordValidation.length ? '✓' : '✗'} At least 8 characters
+            </div>
+            <div style={{color: passwordValidation.uppercase ? '#28a745' : '#dc3545'}}>
+              {passwordValidation.uppercase ? '✓' : '✗'} One uppercase letter
+            </div>
+            <div style={{color: passwordValidation.lowercase ? '#28a745' : '#dc3545'}}>
+              {passwordValidation.lowercase ? '✓' : '✗'} One lowercase letter
+            </div>
+            <div style={{color: passwordValidation.number ? '#28a745' : '#dc3545'}}>
+              {passwordValidation.number ? '✓' : '✗'} One number
+            </div>
+            <div style={{color: passwordValidation.special ? '#28a745' : '#dc3545'}}>
+              {passwordValidation.special ? '✓' : '✗'} One special character (!@#$%^&*)
+            </div>
+          </div>
+        )}
+        
+        <div style={{width: '384px', height: '48px', left: '760px', top: formData.password ? '614px' : '514px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
           <input
             type="tel"
             name="contact_number"
@@ -139,14 +191,14 @@ const Register = ({ onLogin }) => {
         
         <button 
           type="submit" 
-          style={{width: '384px', height: '64px', left: '760px', top: '582px', position: 'absolute', backgroundColor: '#03045E', borderRadius: '10px', border: 'none', color: 'white', fontSize: '24px', fontFamily: 'Calibri', cursor: 'pointer'}}
+          style={{width: '384px', height: '64px', left: '760px', top: formData.password ? '682px' : '582px', position: 'absolute', backgroundColor: '#03045E', borderRadius: '10px', border: 'none', color: 'white', fontSize: '24px', fontFamily: 'Calibri', cursor: 'pointer'}}
           disabled={loading}
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
       
-      <div style={{left: '815px', top: '672px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '24px', fontFamily: 'Calibri'}}>
+      <div style={{left: '815px', top: formData.password ? '772px' : '672px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '24px', fontFamily: 'Calibri'}}>
         Already have an account? 
         <span style={{color: '#03045E', cursor: 'pointer', marginLeft: '5px'}} onClick={handleSignInClick}>Sign In</span>
       </div>
