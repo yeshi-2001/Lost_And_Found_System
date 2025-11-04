@@ -20,6 +20,10 @@ const Register = ({ onLogin }) => {
     number: false,
     special: false
   });
+  const [emailValidation, setEmailValidation] = useState({
+    isValid: false,
+    message: ''
+  });
 
   const departments = [
     'Department of Computer Science',
@@ -40,6 +44,19 @@ const Register = ({ onLogin }) => {
     };
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValid = emailRegex.test(email);
+    
+    if (!email) {
+      return { isValid: false, message: '' };
+    } else if (!isValid) {
+      return { isValid: false, message: 'Please enter a valid email address' };
+    } else {
+      return { isValid: true, message: 'Valid email format' };
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -49,6 +66,8 @@ const Register = ({ onLogin }) => {
     
     if (name === 'password') {
       setPasswordValidation(validatePassword(value));
+    } else if (name === 'email') {
+      setEmailValidation(validateEmail(value));
     }
   };
 
@@ -56,6 +75,13 @@ const Register = ({ onLogin }) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    // Check email validation
+    if (!emailValidation.isValid && formData.email) {
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
 
     // Check password validation
     const isPasswordValid = Object.values(passwordValidation).every(Boolean);
@@ -116,19 +142,26 @@ const Register = ({ onLogin }) => {
           />
         </div>
         
-        <div style={{width: '384px', height: '48px', left: '760px', top: '286px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
+        <div style={{width: '384px', height: '48px', left: '760px', top: '286px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : 'rgba(0,0,0,0.6)'}`, borderRadius: '4px'}}>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter your email"
+            placeholder="Enter your email (e.g., student@university.edu)"
             style={{width: '100%', height: '100%', border: 'none', backgroundColor: 'transparent', padding: '0 45px', fontSize: '18px', fontFamily: 'Calibri', color: 'black', outline: 'none'}}
             required
           />
         </div>
         
-        <div style={{width: '384px', height: '48px', left: '760px', top: '363px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
+        {/* Email Validation */}
+        {formData.email && emailValidation.message && (
+          <div style={{width: '384px', left: '760px', top: '342px', position: 'absolute', padding: '5px 10px', fontSize: '14px', fontFamily: 'Calibri', color: emailValidation.isValid ? '#28a745' : '#dc3545'}}>
+            {emailValidation.isValid ? '✓' : '✗'} {emailValidation.message}
+          </div>
+        )}
+        
+        <div style={{width: '384px', height: '48px', left: '760px', top: formData.email && emailValidation.message ? '383px' : '363px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
           <select
             name="department"
             value={formData.department}
@@ -143,7 +176,7 @@ const Register = ({ onLogin }) => {
           </select>
         </div>
         
-        <div style={{width: '384px', height: '48px', left: '760px', top: '434px', position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
+        <div style={{width: '384px', height: '48px', left: '760px', top: (formData.email && emailValidation.message ? '454px' : '434px'), position: 'absolute', backgroundColor: 'rgba(239, 245, 253, 0.5)', border: '1px solid rgba(0,0,0,0.6)', borderRadius: '4px'}}>
           <input
             type="password"
             name="password"
@@ -157,7 +190,7 @@ const Register = ({ onLogin }) => {
         
         {/* Password Validation */}
         {formData.password && (
-          <div style={{width: '384px', left: '760px', top: '490px', position: 'absolute', backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '4px', padding: '10px', fontSize: '14px', fontFamily: 'Calibri'}}>
+          <div style={{width: '384px', left: '760px', top: (formData.email && emailValidation.message ? '510px' : '490px'), position: 'absolute', backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '4px', padding: '10px', fontSize: '14px', fontFamily: 'Calibri'}}>
             <div style={{fontWeight: 'bold', marginBottom: '8px', color: '#03045E'}}>Password Requirements:</div>
             <div style={{color: passwordValidation.length ? '#28a745' : '#dc3545'}}>
               {passwordValidation.length ? '✓' : '✗'} At least 8 characters
