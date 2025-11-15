@@ -141,42 +141,9 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <div style={{display: 'flex', height: '100vh', fontFamily: 'Inter, sans-serif', background: 'white'}}>
-      {/* Sidebar */}
-      <div style={{width: 280, background: '#EBF5FD', padding: 20, display: 'flex', flexDirection: 'column'}}>
-        {/* Logo */}
-        <div style={{display: 'flex', alignItems: 'center', marginBottom: 40}}>
-          <img style={{width: 80, height: 80, objectFit: 'contain', marginRight: 15}} src="/image/logo2%201.png" alt="Logo" />
-          <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '800', margin: 0}}>Back2U</h1>
-        </div>
-        
-        {/* Navigation */}
-        <nav style={{flex: 1}}>
-          <div style={{background: 'white', padding: 15, borderRadius: 15, marginBottom: 20, boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}}>
-            <div style={{color: '#03045E', fontSize: 16, fontWeight: '700'}}>Dashboard</div>
-          </div>
-          
-          <Link to="/found-item" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>Report Found</Link>
-          <Link to="/lost-item" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>Report Lost</Link>
-          <Link to="/matches" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>My Matches</Link>
-          <Link to="/cleanup" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>🗑️ Clean Up Items</Link>
-        </nav>
-        
-        {/* Bottom Menu */}
-        <div style={{marginTop: 'auto'}}>
-          <Link to="/profile" style={{textDecoration: 'none', display: 'flex', alignItems: 'center', padding: '10px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>
-            <img style={{width: 24, height: 24, marginRight: 10}} src="/image/Gear.png" alt="Settings" />
-            Settings
-          </Link>
-          <div style={{display: 'flex', alignItems: 'center', padding: '10px 0', color: '#03045E', fontSize: 16, fontWeight: '700', cursor: 'pointer'}} onClick={() => window.location.href = '/login'}>
-            <img style={{width: 24, height: 24, marginRight: 10}} src="/image/exit.svg" alt="Logout" />
-            Log Out
-          </div>
-        </div>
-      </div>
-      
+    <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif', background: '#F9FAFB'}}>
       {/* Main Content */}
-      <div style={{flex: 1, padding: 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
+      <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
         {/* Header */}
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>

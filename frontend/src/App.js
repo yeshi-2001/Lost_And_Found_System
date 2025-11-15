@@ -13,6 +13,7 @@ import Matches from './components/Matches';
 import Verification from './components/Verification';
 import ItemCleanup from './components/ItemCleanup';
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import './App.css';
 
 function AppContent() {
@@ -43,9 +44,12 @@ function AppContent() {
     localStorage.removeItem('user');
   };
 
+  const showSidebar = user && !['/login', '/register', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
+
   return (
     <div className="App">
-      {user && location.pathname !== '/dashboard' && <Navbar user={user} onLogout={logout} />}
+      {showSidebar && <Sidebar user={user} onLogout={logout} />}
+      {user && !showSidebar && location.pathname !== '/home' && <Navbar user={user} onLogout={logout} />}
         
         <Routes>
           <Route 
