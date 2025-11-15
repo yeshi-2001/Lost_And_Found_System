@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { itemsAPI, verificationAPI } from '../services/api';
+import DeleteConfirmation from './DeleteConfirmation';
 
 const Dashboard = ({ user }) => {
   const [stats, setStats] = useState({
@@ -16,6 +17,7 @@ const Dashboard = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, itemId: null, itemType: null, itemName: '' });
 
   useEffect(() => {
     loadDashboardData();
@@ -41,6 +43,32 @@ const Dashboard = ({ user }) => {
       });
     } catch (error) {
       console.error('Error loading dashboard data:', error);
+    }
+  };
+
+  const handleDeleteItem = (itemId, itemType, itemName) => {
+    setDeleteModal({ isOpen: true, itemId, itemType, itemName });
+  };
+
+  const confirmDelete = async (reason) => {
+    try {
+      const response = await fetch(`/api/items/${deleteModal.itemId}/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ type: deleteModal.itemType, reason })
+      });
+      
+      if (response.ok) {
+        // Reload dashboard data
+        loadDashboardData();
+      } else {
+        console.error('Failed to delete item');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
     }
   };
 
@@ -104,6 +132,7 @@ const Dashboard = ({ user }) => {
           <Link to="/found-item" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>Report Found</Link>
           <Link to="/lost-item" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>Report Lost</Link>
           <Link to="/matches" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>My Matches</Link>
+          <Link to="/cleanup" style={{textDecoration: 'none', display: 'block', padding: '15px 0', color: '#03045E', fontSize: 16, fontWeight: '700'}}>🗑️ Clean Up Items</Link>
         </nav>
         
         {/* Bottom Menu */}
@@ -240,8 +269,18 @@ const Dashboard = ({ user }) => {
             {recentItems.found.length > 0 ? (
               recentItems.found.map((item, index) => (
                 <div key={item.id || index} style={{marginBottom: 15, paddingBottom: 10, borderBottom: index < recentItems.found.length - 1 ? '1px solid #eee' : 'none'}}>
-                  <div style={{fontSize: 14, fontWeight: '600', color: '#333', marginBottom: 2}}>{item.item_name || 'Unknown Item'}</div>
-                  <div style={{fontSize: 12, color: '#666'}}>{item.category || 'Category'} • {item.location || 'Location'}</div>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <div>
+                      <div style={{fontSize: 14, fontWeight: '600', color: '#333', marginBottom: 2}}>{item.item_name || 'Unknown Item'}</div>
+                      <div style={{fontSize: 12, color: '#666'}}>{item.category || 'Category'} • {item.location || 'Location'}</div>
+                    </div>
+                    <button 
+                      style={{background: '#EF4444', color: 'white', border: 'none', borderRadius: 4, padding: '4px 8px', fontSize: 12, cursor: 'pointer'}}
+                      onClick={() => handleDeleteItem(item.id, 'found', item.item_name)}
+                    >
+                      ✗
+                    </button>
+                  </div>
                 </div>
               ))
             ) : (
@@ -255,8 +294,18 @@ const Dashboard = ({ user }) => {
             {recentItems.lost.length > 0 ? (
               recentItems.lost.map((item, index) => (
                 <div key={item.id || index} style={{marginBottom: 15, paddingBottom: 10, borderBottom: index < recentItems.lost.length - 1 ? '1px solid #eee' : 'none'}}>
-                  <div style={{fontSize: 14, fontWeight: '600', color: '#333', marginBottom: 2}}>{item.item_name || 'Unknown Item'}</div>
-                  <div style={{fontSize: 12, color: '#666'}}>{item.category || 'Category'} • {item.location || 'Location'}</div>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <div>
+                      <div style={{fontSize: 14, fontWeight: '600', color: '#333', marginBottom: 2}}>{item.item_name || 'Unknown Item'}</div>
+                      <div style={{fontSize: 12, color: '#666'}}>{item.category || 'Category'} • {item.location || 'Location'}</div>
+                    </div>
+                    <button 
+                      style={{background: '#EF4444', color: 'white', border: 'none', borderRadius: 4, padding: '4px 8px', fontSize: 12, cursor: 'pointer'}}
+                      onClick={() => handleDeleteItem(item.id, 'lost', item.item_name)}
+                    >
+                      ✗
+                    </button>
+                  </div>
                 </div>
               ))
             ) : (
@@ -265,6 +314,14 @@ const Dashboard = ({ user }) => {
           </div>
         </div>
       </div>
+      
+      <DeleteConfirmation
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ isOpen: false, itemId: null, itemType: null, itemName: '' })}
+        onConfirm={confirmDelete}
+        itemName={deleteModal.itemName}
+        itemType={deleteModal.itemType}
+      />
     </div>
   );
 };

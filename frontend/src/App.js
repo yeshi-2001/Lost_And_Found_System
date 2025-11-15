@@ -11,6 +11,7 @@ import LostItemForm from './components/LostItemForm';
 import Profile from './components/Profile';
 import Matches from './components/Matches';
 import Verification from './components/Verification';
+import ItemCleanup from './components/ItemCleanup';
 import Navbar from './components/Navbar';
 import './App.css';
 
@@ -90,6 +91,10 @@ function AppContent() {
           <Route 
             path="/verification/:matchId" 
             element={user ? <Verification token={token} /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/cleanup" 
+            element={user ? <ItemCleanup user={user} token={token} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/" 
