@@ -18,9 +18,16 @@ const Dashboard = ({ user }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, itemId: null, itemType: null, itemName: '' });
+  const [welcomeInfo, setWelcomeInfo] = useState({
+    welcome_message: 'Welcome back!',
+    activity_message: 'Everything is just as you left it ✨',
+    change_details: [],
+    changes: {}
+  });
 
   useEffect(() => {
     loadDashboardData();
+    loadWelcomeInfo();
   }, []);
 
   const loadDashboardData = async () => {
@@ -43,6 +50,23 @@ const Dashboard = ({ user }) => {
       });
     } catch (error) {
       console.error('Error loading dashboard data:', error);
+    }
+  };
+
+  const loadWelcomeInfo = async () => {
+    try {
+      const response = await fetch('/api/dashboard/welcome-info', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setWelcomeInfo(data);
+      }
+    } catch (error) {
+      console.error('Error loading welcome info:', error);
     }
   };
 
@@ -152,8 +176,22 @@ const Dashboard = ({ user }) => {
       <div style={{flex: 1, padding: 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
         {/* Header */}
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>Welcome Back {user?.name || 'User'} 👋</h1>
-          <p style={{fontSize: 18, color: '#666', margin: 0}}>Manage your lost and found items from your dashboard</p>
+          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>
+          <p style={{fontSize: 18, color: '#666', margin: '0 0 10px 0'}}>{welcomeInfo.activity_message}</p>
+          {welcomeInfo.change_details.length > 0 && (
+            <div style={{background: '#EBF5FD', padding: 15, borderRadius: 10, border: '1px solid #2E72F9'}}>
+              <div style={{fontSize: 14, fontWeight: '600', color: '#03045E', marginBottom: 8}}>What's New:</div>
+              <div style={{fontSize: 14, color: '#03045E'}}>{welcomeInfo.change_details.join(' • ')}</div>
+              <div style={{marginTop: 10, display: 'flex', gap: 10}}>
+                {welcomeInfo.changes.new_matches > 0 && (
+                  <Link to="/matches" style={{background: '#2E72F9', color: 'white', padding: '6px 12px', borderRadius: 6, textDecoration: 'none', fontSize: 12}}>View Matches</Link>
+                )}
+                {welcomeInfo.changes.pending_verifications > 0 && (
+                  <Link to="/matches" style={{background: '#F59E0B', color: 'white', padding: '6px 12px', borderRadius: 6, textDecoration: 'none', fontSize: 12}}>Complete Verification</Link>
+                )}
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Search Bar */}

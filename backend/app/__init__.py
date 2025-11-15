@@ -54,6 +54,7 @@ def create_app():
     from app.routes.returns import returns_bp
     from app.routes.admin import admin_bp
     from app.routes.deletion import deletion_bp
+    from app.routes.dashboard import dashboard_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(found_items_bp, url_prefix='/api/found-items')
@@ -66,6 +67,7 @@ def create_app():
     app.register_blueprint(returns_bp, url_prefix='/api/returns')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     app.register_blueprint(deletion_bp, url_prefix='/api')
+    app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
     
     # Log all requests
     @app.before_request
