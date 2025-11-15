@@ -59,15 +59,9 @@ const Matches = ({ user, token }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, fontFamily: 'Inter, sans-serif'}}>
+    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
       <div style={{maxWidth: 1200, margin: '0 auto'}}>
         <div style={{marginBottom: 30}}>
-          <button 
-            style={{background: 'none', border: 'none', color: '#03045E', fontSize: 16, cursor: 'pointer', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8}}
-            onClick={() => navigate('/dashboard')}
-          >
-            ← Back to Dashboard
-          </button>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>🎯 Your Potential Matches</h1>
         </div>
 

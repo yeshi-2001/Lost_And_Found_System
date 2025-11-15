@@ -143,7 +143,7 @@ const Dashboard = ({ user }) => {
   return (
     <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif', background: '#F9FAFB'}}>
       {/* Main Content */}
-      <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
+      <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
         {/* Header */}
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>

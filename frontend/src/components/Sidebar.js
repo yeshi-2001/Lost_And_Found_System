@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import MobileMenuButton from './MobileMenuButton';
 
 const Sidebar = ({ user, onLogout }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsMobileOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: '🏠' },
@@ -154,26 +168,10 @@ const Sidebar = ({ user, onLogout }) => {
   return (
     <>
       {/* Mobile Menu Button */}
-      <button
-        style={{
-          display: window.innerWidth <= 768 ? 'flex' : 'none',
-          position: 'fixed',
-          top: 20,
-          left: 20,
-          zIndex: 1001,
-          background: '#03045E',
-          color: 'white',
-          border: 'none',
-          borderRadius: 8,
-          padding: 12,
-          cursor: 'pointer',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-        onClick={() => setIsMobileOpen(true)}
-      >
-        ☰
-      </button>
+      <MobileMenuButton 
+        onToggle={() => setIsMobileOpen(!isMobileOpen)}
+        isOpen={isMobileOpen}
+      />
 
       {/* Desktop Sidebar */}
       <div
@@ -188,7 +186,7 @@ const Sidebar = ({ user, onLogout }) => {
           display: 'flex',
           flexDirection: 'column',
           zIndex: 1000,
-          transform: window.innerWidth <= 768 ? 'translateX(-100%)' : 'translateX(0)',
+          transform: isMobile ? 'translateX(-100%)' : 'translateX(0)',
           transition: 'transform 0.3s ease'
         }}
       >
@@ -196,7 +194,7 @@ const Sidebar = ({ user, onLogout }) => {
       </div>
 
       {/* Mobile Sidebar Overlay */}
-      {isMobileOpen && (
+      {isMobile && isMobileOpen && (
         <>
           <div
             style={{
@@ -225,21 +223,6 @@ const Sidebar = ({ user, onLogout }) => {
               transition: 'transform 0.3s ease'
             }}
           >
-            <button
-              style={{
-                position: 'absolute',
-                top: 20,
-                right: 20,
-                background: 'none',
-                border: 'none',
-                fontSize: 24,
-                cursor: 'pointer',
-                color: '#6B7280'
-              }}
-              onClick={() => setIsMobileOpen(false)}
-            >
-              ×
-            </button>
             <SidebarContent />
           </div>
         </>
