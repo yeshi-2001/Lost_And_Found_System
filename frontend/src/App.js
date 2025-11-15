@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Login from './components/Login';
 import Register from './components/Register';
 import Terms from './components/Terms';
+import AboutUs from './components/AboutUs';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Home from './components/Home';
@@ -64,6 +65,10 @@ function AppContent() {
           <Route 
             path="/terms" 
             element={<Terms />} 
+          />
+          <Route 
+            path="/about-us" 
+            element={<AboutUs />} 
           />
           <Route 
             path="/forgot-password" 
