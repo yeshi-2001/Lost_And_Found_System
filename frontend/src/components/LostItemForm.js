@@ -626,10 +626,10 @@ const LostItemForm = ({ token, user }) => {
   return (
     <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
       <div style={{maxWidth: 800, margin: '0 auto'}}>
-        <div style={{marginBottom: 30}}>
+        <div style={{marginBottom: 30, textAlign: 'center'}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>Report Lost Item</h1>
           <p style={{fontSize: 18, color: '#666', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
-          <p style={{fontSize: 16, color: '#03045E', margin: 0, display: 'flex', alignItems: 'center', gap: 8}}>🔍 We'll search our database for matches</p>
+          <p style={{fontSize: 16, color: '#03045E', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>🔍 We'll search our database for matches</p>
         </div>
 
         <form style={{background: 'white', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} onSubmit={handleSubmit}>

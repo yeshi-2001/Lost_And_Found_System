@@ -141,9 +141,23 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif', background: '#F9FAFB'}}>
+    <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif'}}>
       {/* Main Content */}
-      <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, overflow: 'auto'}} onClick={() => setShowResults(false)}>
+      <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, overflow: 'auto', position: 'relative'}} onClick={() => setShowResults(false)}>
+        {/* Background Image with Opacity */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/image/bg.png)',
+          backgroundSize: '80%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.4,
+          zIndex: -1
+        }}></div>
         {/* Header */}
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>
@@ -230,15 +244,15 @@ const Dashboard = ({ user }) => {
         <div style={{background: 'rgba(0, 119, 182, 0.50)', borderRadius: 20, padding: 30, marginBottom: 30}}>
           <h2 style={{color: '#03045E', fontSize: 20, fontWeight: '800', marginBottom: 20}}>Your Statistics</h2>
           <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20}}>
-            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white'}}>
+            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white', boxShadow: '0 4px 8px rgba(0,0,0,0.4)'}}>
               <div style={{fontSize: 24, fontWeight: '600', color: 'black', marginBottom: 5}}>{stats.foundItems}</div>
               <div style={{fontSize: 16, fontWeight: '600', color: 'black'}}>Items Found</div>
             </div>
-            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white'}}>
+            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white', boxShadow: '0 4px 8px rgba(0,0,0,0.4)'}}>
               <div style={{fontSize: 24, fontWeight: '600', color: 'black', marginBottom: 5}}>{stats.lostItems}</div>
               <div style={{fontSize: 16, fontWeight: '600', color: 'black'}}>Items Lost</div>
             </div>
-            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white'}}>
+            <div style={{background: '#EBF5FD', padding: 20, borderRadius: 12, textAlign: 'center', border: '2px solid white', boxShadow: '0 4px 8px rgba(0,0,0,0.4)'}}>
               <div style={{fontSize: 24, fontWeight: '600', color: 'black', marginBottom: 5}}>{stats.matches}</div>
               <div style={{fontSize: 16, fontWeight: '600', color: 'black'}}>Potential Matches</div>
             </div>
@@ -272,7 +286,9 @@ const Dashboard = ({ user }) => {
         {/* Recent Items */}
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20}}>
           {/* Recent Found Items */}
-          <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 20}}>
+          <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 20, position: 'relative'}}>
+            <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/icon_g1.png)', backgroundSize: '50%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.1, borderRadius: 20, zIndex: 0}}></div>
+            <div style={{position: 'relative', zIndex: 1}}>
             <h3 style={{fontSize: 16, fontWeight: '800', marginBottom: 15}}>Recent Found Items</h3>
             {recentItems.found.length > 0 ? (
               recentItems.found.map((item, index) => (
@@ -294,10 +310,13 @@ const Dashboard = ({ user }) => {
             ) : (
               <div style={{fontSize: 12, color: '#999', textAlign: 'center', padding: 20}}>No found items yet</div>
             )}
+            </div>
           </div>
           
           {/* Recent Lost Items */}
-          <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 20}}>
+          <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 20, position: 'relative'}}>
+            <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/icon1.png)', backgroundSize: '50%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.1, borderRadius: 20, zIndex: 0}}></div>
+            <div style={{position: 'relative', zIndex: 1}}>
             <h3 style={{fontSize: 16, fontWeight: '800', marginBottom: 15}}>Recent Lost Items</h3>
             {recentItems.lost.length > 0 ? (
               recentItems.lost.map((item, index) => (
@@ -319,6 +338,7 @@ const Dashboard = ({ user }) => {
             ) : (
               <div style={{fontSize: 12, color: '#999', textAlign: 'center', padding: 20}}>No lost items yet</div>
             )}
+            </div>
           </div>
         </div>
       </div>

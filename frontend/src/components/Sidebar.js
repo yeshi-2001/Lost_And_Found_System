@@ -21,18 +21,18 @@ const Sidebar = ({ user, onLogout }) => {
   }, []);
 
   const menuItems = [
-    { path: '/dashboard', label: 'Dashboard', icon: '🏠' },
-    { path: '/lost-item', label: 'Report Lost Item', icon: '🔍' },
-    { path: '/found-item', label: 'Report Found Item', icon: '📦' },
-    { path: '/my-items', label: 'My Items', icon: '📋' },
-    { path: '/matches', label: 'Matches', icon: '🎯' },
-    { path: '/notifications', label: 'Notifications', icon: '🔔' },
-    { path: '/messages', label: 'Messages', icon: '💬' }
+    { path: '/dashboard', label: 'Dashboard', icon: '⌂' },
+    { path: '/lost-item', label: 'Report Lost Item', icon: '⚠' },
+    { path: '/found-item', label: 'Report Found Item', icon: '⊞' },
+    { path: '/my-items', label: 'My Items', icon: '☰' },
+    { path: '/matches', label: 'Matches', icon: '◉' },
+    { path: '/notifications', label: 'Notifications', icon: '◐' },
+    { path: '/messages', label: 'Messages', icon: '✉' }
   ];
 
   const bottomItems = [
-    { path: '/profile', label: 'Settings', icon: '⚙️' },
-    { path: '/help', label: 'Help & Support', icon: '❓' }
+    { path: '/profile', label: 'Settings', icon: '⚙' },
+    { path: '/help', label: 'Help & Support', icon: '?' }
   ];
 
   const handleLogout = () => {
@@ -43,124 +43,89 @@ const Sidebar = ({ user, onLogout }) => {
   const SidebarContent = () => (
     <>
       {/* Logo Section */}
-      <div style={{padding: '20px', borderBottom: '1px solid #E5E7EB'}}>
-        <div style={{display: 'flex', alignItems: 'center', marginBottom: '20px'}}>
-          <img style={{width: 40, height: 40, marginRight: 12}} src="/image/logo2%201.png" alt="Logo" />
-          <h1 style={{color: '#03045E', fontSize: 24, fontWeight: '800', margin: 0}}>Back2U</h1>
-        </div>
-        
-        {/* User Profile */}
-        <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
-          <div style={{width: 40, height: 40, borderRadius: '50%', background: '#EBF5FD', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18}}>
-            {user?.name?.charAt(0) || 'U'}
-          </div>
-          <div>
-            <div style={{fontSize: 14, fontWeight: '600', color: '#1F2937'}}>{user?.name || 'User'}</div>
-            <div style={{fontSize: 12, color: '#6B7280'}}>Student</div>
-          </div>
+      <div style={{padding: '20px'}}>
+        <div style={{display: 'flex', alignItems: 'center', marginBottom: '40px'}}>
+          <img style={{width: 80, height: 80, objectFit: 'contain', marginRight: 15}} src="/image/logo2_1.png" alt="Logo" />
+          <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '800', margin: 0}}>Back2U</h1>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div style={{padding: '20px 0', flex: 1}}>
-        {menuItems.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-              padding: '12px 20px',
-              textDecoration: 'none',
-              color: location.pathname === item.path ? '#03045E' : '#6B7280',
-              background: location.pathname === item.path ? '#EBF5FD' : 'transparent',
-              borderRight: location.pathname === item.path ? '3px solid #03045E' : 'none',
-              fontSize: 14,
-              fontWeight: location.pathname === item.path ? '600' : '500',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              if (location.pathname !== item.path) {
-                e.target.style.background = '#F9FAFB';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (location.pathname !== item.path) {
-                e.target.style.background = 'transparent';
-              }
-            }}
-            onClick={() => setIsMobileOpen(false)}
-          >
-            <span style={{fontSize: 16}}>{item.icon}</span>
-            {item.label}
-          </Link>
-        ))}
-      </div>
+      <nav style={{flex: 1, padding: '0 20px'}}>
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return isActive ? (
+            <div key={item.path} style={{background: 'white', padding: 15, borderRadius: 15, marginBottom: 20, boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}}>
+              <div style={{color: '#03045E', fontSize: 16, fontWeight: '700', display: 'flex', alignItems: 'center', gap: 8}}>
+                <span style={{color: '#03045E', fontSize: 18}}>{item.icon}</span>
+                {item.label}
+              </div>
+            </div>
+          ) : (
+            <Link
+              key={item.path}
+              to={item.path}
+              style={{
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '15px 0',
+                color: '#03045E',
+                fontSize: 16,
+                fontWeight: '700'
+              }}
+              onClick={() => setIsMobileOpen(false)}
+            >
+              <span style={{color: '#03045E', fontSize: 18}}>{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
 
       {/* Bottom Section */}
-      <div style={{borderTop: '1px solid #E5E7EB', padding: '20px 0'}}>
-        {bottomItems.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-              padding: '12px 20px',
-              textDecoration: 'none',
-              color: location.pathname === item.path ? '#03045E' : '#6B7280',
-              background: location.pathname === item.path ? '#EBF5FD' : 'transparent',
-              fontSize: 14,
-              fontWeight: location.pathname === item.path ? '600' : '500',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              if (location.pathname !== item.path) {
-                e.target.style.background = '#F9FAFB';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (location.pathname !== item.path) {
-                e.target.style.background = 'transparent';
-              }
-            }}
-            onClick={() => setIsMobileOpen(false)}
-          >
-            <span style={{fontSize: 16}}>{item.icon}</span>
-            {item.label}
-          </Link>
-        ))}
+      <div style={{marginTop: 'auto', padding: '0 20px 20px'}}>
+        {bottomItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              style={{
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '10px 0',
+                color: '#03045E',
+                fontSize: 16,
+                fontWeight: '700'
+              }}
+              onClick={() => setIsMobileOpen(false)}
+            >
+              <span style={{color: '#03045E', fontSize: 18}}>{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
         
-        <button
-          onClick={handleLogout}
+        <div 
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 12,
-            padding: '12px 20px',
-            width: '100%',
-            border: 'none',
-            background: 'transparent',
-            color: '#6B7280',
-            fontSize: 14,
-            fontWeight: '500',
-            cursor: 'pointer',
-            transition: 'all 0.2s'
+            gap: 10,
+            padding: '10px 0',
+            color: '#03045E',
+            fontSize: 16,
+            fontWeight: '700',
+            cursor: 'pointer'
           }}
-          onMouseEnter={(e) => {
-            e.target.style.background = '#FEF2F2';
-            e.target.style.color = '#EF4444';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'transparent';
-            e.target.style.color = '#6B7280';
-          }}
+          onClick={handleLogout}
         >
-          <span style={{fontSize: 16}}>🚪</span>
-          Logout
-        </button>
+          <span style={{color: '#03045E', fontSize: 18}}>⏻</span>
+          Log Out
+        </div>
       </div>
     </>
   );
@@ -181,8 +146,7 @@ const Sidebar = ({ user, onLogout }) => {
           top: 0,
           width: 280,
           height: '100vh',
-          background: 'white',
-          borderRight: '1px solid #E5E7EB',
+          background: '#D1E7F5',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 1000,
@@ -215,7 +179,7 @@ const Sidebar = ({ user, onLogout }) => {
               top: 0,
               width: 280,
               height: '100vh',
-              background: 'white',
+              background: '#D1E7F5',
               display: 'flex',
               flexDirection: 'column',
               zIndex: 1002,

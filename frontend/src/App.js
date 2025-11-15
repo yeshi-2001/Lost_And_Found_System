@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
+import Terms from './components/Terms';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Home from './components/Home';
@@ -44,7 +45,7 @@ function AppContent() {
     localStorage.removeItem('user');
   };
 
-  const showSidebar = user && !['/login', '/register', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
+  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
 
   return (
     <div className="App">
@@ -59,6 +60,10 @@ function AppContent() {
           <Route 
             path="/register" 
             element={!user ? <Register onLogin={login} /> : <Navigate to="/dashboard" />} 
+          />
+          <Route 
+            path="/terms" 
+            element={<Terms />} 
           />
           <Route 
             path="/forgot-password" 

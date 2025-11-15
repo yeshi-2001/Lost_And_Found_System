@@ -85,7 +85,7 @@ def get_changes_since_last_visit(user_id, last_login):
         and_(
             LostItem.user_id == user_id,
             Match.created_at > last_login,
-            Match.status == 'pending'
+            Match.status == 'pending_verification'
         )
     ).count()
     
@@ -93,8 +93,8 @@ def get_changes_since_last_visit(user_id, last_login):
     pending_verifications = Match.query.join(LostItem).filter(
         and_(
             LostItem.user_id == user_id,
-            Match.status == 'pending',
-            Match.questions_generated == True
+            Match.status == 'pending_verification',
+            Match.verification_questions.isnot(None)
         )
     ).count()
     
@@ -103,7 +103,7 @@ def get_changes_since_last_visit(user_id, last_login):
         and_(
             LostItem.user_id == user_id,
             Match.updated_at > last_login,
-            Match.status == 'verified'
+            Match.verification_verified == True
         )
     ).count()
     

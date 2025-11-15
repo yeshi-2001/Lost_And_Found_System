@@ -527,7 +527,7 @@ const FoundItemForm = ({ token, user }) => {
   return (
     <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
       <div style={{maxWidth: 800, margin: '0 auto'}}>
-        <div style={{marginBottom: 30}}>
+        <div style={{marginBottom: 30, textAlign: 'center'}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>Report Found Item</h1>
           <p style={{fontSize: 18, color: '#666', margin: 0}}>Help a fellow student find their item</p>
         </div>
