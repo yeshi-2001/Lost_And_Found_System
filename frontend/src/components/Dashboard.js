@@ -19,8 +19,8 @@ const Dashboard = ({ user }) => {
   const [showResults, setShowResults] = useState(false);
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, itemId: null, itemType: null, itemName: '' });
   const [welcomeInfo, setWelcomeInfo] = useState({
-    welcome_message: 'Welcome back!',
-    activity_message: 'Everything is just as you left it ✨',
+    welcome_message: 'Welcome back',
+    activity_message: 'Everything is just as you left it ',
     change_details: [],
     changes: {}
   });
