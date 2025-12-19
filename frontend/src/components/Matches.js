@@ -62,7 +62,7 @@ const Matches = ({ user, token }) => {
     <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
       <div style={{maxWidth: 1200, margin: '0 auto'}}>
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>🎯 Your Potential Matches</h1>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif'}}>🎯 Your Potential Matches</h1>
         </div>
 
         {error && <div style={{background: '#FEE2E2', color: '#991B1B', padding: 15, borderRadius: 8, marginBottom: 20}}>{error}</div>}

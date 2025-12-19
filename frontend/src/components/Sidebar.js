@@ -45,7 +45,7 @@ const Sidebar = ({ user, onLogout }) => {
       <div style={{padding: '20px'}}>
         <div style={{display: 'flex', alignItems: 'center', marginBottom: '40px'}}>
           <img style={{width: 80, height: 80, objectFit: 'contain', marginRight: 15}} src="/image/logo2_1.png" alt="Logo" />
-          <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '800', margin: 0}}>Back2U</h1>
+          <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>Back2U</h1>
         </div>
       </div>
 

@@ -141,7 +141,7 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif'}}>
+    <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Roboto, sans-serif'}}>
       {/* Main Content */}
       <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, overflow: 'auto', position: 'relative'}} onClick={() => setShowResults(false)}>
         {/* Background Image with Opacity */}
@@ -160,7 +160,7 @@ const Dashboard = ({ user }) => {
         }}></div>
         {/* Header */}
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif'}}>{welcomeInfo.welcome_message} {user?.name || 'User'} 👋</h1>
           <p style={{fontSize: 18, color: '#666', margin: '0 0 10px 0'}}>{welcomeInfo.activity_message}</p>
           {welcomeInfo.change_details.length > 0 && (
             <div style={{background: '#EBF5FD', padding: 15, borderRadius: 10, border: '1px solid #2E72F9'}}>

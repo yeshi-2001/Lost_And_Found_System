@@ -39,7 +39,7 @@ const MyItems = ({ user, token }) => {
   return (
     <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', background: '#f8f9fa'}}>
       <div style={{marginBottom: 30}}>
-        <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: '#03045E'}}>My Items 📦</h1>
+        <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', color: '#03045E', fontFamily: 'Roboto Slab, serif'}}>My Items 📦</h1>
         <p style={{fontSize: 18, color: '#666', margin: 0}}>Manage your reported lost and found items</p>
       </div>
 
