@@ -225,10 +225,6 @@ const Profile = ({ user, token, onLogout }) => {
       justifyContent: 'space-between',
       alignItems: 'center'
     },
-    profileHeader: {
-      textAlign: 'center',
-      marginBottom: '30px'
-    },
     avatar: {
       width: '150px',
       height: '150px',
@@ -240,9 +236,9 @@ const Profile = ({ user, token, onLogout }) => {
       justifyContent: 'center',
       fontSize: '48px',
       fontWeight: 'bold',
-      margin: '0 auto 15px',
       cursor: 'pointer',
-      position: 'relative'
+      position: 'relative',
+      flexShrink: 0
     },
     avatarOverlay: {
       position: 'absolute',
@@ -264,17 +260,17 @@ const Profile = ({ user, token, onLogout }) => {
       fontSize: '28px',
       fontWeight: 'bold',
       color: '#1F2937',
-      margin: '0 0 5px 0'
+      margin: '0 0 8px 0'
     },
     userReg: {
       fontSize: '18px',
       color: '#6B7280',
-      margin: '0 0 5px 0'
+      margin: '0 0 8px 0'
     },
     userDept: {
       fontSize: '16px',
       color: '#6B7280',
-      margin: '0 0 10px 0'
+      margin: '0 0 12px 0'
     },
     memberSince: {
       fontSize: '14px',
@@ -489,19 +485,24 @@ const Profile = ({ user, token, onLogout }) => {
 
         {/* Profile Header */}
         <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <div style={styles.profileHeader}>
+          <div style={{display: 'flex', alignItems: 'center', gap: 40, padding: '20px 0'}}>
+            {/* Profile Photo - Left */}
             <div style={styles.avatar}>
               {profileData.name.split(' ').map(n => n[0]).join('')}
             </div>
-            <h2 style={styles.userName}>{profileData.name}</h2>
-            <p style={styles.userReg}>{profileData.registration_number}</p>
-            <p style={styles.userDept}>{profileData.department}</p>
-            <p style={styles.memberSince}>
-              Member since: {new Date(profileData.member_since).toLocaleDateString('en-US', { 
-                month: 'long', 
-                year: 'numeric' 
-              })}
-            </p>
+            
+            {/* User Info - Right Center */}
+            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+              <h2 style={styles.userName}>{profileData.name}</h2>
+              <p style={styles.userReg}>{profileData.registration_number}</p>
+              <p style={styles.userDept}>{profileData.department}</p>
+              <p style={styles.memberSince}>
+                Member since: {new Date(profileData.member_since).toLocaleDateString('en-US', { 
+                  month: 'long', 
+                  year: 'numeric' 
+                })}
+              </p>
+            </div>
           </div>
         </div>
 
