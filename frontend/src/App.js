@@ -48,7 +48,7 @@ function AppContent() {
     localStorage.removeItem('user');
   };
 
-  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
+  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home', '/profile'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
 
   return (
     <div className="App">

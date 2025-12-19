@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import MobileMenuButton from './MobileMenuButton';
 
 const Profile = ({ user, token, onLogout }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [profileData, setProfileData] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -13,6 +15,8 @@ const Profile = ({ user, token, onLogout }) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [privacySettings, setPrivacySettings] = useState({});
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -31,6 +35,18 @@ const Profile = ({ user, token, onLogout }) => {
 
   useEffect(() => {
     loadProfile();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const loadProfile = async () => {
@@ -467,12 +483,156 @@ const Profile = ({ user, token, onLogout }) => {
 
   const badge = getContributionBadge(profileData.statistics.contribution_score);
 
+  const menuItems = [
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/lost-item', label: 'Report Lost Item' },
+    { path: '/found-item', label: 'Report Found Item' },
+    { path: '/my-items', label: 'My Items' },
+    { path: '/matches', label: 'Matches' },
+    { path: '/notifications', label: 'Notifications' }
+  ];
+
+  const MobileMenu = () => (
+    <>
+      {isMobile && isMobileMenuOpen && (
+        <>
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0,0,0,0.5)',
+              zIndex: 1001
+            }}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div
+            style={{
+              position: 'fixed',
+              left: 0,
+              top: 0,
+              width: 280,
+              height: '100vh',
+              background: '#D1E7F5',
+              display: 'flex',
+              flexDirection: 'column',
+              zIndex: 1002,
+              transform: 'translateX(0)',
+              transition: 'transform 0.3s ease'
+            }}
+          >
+            {/* Logo Section */}
+            <div style={{padding: '20px'}}>
+              <div style={{display: 'flex', alignItems: 'center', marginBottom: '40px'}}>
+                <img style={{width: 80, height: 80, objectFit: 'contain', marginRight: 15}} src="/image/logo2_1.png" alt="Logo" />
+                <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>Back2U</h1>
+              </div>
+            </div>
+
+            {/* Main Navigation */}
+            <nav style={{flex: 1, padding: '20px 15px'}}>
+              {menuItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    style={{
+                      textDecoration: 'none',
+                      display: 'block',
+                      padding: '16px 20px',
+                      margin: '8px 0',
+                      borderRadius: 12,
+                      background: isActive ? 'white' : 'transparent',
+                      color: isActive ? '#03045E' : '#1e40af',
+                      fontSize: 15,
+                      fontWeight: isActive ? '700' : '600',
+                      boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.15)' : 'none',
+                      transition: 'all 0.3s ease',
+                      border: isActive ? 'none' : '1px solid rgba(255,255,255,0.2)'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Bottom Section */}
+            <div style={{marginTop: 'auto', padding: '0 20px 20px'}}>
+              <Link
+                to="/profile"
+                style={{
+                  textDecoration: 'none',
+                  display: 'block',
+                  padding: '12px 20px',
+                  margin: '4px 0',
+                  borderRadius: 8,
+                  background: 'rgba(255,255,255,0.2)',
+                  color: '#1e40af',
+                  fontSize: 14,
+                  fontWeight: '600',
+                  transition: 'all 0.2s ease'
+                }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Settings
+              </Link>
+              
+              <div 
+                style={{
+                  padding: '12px 20px',
+                  margin: '8px 0 0 0',
+                  borderRadius: 8,
+                  background: 'transparent',
+                  color: '#dc2626',
+                  fontSize: 14,
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  border: '1px solid rgba(220, 38, 38, 0.3)'
+                }}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onLogout();
+                  navigate('/login');
+                }}
+              >
+                Log Out
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Roboto, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
+    <div style={{minHeight: '100vh', background: '#F8FAFC', padding: 20, paddingTop: isMobile ? 80 : 20, fontFamily: 'Roboto, sans-serif'}}>
+      {/* Mobile Menu Button */}
+      <MobileMenuButton 
+        onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        isOpen={isMobileMenuOpen}
+      />
+      
+      {/* Mobile Menu */}
+      <MobileMenu />
+      
       <div style={{maxWidth: 1000, margin: '0 auto'}}>
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>My Profile</h1>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif', color: '#1F2937'}}>My Profile</h1>
+          <p style={{fontSize: 16, color: '#6B7280', margin: '8px 0 0 0'}}>Manage your account settings and view your activity</p>
         </div>
+        
+        <style>{`
+          @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+          }
+        `}</style>
 
         {message && (
           <div style={{
@@ -483,45 +643,49 @@ const Profile = ({ user, token, onLogout }) => {
           </div>
         )}
 
-        {/* Profile Header */}
-        <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <div style={{display: 'flex', alignItems: 'center', gap: 40, padding: '20px 0'}}>
-            {/* Profile Photo - Left */}
-            <div style={styles.avatar}>
-              {profileData.name.split(' ').map(n => n[0]).join('')}
+        {/* Two Column Layout */}
+        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, marginBottom: 30}}>
+          
+          {/* LEFT PANEL: Profile Information */}
+          <div>
+            {/* Profile Header */}
+            <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20}}>
+                <div style={{...styles.avatar, background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)'}}>
+                  {profileData.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <h2 style={{fontSize: 24, fontWeight: 'bold', margin: '0 0 4px 0', fontFamily: 'Roboto Slab, serif'}}>{profileData.name}</h2>
+                  <p style={{fontSize: 16, color: '#6B7280', margin: '0 0 4px 0'}}>{profileData.registration_number}</p>
+                  <p style={{fontSize: 14, color: '#6B7280', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: 6}}>
+                    🏢 {profileData.department}
+                  </p>
+                  <p style={{fontSize: 12, color: '#6B7280', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: 6}}>
+                    📅 Member since: {new Date(profileData.member_since).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                  </p>
+                  <div style={{background: '#10B981', color: 'white', padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: 4, animation: 'pulse 2s infinite'}}>
+                    ✅ Active Member
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            {/* User Info - Right Center */}
-            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-              <h2 style={styles.userName}>{profileData.name}</h2>
-              <p style={styles.userReg}>{profileData.registration_number}</p>
-              <p style={styles.userDept}>{profileData.department}</p>
-              <p style={styles.memberSince}>
-                Member since: {new Date(profileData.member_since).toLocaleDateString('en-US', { 
-                  month: 'long', 
-                  year: 'numeric' 
-                })}
-              </p>
-            </div>
-          </div>
-        </div>
 
-        {/* Personal Information */}
-        <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <div style={styles.sectionTitle}>
-            Personal Information
-            {!editMode && (
-              <button 
-                style={{...styles.button, ...styles.editButton}}
-                onClick={() => setEditMode(true)}
-              >
-                Edit
-              </button>
-            )}
-          </div>
+            {/* Personal Information Card */}
+            <div style={{background: 'white', borderRadius: 16, padding: 24, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20}}>
+                <h3 style={{fontSize: 18, fontWeight: '600', margin: 0, color: '#1F2937'}}>Personal Information</h3>
+                {!editMode && (
+                  <button 
+                    style={{background: '#3B82F6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: 8, fontSize: 14, fontWeight: '500', cursor: 'pointer'}}
+                    onClick={() => setEditMode(true)}
+                  >
+                    Edit
+                  </button>
+                )}
+              </div>
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>👤 Full Name</label>
+              <div style={{marginBottom: 16}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: '500', color: '#374151', marginBottom: 6}}>👤 Full Name</label>
             <input
               type="text"
               name="name"
@@ -537,8 +701,8 @@ const Profile = ({ user, token, onLogout }) => {
             {errors.name && <div style={styles.error}>{errors.name}</div>}
           </div>
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>🆔 Registration Number</label>
+              <div style={{marginBottom: 16}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: '500', color: '#374151', marginBottom: 6}}>🆔 Registration Number</label>
             <input
               type="text"
               value={profileData.registration_number}
@@ -550,8 +714,8 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
           </div>
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>✉️ Email Address</label>
+              <div style={{marginBottom: 16}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: '500', color: '#374151', marginBottom: 6}}>✉️ Email Address</label>
             <input
               type="email"
               name="email"
@@ -567,8 +731,8 @@ const Profile = ({ user, token, onLogout }) => {
             {errors.email && <div style={styles.error}>{errors.email}</div>}
           </div>
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>📱 Contact Number</label>
+              <div style={{marginBottom: 16}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: '500', color: '#374151', marginBottom: 6}}>📱 Contact Number</label>
             <input
               type="tel"
               name="contact_number"
@@ -587,8 +751,8 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
           </div>
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>🏢 Department</label>
+              <div style={{marginBottom: 16}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: '500', color: '#374151', marginBottom: 6}}>🏢 Department</label>
             {editMode ? (
               <select
                 name="department"
@@ -632,103 +796,129 @@ const Profile = ({ user, token, onLogout }) => {
             {errors.department && <div style={styles.error}>{errors.department}</div>}
           </div>
 
-          {editMode && (
-            <div style={styles.buttonGroup}>
-              <button 
-                style={{...styles.button, ...styles.secondaryButton}}
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-              <button 
-                style={{...styles.button, ...styles.primaryButton}}
-                onClick={handleSave}
-                disabled={saving}
-              >
-                {saving ? 'Saving...' : 'Save Changes'}
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Activity Statistics */}
-        <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <div style={styles.sectionTitle}>Your Activity</div>
-          
-          <div style={styles.statsGrid}>
-            <div style={styles.statCard} onClick={() => navigate('/dashboard')}>
-              <div style={styles.statIcon}>📦</div>
-              <div style={styles.statNumber}>{profileData.statistics.found_items_active}</div>
-              <div style={styles.statLabel}>Found Items<br/>Active</div>
-            </div>
-            
-            <div style={styles.statCard} onClick={() => navigate('/dashboard')}>
-              <div style={styles.statIcon}>📢</div>
-              <div style={styles.statNumber}>{profileData.statistics.lost_items_searching}</div>
-              <div style={styles.statLabel}>Lost Items<br/>Searching</div>
-            </div>
-            
-            <div style={styles.statCard}>
-              <div style={styles.statIcon}>✅</div>
-              <div style={styles.statNumber}>{profileData.statistics.successful_returns}</div>
-              <div style={styles.statLabel}>Successful<br/>Returns</div>
-            </div>
-            
-            <div style={styles.statCard}>
-              <div style={styles.statIcon}>🎯</div>
-              <div style={styles.statNumber}>{profileData.statistics.total_matches}</div>
-              <div style={styles.statLabel}>Total<br/>Matches</div>
+              {editMode && (
+                <div style={{display: 'flex', gap: 12, justifyContent: 'flex-end', marginTop: 20}}>
+                  <button 
+                    style={{background: 'transparent', color: '#6B7280', border: '2px solid #D1D5DB', padding: '10px 20px', borderRadius: 8, fontSize: 14, cursor: 'pointer'}}
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    style={{background: '#3B82F6', color: 'white', border: 'none', padding: '10px 20px', borderRadius: 8, fontSize: 14, fontWeight: '500', cursor: 'pointer'}}
+                    onClick={handleSave}
+                    disabled={saving}
+                  >
+                    {saving ? 'Saving...' : 'Save Changes'}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
+          
+          {/* RIGHT PANEL: Activity & Stats */}
+          <div>
 
-          <div style={styles.contributionCard}>
-            <div style={{fontSize: '24px', marginBottom: '10px'}}>
-              {badge.emoji} Contribution Score: {profileData.statistics.contribution_score}%
+            {/* Statistics Grid */}
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20}}>
+              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+                <div style={{fontSize: 32, marginBottom: 8}}>📦</div>
+                <div style={{fontSize: 24, fontWeight: 'bold', color: '#3B82F6', marginBottom: 4}}>{profileData.statistics.found_items_active}</div>
+                <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Found Items</div>
+                <div style={{background: '#3B82F6', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Active</div>
+              </div>
+              
+              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+                <div style={{fontSize: 32, marginBottom: 8}}>📢</div>
+                <div style={{fontSize: 24, fontWeight: 'bold', color: '#F59E0B', marginBottom: 4}}>{profileData.statistics.lost_items_searching}</div>
+                <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Lost Items</div>
+                <div style={{background: '#F59E0B', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Searching</div>
+              </div>
+              
+              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                <div style={{fontSize: 32, marginBottom: 8}}>✅</div>
+                <div style={{fontSize: 24, fontWeight: 'bold', color: '#10B981', marginBottom: 4}}>{profileData.statistics.successful_returns}</div>
+                <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Successful Returns</div>
+                <div style={{background: '#10B981', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>All Time</div>
+              </div>
+              
+              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                <div style={{fontSize: 32, marginBottom: 8}}>🎯</div>
+                <div style={{fontSize: 24, fontWeight: 'bold', color: '#8B5CF6', marginBottom: 4}}>{profileData.statistics.total_matches}</div>
+                <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Total Matches</div>
+                <div style={{background: '#8B5CF6', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>All Time</div>
+              </div>
             </div>
-            <div>You're a {badge.text.toLowerCase()}!</div>
-          </div>
-        </div>
 
-        {/* Account Actions */}
-        <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <div style={styles.sectionTitle}>Account</div>
-          
-          
-          <button 
-            style={styles.actionButton}
-            onClick={() => setShowPrivacyModal(true)}
-          >
-            🔒 Privacy Settings
-            <div style={{fontSize: '14px', color: '#6B7280'}}>Manage your privacy preferences</div>
-          </button>
-          
-          <button style={styles.actionButton}>
-            📖 Terms & Conditions
-            <div style={{fontSize: '14px', color: '#6B7280'}}>Read our terms of service</div>
-          </button>
-          
-          <button style={styles.actionButton}>
-            ❓ Help & Support
-            <div style={{fontSize: '14px', color: '#6B7280'}}>Get help or contact support</div>
-          </button>
-          
-          <button 
-            style={styles.actionButton}
-            onClick={() => setShowLogoutModal(true)}
-          >
-            🚪 Logout
-            <div style={{fontSize: '14px', color: '#6B7280'}}>Sign out of your account</div>
-          </button>
-          
-          <hr style={{margin: '20px 0', border: 'none', borderTop: '1px solid #E5E7EB'}} />
-          
-          <button 
-            style={{...styles.actionButton, ...styles.deleteButton}}
-            onClick={() => setShowDeleteModal(true)}
-          >
-            ⚠️ Delete Account
-            <div style={{fontSize: '14px', color: '#EF4444'}}>Permanently delete your account</div>
-          </button>
+            {/* Contribution Score Card */}
+            <div style={{background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)', color: 'white', padding: 24, borderRadius: 16, textAlign: 'center', marginBottom: 20}}>
+              <div style={{fontSize: 20, fontWeight: 'bold', marginBottom: 12}}>
+                {badge.emoji} Contribution Score: {profileData.statistics.contribution_score}%
+              </div>
+              <div style={{background: 'rgba(255,255,255,0.2)', borderRadius: 10, height: 8, marginBottom: 12}}>
+                <div style={{background: '#10B981', height: '100%', borderRadius: 10, width: `${profileData.statistics.contribution_score}%`}}></div>
+              </div>
+              <div style={{fontSize: 16}}>You're a {badge.text.toLowerCase()}!</div>
+              <div style={{fontSize: 12, opacity: 0.8, marginTop: 4}}>🆕👍⭐🌟</div>
+            </div>
+
+            {/* Account Actions */}
+            <div style={{background: 'white', borderRadius: 16, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+              <h3 style={{fontSize: 18, fontWeight: '600', margin: '0 0 16px 0', color: '#1F2937'}}>Account Actions</h3>
+              
+              <div style={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                <button 
+                  style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#374151'}}
+                  onClick={() => setShowPrivacyModal(true)}
+                  onMouseEnter={(e) => e.target.style.background = '#F3F4F6'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  🔒 Privacy Settings
+                </button>
+                
+                <button style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#374151'}}
+                  onMouseEnter={(e) => e.target.style.background = '#F3F4F6'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  📖 Terms & Conditions
+                </button>
+                
+                <button style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#374151'}}
+                  onMouseEnter={(e) => e.target.style.background = '#F3F4F6'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  ❓ Help & Support
+                </button>
+                
+                <button style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#374151'}}
+                  onMouseEnter={(e) => e.target.style.background = '#F3F4F6'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  📥 Download My Data
+                </button>
+                
+                <button 
+                  style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#374151'}}
+                  onClick={() => setShowLogoutModal(true)}
+                  onMouseEnter={(e) => e.target.style.background = '#F3F4F6'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  🚪 Logout
+                </button>
+                
+                <hr style={{margin: '12px 0', border: 'none', borderTop: '1px solid #E5E7EB'}} />
+                
+                <button 
+                  style={{display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '12px 16px', background: 'transparent', border: 'none', borderRadius: 8, fontSize: 14, cursor: 'pointer', transition: 'background 0.2s', color: '#EF4444'}}
+                  onClick={() => setShowDeleteModal(true)}
+                  onMouseEnter={(e) => e.target.style.background = '#FEF2F2'}
+                  onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                >
+                  ⚠️ Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Logout Modal */}
