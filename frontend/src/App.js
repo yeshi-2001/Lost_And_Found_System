@@ -53,7 +53,7 @@ function AppContent() {
   return (
     <div className="App">
       {showSidebar && <Sidebar user={user} onLogout={logout} />}
-      {user && !showSidebar && location.pathname !== '/home' && <Navbar user={user} onLogout={logout} />}
+      {user && !showSidebar && location.pathname !== '/home' && location.pathname !== '/profile' && <Navbar user={user} onLogout={logout} />}
         
         <Routes>
           <Route 

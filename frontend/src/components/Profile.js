@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import MobileMenuButton from './MobileMenuButton';
 
 const Profile = ({ user, token, onLogout }) => {
   const navigate = useNavigate();
@@ -15,8 +14,6 @@ const Profile = ({ user, token, onLogout }) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [privacySettings, setPrivacySettings] = useState({});
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,18 +32,6 @@ const Profile = ({ user, token, onLogout }) => {
 
   useEffect(() => {
     loadProfile();
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const loadProfile = async () => {
@@ -483,145 +468,49 @@ const Profile = ({ user, token, onLogout }) => {
 
   const badge = getContributionBadge(profileData.statistics.contribution_score);
 
-  const menuItems = [
-    { path: '/dashboard', label: 'Dashboard' },
-    { path: '/lost-item', label: 'Report Lost Item' },
-    { path: '/found-item', label: 'Report Found Item' },
-    { path: '/my-items', label: 'My Items' },
-    { path: '/matches', label: 'Matches' },
-    { path: '/notifications', label: 'Notifications' }
-  ];
-
-  const MobileMenu = () => (
-    <>
-      {isMobile && isMobileMenuOpen && (
-        <>
-          <div
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0,0,0,0.5)',
-              zIndex: 1001
-            }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <div
-            style={{
-              position: 'fixed',
-              left: 0,
-              top: 0,
-              width: 280,
-              height: '100vh',
-              background: '#D1E7F5',
-              display: 'flex',
-              flexDirection: 'column',
-              zIndex: 1002,
-              transform: 'translateX(0)',
-              transition: 'transform 0.3s ease'
-            }}
-          >
-            {/* Logo Section */}
-            <div style={{padding: '20px'}}>
-              <div style={{display: 'flex', alignItems: 'center', marginBottom: '40px'}}>
-                <img style={{width: 80, height: 80, objectFit: 'contain', marginRight: 15}} src="/image/logo2_1.png" alt="Logo" />
-                <h1 style={{color: '#03045E', fontSize: 28, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>Back2U</h1>
-              </div>
-            </div>
-
-            {/* Main Navigation */}
-            <nav style={{flex: 1, padding: '20px 15px'}}>
-              {menuItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    style={{
-                      textDecoration: 'none',
-                      display: 'block',
-                      padding: '16px 20px',
-                      margin: '8px 0',
-                      borderRadius: 12,
-                      background: isActive ? 'white' : 'transparent',
-                      color: isActive ? '#03045E' : '#1e40af',
-                      fontSize: 15,
-                      fontWeight: isActive ? '700' : '600',
-                      boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.15)' : 'none',
-                      transition: 'all 0.3s ease',
-                      border: isActive ? 'none' : '1px solid rgba(255,255,255,0.2)'
-                    }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Bottom Section */}
-            <div style={{marginTop: 'auto', padding: '0 20px 20px'}}>
-              <Link
-                to="/profile"
-                style={{
-                  textDecoration: 'none',
-                  display: 'block',
-                  padding: '12px 20px',
-                  margin: '4px 0',
-                  borderRadius: 8,
-                  background: 'rgba(255,255,255,0.2)',
-                  color: '#1e40af',
-                  fontSize: 14,
-                  fontWeight: '600',
-                  transition: 'all 0.2s ease'
-                }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Settings
-              </Link>
-              
-              <div 
-                style={{
-                  padding: '12px 20px',
-                  margin: '8px 0 0 0',
-                  borderRadius: 8,
-                  background: 'transparent',
-                  color: '#dc2626',
-                  fontSize: 14,
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  border: '1px solid rgba(220, 38, 38, 0.3)'
-                }}
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onLogout();
-                  navigate('/login');
-                }}
-              >
-                Log Out
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </>
+  const AnnouncementBar = () => (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      background: '#03045E',
+      color: 'white',
+      padding: '12px 20px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      zIndex: 1000,
+      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+    }}>
+      <div style={{display: 'flex', alignItems: 'center', gap: 20}}>
+        <Link to="/dashboard" style={{color: 'white', textDecoration: 'none', fontSize: 14, fontWeight: '500'}}>← Back to Dashboard</Link>
+        <div style={{color: '#D1E7F5', fontSize: 14}}>|</div>
+        <h2 style={{margin: 0, fontSize: 16, fontWeight: '600'}}>Profile Settings</h2>
+      </div>
+      <div style={{display: 'flex', alignItems: 'center', gap: 15}}>
+        <Link to="/notifications" style={{color: '#D1E7F5', textDecoration: 'none', fontSize: 13}}>Notifications</Link>
+        <Link to="/my-items" style={{color: '#D1E7F5', textDecoration: 'none', fontSize: 13}}>My Items</Link>
+        <Link to="/matches" style={{color: '#D1E7F5', textDecoration: 'none', fontSize: 13}}>Matches</Link>
+        <button 
+          onClick={() => {
+            onLogout();
+            navigate('/login');
+          }}
+          style={{background: 'transparent', border: '1px solid #D1E7F5', color: '#D1E7F5', padding: '4px 12px', borderRadius: 4, fontSize: 12, cursor: 'pointer'}}
+        >
+          Logout
+        </button>
+      </div>
+    </div>
   );
 
   return (
-    <div style={{minHeight: '100vh', background: '#F8FAFC', padding: 20, paddingTop: isMobile ? 80 : 20, fontFamily: 'Roboto, sans-serif'}}>
-      {/* Mobile Menu Button */}
-      <MobileMenuButton 
-        onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        isOpen={isMobileMenuOpen}
-      />
+    <div style={{minHeight: '100vh', background: '#F8FAFC', paddingTop: 60, fontFamily: 'Roboto, sans-serif'}}>
+      {/* Announcement Bar Navigation */}
+      <AnnouncementBar />
       
-      {/* Mobile Menu */}
-      <MobileMenu />
-      
-      <div style={{maxWidth: 1000, margin: '0 auto'}}>
+      <div style={{maxWidth: 1000, margin: '0 auto', padding: 20}}>
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif', color: '#1F2937'}}>My Profile</h1>
           <p style={{fontSize: 16, color: '#6B7280', margin: '8px 0 0 0'}}>Manage your account settings and view your activity</p>
