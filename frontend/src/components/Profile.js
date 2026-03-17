@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Profile = ({ user, token, onLogout }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [profileData, setProfileData] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
-  const [showPasswordChange, setShowPasswordChange] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -22,16 +20,11 @@ const Profile = ({ user, token, onLogout }) => {
     department: ''
   });
 
-  const [passwordData, setPasswordData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_password: ''
-  });
-
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     loadProfile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadProfile = async () => {
