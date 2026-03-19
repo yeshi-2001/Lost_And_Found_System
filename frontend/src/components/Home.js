@@ -50,7 +50,7 @@ const Home = ({ user, onLogout }) => {
       <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.5vw', paddingBottom: '4vw'}}>
 
         {/* Logo - fixed, not moved */}
-        <img style={{width: '17.2vw', height: '17.2vw', objectFit: 'contain', flexShrink: 0}} src="image/logo.png" />
+        <img style={{width: '17.2vw', height: '17.2vw', objectFit: 'contain', flexShrink: 0, cursor: 'pointer'}} src="image/logo.png" onClick={() => navigate('/dashboard')} />
 
         {/* Title + Subtitle + Cards shifted up */}
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5vw', marginTop: '-6px'}}>
