@@ -55,7 +55,7 @@ def get_welcome_info():
     # Generate activity summary
     total_changes = sum(changes.values())
     if total_changes == 0:
-        activity_message = "Everything is just as you left it ✨"
+        activity_message = "Everything is just as you left it"
         change_details = []
     else:
         activity_message = "Here's what changed while you were away..."
