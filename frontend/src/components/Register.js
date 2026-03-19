@@ -30,6 +30,7 @@ const Register = ({ onLogin }) => {
   });
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
@@ -89,18 +90,12 @@ const Register = ({ onLogin }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-    
-    if (name === 'password') {
-      setPasswordValidation(validatePassword(value));
-    } else if (name === 'email') {
-      setEmailValidation(validateEmail(value));
-    } else if (name === 'registration_number') {
-      setRegNumberValidation(validateRegistrationNumber(value));
-    }
+    setFormData({ ...formData, [name]: value });
+    // Clear field error when user starts typing
+    if (fieldErrors[name]) setFieldErrors(prev => ({ ...prev, [name]: '' }));
+    if (name === 'password') setPasswordValidation(validatePassword(value));
+    else if (name === 'email') setEmailValidation(validateEmail(value));
+    else if (name === 'registration_number') setRegNumberValidation(validateRegistrationNumber(value));
   };
 
   const handleSubmit = async (e) => {
@@ -108,38 +103,32 @@ const Register = ({ onLogin }) => {
     setLoading(true);
     setError('');
 
-    // Check registration number validation
-    if (!regNumberValidation.isValid && formData.registration_number) {
-      setError('Please enter a valid registration number format (e.g., 21com76, 21cs123)');
-      setLoading(false);
-      return;
-    }
+    const errors = {};
+    if (!formData.registration_number) errors.registration_number = 'Registration number is required';
+    else if (!regNumberValidation.isValid) errors.registration_number = 'Format: 2 digits + letters + digits (e.g., 21com76)';
 
-    // Check email validation
-    if (!emailValidation.isValid && formData.email) {
-      setError('Please enter a valid email address');
-      setLoading(false);
-      return;
-    }
+    if (!formData.email) errors.email = 'Email is required';
+    else if (!emailValidation.isValid) errors.email = 'Please enter a valid email address';
 
-    // Check password validation
     const isPasswordValid = Object.values(passwordValidation).every(Boolean);
-    if (!isPasswordValid) {
-      setError('Please ensure your password meets all security requirements');
+    if (!formData.password) errors.password = 'Password is required';
+    else if (!isPasswordValid) errors.password = 'Password does not meet all requirements';
+
+    if (!formData.name) errors.name = 'Full name is required';
+    if (!formData.department) errors.department = 'Please select your department';
+    if (!formData.contact_number) errors.contact_number = 'Contact number is required';
+    if (!termsAccepted) errors.terms = 'Please accept the Terms & Conditions to continue';
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setError('Please fix the errors below before submitting.');
       setLoading(false);
       return;
     }
 
-    // Check terms acceptance
-    if (!termsAccepted) {
-      setError('Please accept the Terms & Conditions and Privacy Policy to continue');
-      setLoading(false);
-      return;
-    }
-
+    setFieldErrors({});
     try {
-      const response = await authAPI.register(formData);
-      // Show success message and redirect to login
+      await authAPI.register(formData);
       alert('Registration successful! Please login with your credentials.');
       window.location.href = '/login';
     } catch (error) {
@@ -197,6 +186,7 @@ const Register = ({ onLogin }) => {
             .reg-input:-webkit-autofill, .reg-input:-webkit-autofill:hover, .reg-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #ede0f7 inset !important; box-shadow: 0 0 0px 1000px #ede0f7 inset !important; }
           `}</style>
           <form onSubmit={handleSubmit} style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="text"
               name="name"
@@ -204,9 +194,13 @@ const Register = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Enter your full name"
               className="reg-input"
+              style={{border: `1px solid ${fieldErrors.name ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
             />
-            
+            {fieldErrors.name && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.name}</div>}
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="text"
               name="registration_number"
@@ -214,16 +208,17 @@ const Register = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Registration number (e.g., 21com76, 21computerscience123)"
               className="reg-input"
-              style={{border: `1px solid ${formData.registration_number ? (regNumberValidation.isValid ? '#28a745' : '#dc3545') : 'rgba(161,22,220,0.4)'}`}}
+              style={{border: `1px solid ${formData.registration_number ? (regNumberValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.registration_number ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
             />
-            
-            {formData.registration_number && regNumberValidation.message && (
-              <div style={{fontSize: '12px', fontFamily: 'Calibri', color: regNumberValidation.isValid ? '#28a745' : '#dc3545', marginTop: '-10px'}}>
-                {regNumberValidation.isValid ? '✓' : '✗'} {regNumberValidation.message}
+            {(fieldErrors.registration_number || (formData.registration_number && regNumberValidation.message)) && (
+              <div style={{fontSize: 12, color: regNumberValidation.isValid ? '#28a745' : '#dc3545'}}>
+                {regNumberValidation.isValid ? '✓' : '✗'} {fieldErrors.registration_number || regNumberValidation.message}
               </div>
             )}
-            
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="email"
               name="email"
@@ -231,21 +226,22 @@ const Register = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Enter your email (e.g., student@university.edu)"
               className="reg-input"
-              style={{border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : 'rgba(161,22,220,0.4)'}`}}
+              style={{border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.email ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
             />
-            
-            {formData.email && emailValidation.message && (
-              <div style={{fontSize: '12px', fontFamily: 'Calibri', color: emailValidation.isValid ? '#28a745' : '#dc3545', marginTop: '-10px'}}>
-                {emailValidation.isValid ? '✓' : '✗'} {emailValidation.message}
+            {(fieldErrors.email || (formData.email && emailValidation.message)) && (
+              <div style={{fontSize: 12, color: emailValidation.isValid ? '#28a745' : '#dc3545'}}>
+                {emailValidation.isValid ? '✓' : '✗'} {fieldErrors.email || emailValidation.message}
               </div>
             )}
+            </div>
             
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <select
               name="department"
               value={formData.department}
               onChange={handleChange}
-              style={{width: '100%', height: '50px', background: '#ede0f7', border: '1px solid rgba(161,22,220,0.4)', borderRadius: '4px', padding: '0 15px', fontSize: '16px', fontFamily: 'Calibri', color: formData.department ? 'black' : 'rgba(0,0,0,0.5)', outline: 'none'}}
+              style={{width: '100%', height: '50px', background: '#ede0f7', border: `1px solid ${fieldErrors.department ? '#dc3545' : 'rgba(161,22,220,0.4)'}`, borderRadius: '4px', padding: '0 15px', fontSize: '16px', fontFamily: 'Calibri', color: formData.department ? 'black' : 'rgba(0,0,0,0.5)', outline: 'none'}}
               required
             >
               <option value="">Select your department</option>
@@ -253,7 +249,10 @@ const Register = ({ onLogin }) => {
                 <option key={dept} value={dept}>{dept}</option>
               ))}
             </select>
-            
+            {fieldErrors.department && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.department}</div>}
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="password"
               name="password"
@@ -263,8 +262,10 @@ const Register = ({ onLogin }) => {
               onBlur={() => setPasswordFocused(false)}
               placeholder="Create a Strong password"
               className="reg-input"
+              style={{border: `1px solid ${formData.password ? (Object.values(passwordValidation).every(Boolean) ? '#28a745' : '#dc3545') : (fieldErrors.password ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
             />
+            {fieldErrors.password && !passwordFocused && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.password}</div>}
             
             {passwordFocused && formData.password && (
               <div style={{background: '#f5eef8', border: '1px solid #ddd', borderRadius: '4px', padding: '10px', fontSize: '12px', fontFamily: 'Calibri', marginTop: '-10px'}}>
@@ -286,7 +287,9 @@ const Register = ({ onLogin }) => {
                 </div>
               </div>
             )}
-            
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="tel"
               name="contact_number"
@@ -294,29 +297,32 @@ const Register = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Enter your contact number"
               className="reg-input"
+              style={{border: `1px solid ${fieldErrors.contact_number ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
             />
+            {fieldErrors.contact_number && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.contact_number}</div>}
+            </div>
             
             {/* Terms and Conditions Checkbox */}
-            <div style={{background: 'rgba(148,102,153,0.15)', border: '1px solid #ddd', borderRadius: '8px', padding: '15px', fontSize: '12px', fontFamily: 'Calibri'}}>
+            <div style={{background: fieldErrors.terms ? 'rgba(220,53,69,0.1)' : 'rgba(148,102,153,0.15)', border: `1px solid ${fieldErrors.terms ? '#dc3545' : '#ddd'}`, borderRadius: '8px', padding: '15px', fontSize: '12px', fontFamily: 'Calibri'}}>
               <label style={{display: 'flex', alignItems: 'flex-start', cursor: 'pointer', color: '#333'}}>
                 <input
                   type="checkbox"
                   checked={termsAccepted}
                   onChange={(e) => {
                     if (!termsAccepted) {
-                      // Save form data before navigating to terms
                       localStorage.setItem('registrationFormData', JSON.stringify(formData));
                       navigate('/terms');
                     } else {
                       setTermsAccepted(false);
                     }
+                    if (fieldErrors.terms) setFieldErrors(prev => ({ ...prev, terms: '' }));
                   }}
                   style={{marginRight: '8px', marginTop: '2px'}}
                 />
                 <span>
                   I have read and agree to the{' '}
-                  <span 
+                  <span
                     style={{color: '#3b0764', textDecoration: 'underline', cursor: 'pointer'}}
                     onClick={() => {
                       localStorage.setItem('registrationFormData', JSON.stringify(formData));
@@ -327,6 +333,7 @@ const Register = ({ onLogin }) => {
                   </span>
                 </span>
               </label>
+              {fieldErrors.terms && <div style={{fontSize: 12, color: '#dc3545', marginTop: 6}}>✗ {fieldErrors.terms}</div>}
             </div>
             
             <button 

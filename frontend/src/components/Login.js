@@ -3,31 +3,35 @@ import { Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
 
 const Login = ({ onLogin }) => {
-  const [formData, setFormData] = useState({
-    login: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ login: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (fieldErrors[e.target.name]) setFieldErrors(prev => ({ ...prev, [e.target.name]: '' }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errors = {};
+    if (!formData.login) errors.login = 'Email or registration number is required';
+    if (!formData.password) errors.password = 'Password is required';
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError('');
-
+    setFieldErrors({});
     try {
       const response = await authAPI.login(formData);
       const { access_token, user } = response.data;
       onLogin(user, access_token);
     } catch (error) {
-      setError(error.response?.data?.error || 'Login failed');
+      setError(error.response?.data?.error || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -83,6 +87,7 @@ const Login = ({ onLogin }) => {
             .login-input:-webkit-autofill, .login-input:-webkit-autofill:hover, .login-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #ede0f7 inset !important; box-shadow: 0 0 0px 1000px #ede0f7 inset !important; }
           `}</style>
           <form onSubmit={handleSubmit} style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="text"
               name="login"
@@ -90,9 +95,13 @@ const Login = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Email or Registration number"
               className="login-input"
+              style={{border: `1px solid ${fieldErrors.login ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
             />
-            
+            {fieldErrors.login && <div style={{fontSize: 13, color: '#dc3545'}}>✗ {fieldErrors.login}</div>}
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="password"
               name="password"
@@ -100,8 +109,11 @@ const Login = ({ onLogin }) => {
               onChange={handleChange}
               placeholder="Password"
               className="login-input"
+              style={{border: `1px solid ${fieldErrors.password ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
             />
+            {fieldErrors.password && <div style={{fontSize: 13, color: '#dc3545'}}>✗ {fieldErrors.password}</div>}
+            </div>
             
             <Link to="/forgot-password" style={{alignSelf: 'flex-end', color: 'black', fontSize: 'clamp(16px, 1.8vw, 20px)', fontFamily: 'Calibri', textDecoration: 'none', marginBottom: '10px'}}>Forgot password ?</Link>
             
