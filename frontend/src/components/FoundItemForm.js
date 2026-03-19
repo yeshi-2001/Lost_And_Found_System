@@ -215,7 +215,7 @@ const FoundItemForm = ({ token, user }) => {
   const styles = {
     container: {
       minHeight: '100vh',
-      background: '#EFF6FF',
+      background: '#F5F0FF',
       padding: '20px',
       fontFamily: 'Calibri, sans-serif'
     },
@@ -227,7 +227,7 @@ const FoundItemForm = ({ token, user }) => {
     backButton: {
       background: 'none',
       border: 'none',
-      color: '#03045E',
+      color: '#3b0764',
       fontSize: '16px',
       cursor: 'pointer',
       marginBottom: '20px',
@@ -249,7 +249,7 @@ const FoundItemForm = ({ token, user }) => {
     form: {
       maxWidth: '800px',
       margin: '0 auto',
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '40px',
       boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
@@ -331,11 +331,11 @@ const FoundItemForm = ({ token, user }) => {
       textAlign: 'center',
       cursor: 'pointer',
       transition: 'border-color 0.2s',
-      backgroundColor: '#F9FAFB'
+      backgroundColor: '#faf5ff'
     },
     uploadAreaHover: {
-      borderColor: '#03045E',
-      backgroundColor: '#EFF6FF'
+      borderColor: '#3b0764',
+      backgroundColor: '#F5F0FF'
     },
     imagePreview: {
       display: 'grid',
@@ -414,7 +414,7 @@ const FoundItemForm = ({ token, user }) => {
       padding: '12px 32px',
       border: 'none',
       borderRadius: '8px',
-      background: '#03045E',
+      background: '#3b0764',
       color: 'white',
       fontSize: '16px',
       fontWeight: '600',
@@ -439,7 +439,7 @@ const FoundItemForm = ({ token, user }) => {
       padding: '20px'
     },
     modalContent: {
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '40px',
       maxWidth: '500px',
@@ -465,7 +465,7 @@ const FoundItemForm = ({ token, user }) => {
             Thank you for helping our university community!
           </p>
           
-          <div style={{ textAlign: 'left', background: '#F9FAFB', padding: '20px', borderRadius: '8px', marginBottom: '24px' }}>
+          <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '24px' }}>
             <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 ITEM DETAILS</h3>
             <p style={{ margin: '4px 0', color: '#6B7280' }}>• Item: {submittedData?.item_name}</p>
             <p style={{ margin: '4px 0', color: '#6B7280' }}>• Brand: {submittedData?.brand || 'Not specified'}</p>
@@ -479,8 +479,8 @@ const FoundItemForm = ({ token, user }) => {
           <p style={{ fontWeight: 'bold', color: '#374151', marginBottom: '20px' }}>{submittedData?.contact_number}</p>
           
           {submittedData?.matches_found ? (
-            <div style={{ background: '#EFF6FF', padding: '16px', borderRadius: '8px', marginBottom: '24px' }}>
-              <h3 style={{ margin: '0 0 8px 0', color: '#03045E' }}>🎯 POTENTIAL MATCHES FOUND!</h3>
+            <div style={{ background: '#F5F0FF', padding: '16px', borderRadius: '8px', marginBottom: '24px' }}>
+              <h3 style={{ margin: '0 0 8px 0', color: '#3b0764' }}>🎯 POTENTIAL MATCHES FOUND!</h3>
               <p style={{ margin: '0', color: '#1F2937', fontSize: '14px' }}>
                 We found {submittedData.matches.length} potential match(es). The owners will be notified to verify ownership.
               </p>
@@ -525,14 +525,21 @@ const FoundItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
-      <div style={{maxWidth: 800, margin: '0 auto'}}>
+    <div style={{minHeight: '100vh', background: 'linear-gradient(155deg, #210F37 0%, #4F1C51 40%, #6A1E55 70%, #A64D79 100%)', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+      {/* Orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-10%', right: '-5%', width: '45%', height: '50%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.35) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', bottom: '5%', left: '-5%', width: '40%', height: '45%', background: 'radial-gradient(ellipse, rgba(33,15,55,0.5) 0%, transparent 70%)', filter: 'blur(50px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px)'}} />
+      </div>
+      <div style={{maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30, textAlign: 'center'}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>Report Found Item</h1>
-          <p style={{fontSize: 18, color: '#666', margin: 0}}>Help a fellow student find their item</p>
+          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: 'white'}}>Report Found Item</h1>
+          <p style={{fontSize: 18, color: 'rgba(237,200,255,0.85)', margin: 0}}>Help a fellow student find their item</p>
         </div>
 
-        <form style={{background: 'white', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} onSubmit={handleSubmit}>
+        <form style={{background: '#f5eef8', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
+          <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/bg.png)', backgroundSize: '100% auto', backgroundPosition: 'top center', backgroundRepeat: 'repeat-y', opacity: 0.1, zIndex: 0, pointerEvents: 'none'}} />
         {/* Basic Information */}
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>BASIC INFORMATION</h3>
@@ -713,17 +720,35 @@ const FoundItemForm = ({ token, user }) => {
               style={{
                 ...styles.uploadArea,
                 ...(errors.images ? { borderColor: '#EF4444' } : {}),
-                ...(formData.images.length > 0 && !errors.images ? { borderColor: '#10B981' } : {})
+                ...(formData.images.length > 0 && !errors.images ? { borderColor: '#10B981' } : {}),
+                padding: formData.images.length > 0 ? '16px' : '40px 20px'
               }}
               onClick={() => document.getElementById('imageInput').click()}
             >
-              <div style={{ fontSize: '48px', marginBottom: '16px' }}>📷</div>
-              <p style={{ margin: '0 0 8px 0', fontSize: '16px', color: '#374151' }}>
-                Click to upload or drag and drop
-              </p>
-              <p style={{ margin: 0, fontSize: '14px', color: '#6B7280' }}>
-                JPG, PNG (Max 5MB each) • {formData.images.length} of 5 photos
-              </p>
+              {formData.images.length > 0 ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '12px' }}>
+                  {formData.images.map((image, index) => (
+                    <div key={index} style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', aspectRatio: '1' }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <img src={URL.createObjectURL(image)} alt={`Preview ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <button type="button" onClick={(e) => { e.stopPropagation(); removeImage(index); }} style={styles.deleteButton}>×</button>
+                    </div>
+                  ))}
+                  {formData.images.length < 5 && (
+                    <div style={{ borderRadius: '8px', border: '2px dashed #D1D5DB', aspectRatio: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#6B7280', fontSize: '12px' }}>
+                      <div style={{ fontSize: '24px' }}>+</div>
+                      <div>Add more</div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>📷</div>
+                  <p style={{ margin: '0 0 8px 0', fontSize: '16px', color: '#374151' }}>Click to upload or drag and drop</p>
+                  <p style={{ margin: 0, fontSize: '14px', color: '#6B7280' }}>JPG, PNG (Max 5MB each) • {formData.images.length} of 5 photos</p>
+                </>
+              )}
             </div>
             <input
               id="imageInput"
@@ -738,27 +763,6 @@ const FoundItemForm = ({ token, user }) => {
               <div style={styles.success}>✓ {formData.images.length} photo{formData.images.length > 1 ? 's' : ''} uploaded</div>
             )}
             <div style={styles.helper}>Add 1-5 clear photos of the item from different angles</div>
-            
-            {formData.images.length > 0 && (
-              <div style={styles.imagePreview}>
-                {formData.images.map((image, index) => (
-                  <div key={index} style={styles.imageItem}>
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt={`Preview ${index + 1}`}
-                      style={styles.image}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      style={styles.deleteButton}
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 

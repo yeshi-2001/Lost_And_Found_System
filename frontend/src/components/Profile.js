@@ -204,7 +204,7 @@ const Profile = ({ user, token, onLogout }) => {
       fontWeight: 'bold'
     },
     section: {
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '30px',
       marginBottom: '20px',
@@ -303,7 +303,7 @@ const Profile = ({ user, token, onLogout }) => {
       border: '2px solid #E5E7EB',
       borderRadius: '8px',
       fontSize: '16px',
-      backgroundColor: 'white',
+      backgroundColor: '#f5eef8',
       boxSizing: 'border-box'
     },
     error: {
@@ -421,7 +421,7 @@ const Profile = ({ user, token, onLogout }) => {
       padding: '20px'
     },
     modalContent: {
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '30px',
       maxWidth: '500px',
@@ -499,14 +499,20 @@ const Profile = ({ user, token, onLogout }) => {
   );
 
   return (
-    <div style={{minHeight: '100vh', background: '#F8FAFC', paddingTop: 60, fontFamily: 'Roboto, sans-serif'}}>
+    <div style={{minHeight: '100vh', background: 'linear-gradient(175deg, #180630 0%, #3a0a5a 35%, #6e1a62 65%, #9e2858 100%)', paddingTop: 60, fontFamily: 'Roboto, sans-serif', position: 'relative'}}>
+      {/* Orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-5%', right: '-5%', width: '40%', height: '45%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', bottom: '10%', left: '-5%', width: '35%', height: '40%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.4) 0%, transparent 70%)', filter: 'blur(50px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 65px)'}} />
+      </div>
       {/* Announcement Bar Navigation */}
       <AnnouncementBar />
       
-      <div style={{maxWidth: 1000, margin: '0 auto', padding: 20}}>
+      <div style={{maxWidth: 1000, margin: '0 auto', padding: 20, position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif', color: '#1F2937'}}>My Profile</h1>
-          <p style={{fontSize: 16, color: '#6B7280', margin: '8px 0 0 0'}}>Manage your account settings and view your activity</p>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif', color: 'white'}}>My Profile</h1>
+          <p style={{fontSize: 16, color: 'rgba(237,200,255,0.8)', margin: '8px 0 0 0'}}>Manage your account settings and view your activity</p>
         </div>
         
         <style>{`
@@ -531,7 +537,7 @@ const Profile = ({ user, token, onLogout }) => {
           {/* LEFT PANEL: Profile Information */}
           <div>
             {/* Profile Header */}
-            <div style={{background: 'white', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#f5eef8', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <div style={{display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20}}>
                 <div style={{...styles.avatar, background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)'}}>
                   {profileData.name.split(' ').map(n => n[0]).join('')}
@@ -553,7 +559,7 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
 
             {/* Personal Information Card */}
-            <div style={{background: 'white', borderRadius: 16, padding: 24, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#f5eef8', borderRadius: 16, padding: 24, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20}}>
                 <h3 style={{fontSize: 18, fontWeight: '600', margin: 0, color: '#1F2937'}}>Personal Information</h3>
                 {!editMode && (
@@ -703,28 +709,28 @@ const Profile = ({ user, token, onLogout }) => {
 
             {/* Statistics Grid */}
             <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20}}>
-              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
                 <div style={{fontSize: 32, marginBottom: 8}}>📦</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#3B82F6', marginBottom: 4}}>{profileData.statistics.found_items_active}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Found Items</div>
                 <div style={{background: '#3B82F6', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Active</div>
               </div>
               
-              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
                 <div style={{fontSize: 32, marginBottom: 8}}>📢</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#F59E0B', marginBottom: 4}}>{profileData.statistics.lost_items_searching}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Lost Items</div>
                 <div style={{background: '#F59E0B', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Searching</div>
               </div>
               
-              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
                 <div style={{fontSize: 32, marginBottom: 8}}>✅</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#10B981', marginBottom: 4}}>{profileData.statistics.successful_returns}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Successful Returns</div>
                 <div style={{background: '#10B981', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>All Time</div>
               </div>
               
-              <div style={{background: 'white', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
                 <div style={{fontSize: 32, marginBottom: 8}}>🎯</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#8B5CF6', marginBottom: 4}}>{profileData.statistics.total_matches}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Total Matches</div>
@@ -745,7 +751,7 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
 
             {/* Account Actions */}
-            <div style={{background: 'white', borderRadius: 16, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#f5eef8', borderRadius: 16, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <h3 style={{fontSize: 18, fontWeight: '600', margin: '0 0 16px 0', color: '#1F2937'}}>Account Actions</h3>
               
               <div style={{display: 'flex', flexDirection: 'column', gap: 2}}>

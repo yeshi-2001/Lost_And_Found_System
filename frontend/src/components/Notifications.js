@@ -62,13 +62,20 @@ const Notifications = ({ user, token }) => {
   }
 
   return (
-    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', background: '#f8f9fa'}}>
-      <div style={{marginBottom: 30}}>
-        <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', color: '#03045E', fontFamily: 'Roboto Slab, serif'}}>Notifications 🔔</h1>
-        <p style={{fontSize: 18, color: '#666', margin: 0}}>Stay updated with your lost and found activities</p>
+    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', background: 'linear-gradient(110deg, #1a0a3e 0%, #3d1558 40%, #7a2060 70%, #b03070 100%)', position: 'relative'}}>
+      {/* Orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '5%', right: '-5%', width: '35%', height: '40%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(50px)'}} />
+        <div style={{position: 'absolute', bottom: '15%', left: '5%', width: '30%', height: '35%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.4) 0%, transparent 70%)', filter: 'blur(40px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 70px)'}} />
       </div>
+      <div style={{position: 'relative', zIndex: 1}}>
+      <div style={{marginBottom: 30}}>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', color: 'white', fontFamily: 'Roboto Slab, serif'}}>Notifications</h1>
+          <p style={{fontSize: 18, color: 'rgba(237,200,255,0.8)', margin: 0}}>Stay updated with your lost and found activities</p>
+        </div>
 
-      <div style={{background: 'white', borderRadius: 15, padding: 20, boxShadow: '0 2px 10px rgba(0,0,0,0.1)'}}>
+      <div style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 15, padding: 20}}>
         {!Array.isArray(notifications) || notifications.length === 0 ? (
           <div style={{textAlign: 'center', padding: 40, color: '#666'}}>
             <div style={{fontSize: 48, marginBottom: 20}}>📭</div>
@@ -128,6 +135,7 @@ const Notifications = ({ user, token }) => {
             ))}
           </div>
         )}
+      </div>
       </div>
     </div>
   );

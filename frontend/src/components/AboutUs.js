@@ -9,16 +9,22 @@ const AboutUs = () => {
   };
 
   return (
-    <div style={{width: '100vw', minHeight: '100vh', background: '#EBF5FD', display: 'flex', flexDirection: 'column'}}>
+    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(200deg, #0d0221 0%, #3b0764 45%, #6d1a7a 100%)', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden'}}>
+      {/* Blur orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-10%', right: '-10%', width: '50%', height: '50%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.4) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', bottom: '10%', left: '-10%', width: '45%', height: '45%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.5) 0%, transparent 70%)', filter: 'blur(50px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px)'}} />
+      </div>
       {/* Header */}
-      <div style={{width: '100%', height: '50vh', background: '#03045E', position: 'relative', flexShrink: 0, zIndex: 1}}>
+      <div style={{width: '100%', height: '50vh', background: 'rgba(33,15,55,0.6)', position: 'relative', flexShrink: 0, zIndex: 1}}>
       </div>
       
       {/* Main Content */}
-      <div style={{background: 'white', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
+      <div style={{background: 'rgba(245,238,248,0.97)', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 20px rgba(0,0,0,0.4)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
         {/* Logo Circle - Left Upper Corner */}
-        <div style={{width: 150, height: 150, background: 'white', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
-          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo2_1.png" alt="Logo" />
+        <div style={{width: 150, height: 150, background: 'rgba(245,238,248,0.97)', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
+          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo.png" alt="Logo" />
         </div>
         <div style={{maxWidth: '700px', margin: '0 auto', padding: '40px 30px'}}>
           <h1 style={{color: '#03045E', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
@@ -44,12 +50,12 @@ const AboutUs = () => {
             
             <h3 style={{color: '#03045E', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>What Makes Us Different</h3>
             <ul style={{paddingLeft: '20px', marginBottom: '20px'}}>
-              <li style={{marginBottom: '8px'}}>🔒 Privacy First: Found items are never publicly listed</li>
-              <li style={{marginBottom: '8px'}}>🤖 AI-Powered: Automatic matching and intelligent verification</li>
-              <li style={{marginBottom: '8px'}}>⚡ Real-Time: Instant notifications when matches are found</li>
-              <li style={{marginBottom: '8px'}}>🎯 Accurate: 80%+ similarity matching algorithm</li>
-              <li style={{marginBottom: '8px'}}>🔐 Secure: Contact info only shared after verification</li>
-              <li style={{marginBottom: '8px'}}>🎓 Student Community: Built by students, for students</li>
+              <li style={{marginBottom: '8px'}}>Privacy First: Found items are never publicly listed</li>
+              <li style={{marginBottom: '8px'}}>AI-Powered: Automatic matching and intelligent verification</li>
+              <li style={{marginBottom: '8px'}}>Real-Time: Instant notifications when matches are found</li>
+              <li style={{marginBottom: '8px'}}>Accurate: 80%+ similarity matching algorithm</li>
+              <li style={{marginBottom: '8px'}}>Secure: Contact info only shared after verification</li>
+              <li style={{marginBottom: '8px'}}>Student Community: Built by students, for students</li>
             </ul>
             
             <h3 style={{color: '#03045E', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>How It Works</h3>
@@ -111,7 +117,7 @@ const AboutUs = () => {
             `}</style>
 
             <div style={{backgroundColor: '#d1ecf1', border: '1px solid #bee5eb', borderRadius: '6px', padding: '15px', color: '#0c5460', marginTop: '20px'}}>
-              <strong>🎯 Our Commitment:</strong>
+              <strong>Our Commitment:</strong>
               <br />• Free forever for university students
               <br />• Continuous improvements based on feedback
               <br />• Dedicated to student safety and privacy

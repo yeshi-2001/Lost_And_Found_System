@@ -1,66 +1,59 @@
-import google.generativeai as genai
+from groq import Groq
 import os
 from datetime import datetime
 
 class AIVerificationService:
-    """Dynamic AI verification service using Google Generative AI"""
+    """Dynamic AI verification service using Groq"""
     
     def __init__(self):
-        """Initialize with Google Generative AI API key"""
-        api_key = os.environ.get('GOOGLE_API_KEY')
+        """Initialize with Groq API key"""
+        api_key = os.environ.get('GROQ_API_KEY')
         if not api_key:
-            raise ValueError("GOOGLE_API_KEY environment variable is required")
+            raise ValueError("GROQ_API_KEY environment variable is required")
         
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.client = Groq(api_key=api_key)
+        self.model = 'llama-3.3-70b-versatile'
     
-    def generate_verification_questions(self, founder_description):
-        """Generate verification questions from founder's description using AI"""
-        
-        system_prompt = """You are a verification expert for a lost and found system.
-Your job is to generate questions that ONLY the real owner would know the answer to.
+    def _chat(self, prompt, max_tokens=1000):
+        """Helper to call Groq chat completion"""
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            max_tokens=max_tokens
+        )
+        return response.choices[0].message.content
+    
+    def generate_verification_questions(self, item_name, category, brand, color, location, date_found, description):
+        """Generate verification questions strictly from founder's uploaded details"""
 
-IMPORTANT RULES:
-1. Generate exactly 5-7 verification questions
-2. Questions must be based ONLY on details in the description
-3. Each question should target one specific detail
-4. Mix question types (color, location, condition, accessories, etc.)
-5. Make questions specific - not generic
-6. Avoid yes/no questions - use open-ended questions
-7. Questions should be natural and conversational
-8. Focus on unique/identifying features mentioned
-9. Output ONLY the questions, one per line, numbered 1-7
+        founder_details = f"""Item Name: {item_name}
+Category: {category}
+Brand: {brand or 'Not provided'}
+Color: {color}
+Location Found: {location}
+Date Found: {date_found}
+Description: {description}"""
 
-QUESTION GENERATION STRATEGY:
-- Extract key details from description
-- Create questions about: colors, damage, accessories, condition, markings
-- Make questions that require specific knowledge
-- Avoid questions about obvious information
-- Focus on details only the owner would remember
+        prompt = f"""You are a verification assistant for a lost and found system.
 
-Remember: The goal is to verify REAL ownership.
-Generate questions accordingly."""
-        
-        user_message = f"""Based on this found item description, generate verification questions:
+A finder uploaded these details about an item they found:
 
-FOUND ITEM DESCRIPTION:
-{founder_description}
+{founder_details}
 
-Generate 5-7 verification questions that ONLY the real owner would know.
-Remember: Questions must be specific to details mentioned in the description above.
-Output format: Number the questions 1-7, one per line."""
-        
+Generate 5 simple, short questions based ONLY on the details above.
+
+RULES:
+- Questions must come ONLY from the details provided above
+- Questions should be simple - answers should be one word or a short phrase (e.g. "Black", "Library", "Nike")
+- Do NOT ask for detailed explanations
+- Do NOT invent details not mentioned above
+- Skip fields that say "Not provided"
+- Number each question 1-5, one per line
+- Output ONLY the questions, nothing else"""
+
         try:
-            response = self.model.generate_content(
-                f"{system_prompt}\n\n{user_message}",
-                generation_config=genai.types.GenerationConfig(
-                    temperature=0.7,
-                    top_p=0.8,
-                    max_output_tokens=1000
-                )
-            )
-            
-            questions_text = response.text.strip()
+            questions_text = self._chat(prompt).strip()
             questions = self._parse_questions(questions_text)
             
             return {
@@ -109,9 +102,9 @@ Output format: Number the questions 1-7, one per line."""
                 'explanation': 'No answers provided'
             }
         
-        verification_prompt = f"""You are a verification expert. Evaluate if these answers prove the person is the REAL owner.
+        verification_prompt = f"""You are a verification assistant. Check if the answers match the founder's item details.
 
-FOUNDER'S DESCRIPTION:
+FOUNDER'S ITEM DETAILS:
 {founder_description}
 
 QUESTIONS ASKED:
@@ -121,16 +114,11 @@ OWNER'S ANSWERS:
 {self._format_answers_for_prompt(answers)}
 
 TASK:
-1. Check if answers match key details from description
-2. Score each answer (0-100):
-   - 100: Perfect match with specific details
-   - 75-99: Good match, mostly correct
-   - 50-74: Partial match, some correct details
-   - 25-49: Weak match, minimal correct details
-   - 0-24: No match or incorrect
-3. Calculate AVERAGE score of all answers
-4. If average >= 75%, set verified = true, else false
-5. Provide brief explanation
+- Compare each answer against the item details
+- Accept simple, partial, or approximate answers (e.g. "black" matches "Black", "lib" matches "Library")
+- Be lenient - the owner may not remember exact wording
+- Score overall match (0-100)
+- If score >= 60, set verified = true
 
 OUTPUT FORMAT (ONLY):
 SCORE: [number]
@@ -138,8 +126,8 @@ VERIFIED: [true/false]
 EXPLANATION: [brief reason]"""
         
         try:
-            response = self.model.generate_content(verification_prompt)
-            result = self._parse_verification_response(response.text)
+            result_text = self._chat(verification_prompt)
+            result = self._parse_verification_response(result_text)
             
             return {
                 'overall_percentage': result['score'],

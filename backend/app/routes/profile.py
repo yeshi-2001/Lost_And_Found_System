@@ -197,10 +197,25 @@ def delete_account():
     if not user.check_password(password):
         return jsonify({'error': 'Incorrect password'}), 400
     
-    # TODO: Implement soft delete or proper account deletion
-    # For now, just return success message
-    
-    return jsonify({
-        'success': True,
-        'message': 'Account deletion would be implemented here'
-    }), 200
+    try:
+        # Must delete matches first (FK references found/lost items)
+        found_item_ids = [r.id for r in FoundItem.query.filter_by(user_id=user_id).with_entities(FoundItem.id).all()]
+        lost_item_ids = [r.id for r in LostItem.query.filter_by(user_id=user_id).with_entities(LostItem.id).all()]
+        
+        if found_item_ids or lost_item_ids:
+            from sqlalchemy import or_
+            Match.query.filter(
+                or_(
+                    Match.found_item_id.in_(found_item_ids) if found_item_ids else False,
+                    Match.lost_item_id.in_(lost_item_ids) if lost_item_ids else False
+                )
+            ).delete(synchronize_session='fetch')
+        
+        FoundItem.query.filter_by(user_id=user_id).delete()
+        LostItem.query.filter_by(user_id=user_id).delete()
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({'success': True, 'message': 'Account deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'Failed to delete account: {str(e)}'}), 500

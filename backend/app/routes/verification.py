@@ -41,8 +41,16 @@ def generate_questions():
         # Initialize AI service
         ai_service = AIVerificationService()
         
-        # Generate questions from founder's description
-        result = ai_service.generate_verification_questions(found_item.description)
+        # Generate questions from founder's full item details
+        result = ai_service.generate_verification_questions(
+            item_name=found_item.item_name,
+            category=found_item.category,
+            brand=found_item.brand,
+            color=found_item.color,
+            location=found_item.location,
+            date_found=str(found_item.date_found),
+            description=found_item.description
+        )
         
         if not result['success']:
             return jsonify({
@@ -119,7 +127,7 @@ def verify_answers():
         
         # Verify answers using AI
         verification_result = ai_service.verify_answers(
-            founder_description=found_item.description,
+            founder_description=f"Item: {found_item.item_name}, Category: {found_item.category}, Brand: {found_item.brand or 'Not provided'}, Color: {found_item.color}, Location: {found_item.location}, Date: {found_item.date_found}, Description: {found_item.description}",
             questions=match.verification_questions,
             answers=answers
         )

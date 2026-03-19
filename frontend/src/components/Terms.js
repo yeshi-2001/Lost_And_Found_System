@@ -17,16 +17,22 @@ const Terms = () => {
   };
 
   return (
-    <div style={{width: '100vw', minHeight: '100vh', background: '#EBF5FD', display: 'flex', flexDirection: 'column'}}>
+    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(135deg, #4F1C51 0%, #210F37 50%, #6A1E55 100%)', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden'}}>
+      {/* Radial burst orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '80%', height: '60%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 65%)', filter: 'blur(70px)'}} />
+        <div style={{position: 'absolute', bottom: '-5%', right: '-5%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(106,30,85,0.5) 0%, transparent 70%)', filter: 'blur(40px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 70px)'}} />
+      </div>
       {/* Header */}
-      <div style={{width: '100%', height: '50vh', background: '#03045E', position: 'relative', flexShrink: 0, zIndex: 1}}>
+      <div style={{width: '100%', height: '50vh', background: 'rgba(33,15,55,0.5)', position: 'relative', flexShrink: 0, zIndex: 1}}>
       </div>
       
       {/* Main Content */}
-      <div style={{background: 'white', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
+      <div style={{background: 'rgba(245,238,248,0.97)', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 20px rgba(0,0,0,0.4)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
         {/* Logo Circle - Left Upper Corner */}
-        <div style={{width: 150, height: 150, background: 'white', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
-          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo2_1.png" alt="Logo" />
+        <div style={{width: 150, height: 150, background: 'rgba(245,238,248,0.97)', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
+          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo.png" alt="Logo" />
         </div>
         <div style={{maxWidth: '700px', margin: '0 auto', padding: '40px 30px'}}>
           <h1 style={{color: '#03045E', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
@@ -116,7 +122,7 @@ const Terms = () => {
           </div>
           
           {/* Terms Acceptance Checkbox */}
-          <div style={{backgroundColor: '#f8f9fa', border: '2px solid #03045E', borderRadius: '12px', padding: '25px', marginTop: '30px'}}>
+          <div style={{backgroundColor: 'rgba(79,28,81,0.08)', border: '2px solid #6A1E55', borderRadius: '12px', padding: '25px', marginTop: '30px'}}>
             <label style={{display: 'flex', alignItems: 'flex-start', cursor: 'pointer', fontSize: '16px', fontWeight: '500'}}>
               <input
                 type="checkbox"

@@ -10,7 +10,6 @@ import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import FoundItemForm from './components/FoundItemForm';
 import LostItemForm from './components/LostItemForm';
-import Profile from './components/Profile';
 import Matches from './components/Matches';
 import Verification from './components/Verification';
 import ItemCleanup from './components/ItemCleanup';
@@ -48,12 +47,12 @@ function AppContent() {
     localStorage.removeItem('user');
   };
 
-  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home', '/profile'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
+  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
 
   return (
     <div className="App">
       {showSidebar && <Sidebar user={user} onLogout={logout} />}
-      {user && !showSidebar && location.pathname !== '/home' && location.pathname !== '/profile' && <Navbar user={user} onLogout={logout} />}
+      {user && !showSidebar && location.pathname !== '/home' && <Navbar user={user} onLogout={logout} />}
         
         <Routes>
           <Route 
@@ -95,10 +94,6 @@ function AppContent() {
           <Route 
             path="/lost-item" 
             element={user ? <LostItemForm token={token} user={user} /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/profile" 
-            element={user ? <Profile user={user} token={token} onLogout={logout} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/matches" 

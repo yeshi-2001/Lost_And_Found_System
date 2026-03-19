@@ -59,18 +59,24 @@ const Matches = ({ user, token }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
-      <div style={{maxWidth: 1200, margin: '0 auto'}}>
+    <div style={{minHeight: '100vh', background: 'linear-gradient(145deg, #0f0a2e 0%, #2a0a5e 35%, #5a1060 65%, #8b2060 100%)', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative'}}>
+      {/* Orbs */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-10%', right: '-5%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(50px)'}} />
+        <div style={{position: 'absolute', bottom: '10%', left: '10%', width: '35%', height: '35%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.35) 0%, transparent 70%)', filter: 'blur(40px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 60px)'}} />
+      </div>
+      <div style={{maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30}}>
-          <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif'}}>🎯 Your Potential Matches</h1>
+          <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif', color: 'white'}}>Your Potential Matches</h1>
         </div>
 
         {error && <div style={{background: '#FEE2E2', color: '#991B1B', padding: 15, borderRadius: 8, marginBottom: 20}}>{error}</div>}
 
         {matches.length === 0 ? (
-          <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 40, textAlign: 'center'}}>
-            <h3>No matches found yet</h3>
-            <p style={{ color: '#666', marginBottom: '20px' }}>
+          <div style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, padding: 20, textAlign: 'center'}}>
+            <h3 style={{color: 'white'}}>No matches found yet</h3>
+            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '20px' }}>
               We haven't found any potential matches yet. 
               Don't worry, we'll notify you as soon as there's a match!
             </p>
@@ -97,13 +103,13 @@ const Matches = ({ user, token }) => {
 
 
             {matches.map(match => (
-              <div key={match.id} style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 20, marginBottom: 20}}>
+              <div key={match.id} style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, padding: 20, marginBottom: 20}}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
                 <div>
                   <span className="similarity-score">
                     {Math.round(match.similarity_score)}% Match
                   </span>
-                  <h3 style={{ margin: '10px 0 5px 0' }}>
+                  <h3 style={{ margin: '10px 0 5px 0', color: 'white' }}>
                     {match.found_item_name}
                   </h3>
                   <span style={{ 
@@ -223,7 +229,7 @@ const Matches = ({ user, token }) => {
                 {/* Your Lost Item */}
                 <div>
                   <h4 style={{ color: '#dc3545', marginBottom: '10px' }}>
-                    🔍 Your Lost Item
+                    Your Lost Item
                   </h4>
                   <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
                     <p><strong>Item:</strong> {match.lost_item_name}</p>
@@ -236,7 +242,7 @@ const Matches = ({ user, token }) => {
                 {/* Found Item Match */}
                 <div>
                   <h4 style={{ color: '#28a745', marginBottom: '10px' }}>
-                    📱 Found Item Match
+                    Found Item Match
                   </h4>
                   <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px' }}>
                     <p><strong>Item:</strong> {match.found_item_name}</p>
@@ -386,9 +392,9 @@ const Matches = ({ user, token }) => {
               </div>
             ))}
 
-            <div style={{background: 'white', border: '1px solid black', borderRadius: 20, padding: 30, textAlign: 'center', marginTop: 30}}>
-              <h4>Need Help?</h4>
-              <p style={{ color: '#666', marginBottom: '20px' }}>
+            <div style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, padding: 30, textAlign: 'center', marginTop: 30}}>
+              <h4 style={{color: 'white'}}>Need Help?</h4>
+              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '20px' }}>
                 If you're having trouble with verification or think there's an error, 
                 you can update your lost item description with more details.
               </p>

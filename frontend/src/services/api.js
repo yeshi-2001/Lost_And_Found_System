@@ -67,6 +67,8 @@ export const itemsAPI = {
   }),
   getFoundItems: () => api.get('/found-items'),
   getLostItems: () => api.get('/lost-items'),
+  deleteFoundItem: (itemId) => api.delete(`/found-items/${itemId}`),
+  deleteLostItem: (itemId) => api.delete(`/lost-items/${itemId}`),
   getFormOptions: () => api.get('/form-options'),
   uploadImages: (formData) => api.post('/upload-images', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }

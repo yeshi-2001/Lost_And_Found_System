@@ -186,16 +186,23 @@ def delete_lost_item(item_id):
     if not item:
         return jsonify({'error': 'Item not found'}), 404
     
-    # Delete associated images
-    if item.image_urls:
-        for image_url in item.image_urls:
-            try:
-                image_service.delete_image(image_url)
-            except Exception as e:
-                print(f"Warning: Could not delete image {image_url}: {e}")
-    
-    db.session.delete(item)
-    db.session.commit()
-    
-    return jsonify({'message': 'Item deleted successfully'}), 200
+    try:
+        # Delete associated matches first (FK constraint)
+        from app.models.match import Match
+        Match.query.filter_by(lost_item_id=item_id).delete()
+        
+        # Delete associated images
+        if item.image_urls:
+            for image_url in item.image_urls:
+                try:
+                    image_service.delete_image(image_url)
+                except Exception as e:
+                    print(f"Warning: Could not delete image {image_url}: {e}")
+        
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify({'message': 'Item deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'Failed to delete item: {str(e)}'}), 500
 

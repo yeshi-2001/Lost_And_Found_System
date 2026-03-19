@@ -240,7 +240,7 @@ const LostItemForm = ({ token, user }) => {
   const styles = {
     container: {
       minHeight: '100vh',
-      background: '#EFF6FF',
+      background: '#F5F0FF',
       padding: '20px',
       fontFamily: 'Calibri, sans-serif'
     },
@@ -252,7 +252,7 @@ const LostItemForm = ({ token, user }) => {
     backButton: {
       background: 'none',
       border: 'none',
-      color: '#03045E',
+      color: '#3b0764',
       fontSize: '16px',
       cursor: 'pointer',
       marginBottom: '20px',
@@ -273,7 +273,7 @@ const LostItemForm = ({ token, user }) => {
     },
     searchNote: {
       fontSize: '16px',
-      color: '#03045E',
+      color: '#3b0764',
       margin: 0,
       display: 'flex',
       alignItems: 'center',
@@ -283,7 +283,7 @@ const LostItemForm = ({ token, user }) => {
     form: {
       maxWidth: '800px',
       margin: '0 auto',
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '40px',
       boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
@@ -366,7 +366,7 @@ const LostItemForm = ({ token, user }) => {
       textAlign: 'center',
       cursor: 'pointer',
       transition: 'border-color 0.2s',
-      backgroundColor: '#F9FAFB',
+      backgroundColor: '#faf5ff',
       opacity: '0.8'
     },
     imagePreview: {
@@ -455,7 +455,7 @@ const LostItemForm = ({ token, user }) => {
       padding: '12px 32px',
       border: 'none',
       borderRadius: '8px',
-      background: '#03045E',
+      background: '#3b0764',
       color: 'white',
       fontSize: '16px',
       fontWeight: '600',
@@ -483,7 +483,7 @@ const LostItemForm = ({ token, user }) => {
       padding: '20px'
     },
     modalContent: {
-      background: 'white',
+      background: '#f5eef8',
       borderRadius: '16px',
       padding: '40px',
       maxWidth: '500px',
@@ -508,19 +508,19 @@ const LostItemForm = ({ token, user }) => {
             <>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎉</div>
               <h2 style={{ color: '#10B981', marginBottom: '16px' }}>GREAT NEWS!</h2>
-              <h3 style={{ color: '#03045E', marginBottom: '20px' }}>Potential Match Found!</h3>
+              <h3 style={{ color: '#3b0764', marginBottom: '20px' }}>Potential Match Found!</h3>
               <p style={{ color: '#6B7280', marginBottom: '24px' }}>
                 Someone has reported finding an item that matches your description!
               </p>
               
-              <div style={{ textAlign: 'left', background: '#F9FAFB', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 YOUR ITEM</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• {submittedData?.item_name} {submittedData?.brand && `(${submittedData.brand})`}</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• {submittedData?.color} color</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Lost at: {submittedData?.location}</p>
               </div>
 
-              <div style={{ textAlign: 'left', background: '#EFF6FF', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#F5F0FF', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>🎯 MATCH DETAILS</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Similarity Score: {Math.round(submittedData?.similarity_score || 87)}%</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Found at: Library</p>
@@ -557,11 +557,11 @@ const LostItemForm = ({ token, user }) => {
             <>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>✅</div>
               <h2 style={{ color: '#10B981', marginBottom: '16px' }}>Report Submitted Successfully!</h2>
-              <p style={{ color: '#03045E', marginBottom: '24px', fontSize: '18px', fontWeight: '600' }}>
+              <p style={{ color: '#3b0764', marginBottom: '24px', fontSize: '18px', fontWeight: '600' }}>
                 We're searching for your item!
               </p>
               
-              <div style={{ textAlign: 'left', background: '#F9FAFB', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 YOUR ITEM</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Item: {submittedData?.item_name}</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Brand: {submittedData?.brand || 'Not specified'}</p>
@@ -571,7 +571,7 @@ const LostItemForm = ({ token, user }) => {
                 <p style={{ margin: '12px 0 4px 0', fontWeight: 'bold', color: '#374151' }}>Reference ID: {submittedData?.reference_id}</p>
               </div>
 
-              <div style={{ textAlign: 'left', background: '#EFF6FF', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#F5F0FF', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>🔍 WHAT HAPPENS NEXT</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• We're checking found items database</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• You'll be notified if match found</p>
@@ -624,15 +624,30 @@ const LostItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0}}>
+    <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #210F37 0%, #4F1C51 30%, #6A1E55 60%, #A64D79 100%)', padding: 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+      {/* Background design layers */}
+      <div style={{position: 'fixed', top: 0, left: window.innerWidth > 768 ? 280 : 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none'}}>
+        {/* Glowing blurred orbs */}
+        <div style={{position: 'absolute', top: '-10%', left: '-5%', width: '60%', height: '55%', background: 'linear-gradient(135deg, rgba(166,77,121,0.45), rgba(106,30,85,0.2))', borderRadius: '50%', filter: 'blur(70px)', transform: 'rotate(-15deg)'}} />
+        <div style={{position: 'absolute', bottom: '-10%', right: '-5%', width: '60%', height: '55%', background: 'linear-gradient(135deg, rgba(79,28,81,0.5), rgba(33,15,55,0.3))', borderRadius: '50%', filter: 'blur(80px)', transform: 'rotate(20deg)'}} />
+        <div style={{position: 'absolute', top: '35%', left: '25%', width: '45%', height: '40%', background: 'radial-gradient(circle, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        {/* Diagonal line layers */}
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 55px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 75px)'}} />
+        {/* Extra glowing spots */}
+        <div style={{position: 'absolute', top: '8%', right: '12%', width: 280, height: 280, background: 'radial-gradient(circle, rgba(166,77,121,0.4) 0%, transparent 70%)', filter: 'blur(45px)'}} />
+        <div style={{position: 'absolute', bottom: '15%', left: '8%', width: 220, height: 220, background: 'radial-gradient(circle, rgba(79,28,81,0.45) 0%, transparent 70%)', filter: 'blur(55px)'}} />
+      </div>
+      <div style={{position: 'relative', zIndex: 1}}>
       <div style={{maxWidth: 800, margin: '0 auto'}}>
         <div style={{marginBottom: 30, textAlign: 'center'}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0'}}>Report Lost Item</h1>
-          <p style={{fontSize: 18, color: '#666', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
-          <p style={{fontSize: 16, color: '#03045E', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>🔍 We'll search our database for matches</p>
+          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: 'white', textShadow: '0 2px 12px rgba(166,77,121,0.5)'}}>Report Lost Item</h1>
+          <p style={{fontSize: 18, color: 'rgba(237,200,255,0.9)', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
+          <p style={{fontSize: 16, color: '#e0aaff', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>We'll search our database for matches</p>
         </div>
 
-        <form style={{background: 'white', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} onSubmit={handleSubmit}>
+        <form style={{background: '#f5eef8', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
+          <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/bg.png)', backgroundSize: '100% auto', backgroundPosition: 'top center', backgroundRepeat: 'repeat-y', opacity: 0.1, zIndex: 0, pointerEvents: 'none'}} />
         {/* Basic Information */}
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>BASIC INFORMATION</h3>
@@ -841,16 +856,47 @@ const LostItemForm = ({ token, user }) => {
               }}
               onClick={() => document.getElementById('lostImageInput').click()}
             >
-              <div style={{ fontSize: '36px', marginBottom: '12px' }}>📷</div>
-              <p style={{ margin: '0 0 8px 0', fontSize: '16px', color: '#6B7280' }}>
-                Click to upload or drag and drop
-              </p>
-              <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#9CA3AF' }}>
-                JPG, PNG (Max 5MB each) • {formData.images.length} of 5 photos
-              </p>
-              <p style={{ margin: 0, fontSize: '12px', color: '#9CA3AF' }}>
-                Optional - Upload if you have photos of similar item, receipt, or any reference
-              </p>
+              {formData.images.length > 0 ? (
+                <div
+                  style={{ ...styles.imagePreview, marginTop: 0 }}
+                  onClick={e => e.stopPropagation()}
+                >
+                  {formData.images.map((image, index) => (
+                    <div key={index} style={styles.imageItem}>
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`Preview ${index + 1}`}
+                        style={styles.image}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        style={styles.deleteButton}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                  {formData.images.length < 5 && (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', aspectRatio: '1', border: '2px dashed #D1D5DB', borderRadius: '8px', color: '#9CA3AF', fontSize: '28px', cursor: 'pointer' }}>
+                      +
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div style={{ fontSize: '36px', marginBottom: '12px' }}>📷</div>
+                  <p style={{ margin: '0 0 8px 0', fontSize: '16px', color: '#6B7280' }}>
+                    Click to upload or drag and drop
+                  </p>
+                  <p style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#9CA3AF' }}>
+                    JPG, PNG (Max 5MB each) • {formData.images.length} of 5 photos
+                  </p>
+                  <p style={{ margin: 0, fontSize: '12px', color: '#9CA3AF' }}>
+                    Optional - Upload if you have photos of similar item, receipt, or any reference
+                  </p>
+                </>
+              )}
             </div>
             <input
               id="lostImageInput"
@@ -865,27 +911,6 @@ const LostItemForm = ({ token, user }) => {
               <div style={styles.success}>✓ {formData.images.length} photo{formData.images.length > 1 ? 's' : ''} uploaded</div>
             )}
             <div style={styles.helper}>Most people don't have photos of lost items - that's okay!</div>
-            
-            {formData.images.length > 0 && (
-              <div style={styles.imagePreview}>
-                {formData.images.map((image, index) => (
-                  <div key={index} style={styles.imageItem}>
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt={`Preview ${index + 1}`}
-                      style={styles.image}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      style={styles.deleteButton}
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 
@@ -914,7 +939,7 @@ const LostItemForm = ({ token, user }) => {
             <div style={styles.charCounter}>
               {formData.description.length}/500 characters
             </div>
-            <div style={styles.helper}>🔐 These details will be used to verify you're the real owner</div>
+            <div style={styles.helper}>These details will be used to verify you're the real owner</div>
             <div style={styles.helper}>💡 Include unique features only YOU would know</div>
             <div style={styles.importantNote}>
               ⚠️ Be very specific - this helps us verify you're the real owner
@@ -995,6 +1020,7 @@ const LostItemForm = ({ token, user }) => {
           </button>
         </div>
         </form>
+      </div>
       </div>
     </div>
   );
