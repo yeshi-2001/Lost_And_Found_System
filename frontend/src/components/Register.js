@@ -32,14 +32,43 @@ const Register = ({ onLogin }) => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const navigate = useNavigate();
 
+  const validatePassword = (password) => {
+    return {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValid = emailRegex.test(email);
+    if (!email) return { isValid: false, message: '' };
+    if (!isValid) return { isValid: false, message: 'Please enter a valid email address' };
+    return { isValid: true, message: 'Valid email format' };
+  };
+
+  const validateRegistrationNumber = (regNumber) => {
+    const regNumberRegex = /^\d{2}[a-zA-Z]+\d+$/;
+    const isValid = regNumberRegex.test(regNumber);
+    if (!regNumber) return { isValid: false, message: '' };
+    if (!isValid) return { isValid: false, message: 'Format: 2 digits + letters + digits (e.g., 21com76)' };
+    return { isValid: true, message: 'Valid registration number format' };
+  };
+
   useEffect(() => {
-    // Restore form data when returning from terms page
     const savedFormData = localStorage.getItem('registrationFormData');
     if (savedFormData) {
-      setFormData(JSON.parse(savedFormData));
+      const parsed = JSON.parse(savedFormData);
+      setFormData(parsed);
+      // Re-run validations on restored data
+      setPasswordValidation(validatePassword(parsed.password || ''));
+      setEmailValidation(validateEmail(parsed.email || ''));
+      setRegNumberValidation(validateRegistrationNumber(parsed.registration_number || ''));
     }
     
-    // Check if terms were accepted
     const accepted = localStorage.getItem('termsAccepted');
     if (accepted === 'true') {
       setTermsAccepted(true);
@@ -57,42 +86,6 @@ const Register = ({ onLogin }) => {
     'Faculty of Siddha Medicine'
   ];
 
-  const validatePassword = (password) => {
-    return {
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    };
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const isValid = emailRegex.test(email);
-    
-    if (!email) {
-      return { isValid: false, message: '' };
-    } else if (!isValid) {
-      return { isValid: false, message: 'Please enter a valid email address' };
-    } else {
-      return { isValid: true, message: 'Valid email format' };
-    }
-  };
-
-  const validateRegistrationNumber = (regNumber) => {
-    // Format: 2 digits + any letters + 1 or more digits (e.g., 21com76)
-    const regNumberRegex = /^\d{2}[a-zA-Z]+\d+$/;
-    const isValid = regNumberRegex.test(regNumber);
-    
-    if (!regNumber) {
-      return { isValid: false, message: '' };
-    } else if (!isValid) {
-      return { isValid: false, message: 'Format: 2 digits + letters + digits (e.g., 21com76)' };
-    } else {
-      return { isValid: true, message: 'Valid registration number format' };
-    }
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
