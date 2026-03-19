@@ -88,14 +88,14 @@ const Matches = ({ user, token }) => {
           <>
             {matches.some(m => m.user_role === 'owner' && m.status === 'pending_verification') && (
               <div style={{background: '#EFF6FF', color: '#1F2937', padding: 15, borderRadius: 8, marginBottom: 30}}>
-                🎉 <strong>Great news!</strong> We found {matches.filter(m => m.user_role === 'owner' && m.status === 'pending_verification').length} potential match(es) for your lost items. 
+                <strong>Great news!</strong> We found {matches.filter(m => m.user_role === 'owner' && m.status === 'pending_verification').length} potential match(es) for your lost items. 
                 Click "Verify Ownership" to answer questions and confirm if it's your item.
               </div>
             )}
             
             {matches.some(m => m.user_role === 'owner' && m.status === 'verified') && (
               <div style={{background: '#D1FAE5', color: '#065F46', padding: 15, borderRadius: 8, marginBottom: 30}}>
-                ✅ <strong>Verification Complete!</strong> You've been verified as the owner. 
+                <strong>Verification Complete!</strong> You've been verified as the owner. 
                 Contact the finder to arrange pickup, then confirm when you receive your item.
               </div>
             )}
@@ -149,7 +149,7 @@ const Matches = ({ user, token }) => {
                             fontWeight: 'bold'
                           }}
                         >
-                          📞 View Contact
+                          View Contact
                         </button>
                         <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                           <input 
@@ -172,7 +172,7 @@ const Matches = ({ user, token }) => {
                         fontSize: '14px',
                         fontWeight: 'bold'
                       }}>
-                        ✅ Item Returned Successfully
+                        Item Returned Successfully
                       </div>
                     )}
                   </div>
@@ -193,7 +193,7 @@ const Matches = ({ user, token }) => {
                             fontWeight: 'bold'
                           }}
                         >
-                          📞 View Contact
+                          View Contact
                         </button>
                         <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                           <input 
@@ -217,9 +217,9 @@ const Matches = ({ user, token }) => {
                       fontSize: '14px',
                       fontWeight: 'bold'
                     }}>
-                      {match.status === 'verified' ? '✅ Verified - Contact Shared' : 
-                       (match.status === 'returned_to_owner' || match.status === 'returned_by_finder') ? '✅ Item Returned' :
-                       '⏳ Awaiting Verification'}
+                      {match.status === 'verified' ? 'Verified - Contact Shared' : 
+                       (match.status === 'returned_to_owner' || match.status === 'returned_by_finder') ? 'Item Returned' :
+                       'Awaiting Verification'}
                     </div>
                   </div>
                 )}
@@ -266,7 +266,7 @@ const Matches = ({ user, token }) => {
                 <div style={{ marginTop: '20px', padding: '20px', background: '#e8f5e8', borderRadius: '12px', border: '2px solid #28a745' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
                     <h4 style={{ margin: 0, color: '#155724', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      📞 Contact Information - {contactInfo[match.id].role === 'finder' ? 'Finder' : 'Owner'}
+                      Contact Information - {contactInfo[match.id].role === 'finder' ? 'Finder' : 'Owner'}
                     </h4>
                     <button
                       onClick={() => hideContact(match.id)}
@@ -307,7 +307,7 @@ const Matches = ({ user, token }) => {
                   </div>
                   <div style={{ marginTop: '15px', padding: '10px', background: '#d4edda', borderRadius: '6px' }}>
                     <p style={{ margin: 0, fontSize: '14px', color: '#155724' }}>
-                      📞 <strong>Next Step:</strong> Contact them to arrange {match.user_role === 'owner' ? 'pickup' : 'handover'} of the item.
+                      <strong>Next Step:</strong> Contact them to arrange {match.user_role === 'owner' ? 'pickup' : 'handover'} of the item.
                     </p>
                   </div>
                 </div>
@@ -319,7 +319,7 @@ const Matches = ({ user, token }) => {
                   {match.status === 'pending_verification' && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#e7f3ff', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#0066cc' }}>
-                        🔐 Next Step: Ownership Verification
+                        Next Step: Ownership Verification
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         To confirm this is your item, you'll need to answer verification questions 
@@ -331,7 +331,7 @@ const Matches = ({ user, token }) => {
                   {match.status === 'verified' && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#d4edda', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#155724' }}>
-                        📞 Next Step: Contact Finder & Arrange Pickup
+                        Next Step: Contact Finder & Arrange Pickup
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         You've been verified! Contact the finder to arrange pickup. 
@@ -343,7 +343,7 @@ const Matches = ({ user, token }) => {
                   {(match.status === 'returned_to_owner' || match.status === 'returned_by_finder') && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#d1ecf1', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>
-                        🎊 Case Closed Successfully!
+                        Case Closed Successfully!
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         Your item has been successfully returned. Thank you for using our Lost & Found system!
@@ -356,7 +356,7 @@ const Matches = ({ user, token }) => {
                   {match.status === 'pending_verification' && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#e8f5e8', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#28a745' }}>
-                        📞 Next Step: Wait for Verification
+                        Next Step: Wait for Verification
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         The person claiming this item is answering verification questions. 
@@ -368,7 +368,7 @@ const Matches = ({ user, token }) => {
                   {match.status === 'verified' && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#d4edda', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#155724' }}>
-                        📞 Next Step: Arrange Pickup with Owner
+                        Next Step: Arrange Pickup with Owner
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         The owner has been verified! They should contact you soon to arrange pickup. 
@@ -380,7 +380,7 @@ const Matches = ({ user, token }) => {
                   {(match.status === 'returned_to_owner' || match.status === 'returned_by_finder') && (
                     <div style={{ marginTop: '15px', padding: '15px', background: '#d1ecf1', borderRadius: '8px' }}>
                       <h5 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>
-                        🎊 Item Successfully Returned!
+                        Item Successfully Returned!
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
                         Great job helping someone recover their lost item! Thank you for being part of our community.

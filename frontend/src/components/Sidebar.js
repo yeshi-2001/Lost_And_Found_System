@@ -69,10 +69,10 @@ const Sidebar = ({ user, onLogout, token }) => {
     <>
       {/* Logo Section */}
       <div style={{padding: '20px'}}>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px'}}>
-          <img style={{width: 80, height: 80, objectFit: 'contain', marginBottom: 10}} src="/image/logo.png" alt="Logo" />
+        <Link to="/home" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px'}} onClick={() => setIsMobileOpen(false)}>
+          <img style={{width: 120, height: 120, objectFit: 'contain', marginBottom: 10}} src="/image/logo.png" alt="Logo" />
           <h1 style={{color: 'white', fontSize: 38, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>Back2U</h1>
-        </div>
+        </Link>
       </div>
 
       {/* Main Navigation */}
@@ -262,7 +262,7 @@ const Sidebar = ({ user, onLogout, token }) => {
       {showDeleteModal && (
         <div style={{position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: 20}}>
           <div style={{background: '#2d1245', border: '1px solid rgba(255,68,68,0.4)', borderRadius: 16, padding: 30, maxWidth: 420, width: '100%', textAlign: 'center', color: 'white'}}>
-            <div style={{fontSize: 40, marginBottom: 12}}>⚠️</div>
+            <div style={{fontSize: 40, marginBottom: 12}}></div>
             <h3 style={{color: '#ff4444', fontSize: 20, margin: '0 0 12px 0'}}>Delete Account</h3>
             <p style={{color: 'rgba(255,255,255,0.8)', marginBottom: 16}}>Are you sure you want to delete your account?</p>
             <div style={{textAlign: 'left', background: 'rgba(255,68,68,0.1)', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, color: 'rgba(255,255,255,0.7)'}}>

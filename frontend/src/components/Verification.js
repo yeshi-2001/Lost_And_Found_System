@@ -82,7 +82,7 @@ const Verification = ({ token }) => {
           {result.verified ? (
             <>
               <h2 style={{ color: '#28a745', marginBottom: '20px' }}>
-                ✅ Verification Successful!
+                Verification Successful!
               </h2>
               <p style={{ fontSize: '18px', marginBottom: '20px' }}>
                 Congratulations! You've been verified as the owner of the item.
@@ -92,7 +92,7 @@ const Verification = ({ token }) => {
                 <h3>Verification Results:</h3>
                 <p><strong>Questions Answered:</strong> {questions.length} of {questions.length}</p>
                 <p><strong>Accuracy:</strong> {Math.round(result.verification_result.overall_percentage)}%</p>
-                <p><strong>Status:</strong> ✅ VERIFIED</p>
+                <p><strong>Status:</strong> VERIFIED</p>
                 <p><strong>Message:</strong> {result.message}</p>
               </div>
 
@@ -111,7 +111,7 @@ const Verification = ({ token }) => {
                   onClick={() => navigate('/matches')}
                   className="btn btn-success"
                 >
-                  📞 View Contact Info
+                  View Contact Info
                 </button>
                 <button 
                   onClick={() => navigate('/dashboard')}
@@ -124,7 +124,7 @@ const Verification = ({ token }) => {
           ) : (
             <>
               <h2 style={{ color: '#dc3545', marginBottom: '20px' }}>
-                ❌ Verification Unsuccessful
+                Verification Unsuccessful
               </h2>
               <p style={{ fontSize: '18px', marginBottom: '20px' }}>
                 Unfortunately, your answers don't match the item details well enough.
@@ -134,7 +134,7 @@ const Verification = ({ token }) => {
                 <h3>Verification Results:</h3>
                 <p><strong>Questions Answered:</strong> {questions.length} of {questions.length}</p>
                 <p><strong>Accuracy:</strong> {Math.round(result.verification_result.overall_percentage)}%</p>
-                <p><strong>Status:</strong> ❌ NOT VERIFIED</p>
+                <p><strong>Status:</strong> NOT VERIFIED</p>
                 <p><strong>Message:</strong> {result.message}</p>
               </div>
 
@@ -172,7 +172,7 @@ const Verification = ({ token }) => {
     <div className="verification-container">
       <div className="card" style={{ marginBottom: '30px' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
-          🔐 Ownership Verification
+          Ownership Verification
         </h2>
         
         {matchInfo && (
@@ -186,7 +186,7 @@ const Verification = ({ token }) => {
         <div className="alert alert-info">
           <h4>Instructions:</h4>
           <p>Please answer the following questions about your lost item. Your answers will be verified to confirm you are the rightful owner.</p>
-          <p><strong>💡 TIP:</strong> Be specific and honest. Only the real owner would know these details.</p>
+          <p><strong>TIP:</strong> Be specific and honest. Only the real owner would know these details.</p>
           <p><strong>You need to answer at least 75% correctly to verify ownership.</strong></p>
         </div>
       </div>
@@ -217,7 +217,7 @@ const Verification = ({ token }) => {
 
         <div className="card" style={{ textAlign: 'center' }}>
           <div className="alert alert-info" style={{ marginBottom: '20px' }}>
-            ⚠️ <strong>Warning:</strong> Make sure all answers are accurate before submitting. 
+            <strong>Warning:</strong> Make sure all answers are accurate before submitting. 
             You can only attempt verification a limited number of times.
           </div>
           

@@ -72,7 +72,7 @@ const MyItems = ({ user, token }) => {
       {confirmDelete && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ background: 'white', borderRadius: 12, padding: 30, maxWidth: 380, width: '90%', textAlign: 'center' }}>
-            <div style={{ fontSize: 40, marginBottom: 12 }}>🗑️</div>
+            <div style={{ fontSize: 40, marginBottom: 12 }}></div>
             <h3 style={{ margin: '0 0 10px', color: '#333' }}>Delete Item?</h3>
             <p style={{ color: '#666', marginBottom: 24, fontSize: 14 }}>This action cannot be undone.</p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
@@ -129,9 +129,7 @@ const MyItems = ({ user, token }) => {
       <div style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 15, padding: 20, position: 'relative', zIndex: 1}}>
         {items[activeTab].length === 0 ? (
           <div style={{textAlign: 'center', padding: 40, color: '#666'}}>
-            <div style={{fontSize: 48, marginBottom: 20}}>
-              {activeTab === 'found' ? '📱' : '🔍'}
-            </div>
+            <div style={{fontSize: 48, marginBottom: 20}}></div>
             <div style={{fontSize: 18, fontWeight: '600', marginBottom: 10}}>
               No {activeTab} items yet
             </div>

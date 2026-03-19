@@ -113,7 +113,7 @@ const Terms = () => {
             </ul>
 
             <div style={{backgroundColor: '#d1ecf1', border: '1px solid #bee5eb', borderRadius: '6px', padding: '15px', color: '#0c5460', marginTop: '20px'}}>
-              <strong>📝 By accepting these terms:</strong>
+              <strong>By accepting these terms:</strong>
               <br />• You acknowledge that you have read and understood all requirements
               <br />• You agree to provide only accurate and truthful information
               <br />• You understand the consequences of providing false information

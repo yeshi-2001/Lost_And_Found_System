@@ -235,7 +235,7 @@ const Dashboard = ({ user }) => {
             )}
           </div>
           <div style={{padding: '10px 20px', border: '2px solid #5c4d66', borderRadius: 6, background: '#3d2b4e', fontSize: 12, display: 'flex', alignItems: 'center', color: '#e9d5ff'}}>
-            📅 {new Date().toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+            {new Date().toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
           </div>
         </div>
         

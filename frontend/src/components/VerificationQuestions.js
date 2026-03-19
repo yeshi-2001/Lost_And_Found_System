@@ -92,7 +92,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
       }}>
         <div style={{ fontSize: '18px', color: '#666' }}>
-          🤖 Generating verification questions...
+          Generating verification questions...
         </div>
         <div style={{ fontSize: '14px', color: '#999', marginTop: '10px' }}>
           Using AI to create questions only you would know
@@ -115,7 +115,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
         marginBottom: '20px',
         color: '#03045E'
       }}>
-        🔐 Verify Ownership
+        Verify Ownership
       </h2>
 
       <p style={{ 
@@ -184,7 +184,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
           marginBottom: '20px',
           fontSize: '14px'
         }}>
-          ❌ {error}
+          {error}
         </div>
       )}
 
@@ -204,7 +204,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
           transition: 'all 0.3s'
         }}
       >
-        {submitting ? '🔍 Verifying...' : '✅ Submit Answers'}
+        {submitting ? 'Verifying...' : 'Submit Answers'}
       </button>
 
       <div style={{

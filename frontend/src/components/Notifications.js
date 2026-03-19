@@ -16,14 +16,14 @@ const Notifications = ({ user, token }) => {
         {
           id: 1,
           title: "Item Successfully Returned",
-          message: "🎊 Success! Your item has been successfully returned. Case closed!",
+          message: "Success! Your item has been successfully returned. Case closed!",
           read: false,
           created_at: new Date().toISOString()
         },
         {
           id: 2,
           title: "Match Alert",
-          message: "📱 Match Alert! Someone has claimed 1 of your found items. They are currently going through verification. You'll be contacted if verified.",
+          message: "Match Alert! Someone has claimed 1 of your found items. They are currently going through verification. You'll be contacted if verified.",
           read: false,
           created_at: new Date(Date.now() - 86400000).toISOString() // 1 day ago
         }
@@ -78,7 +78,7 @@ const Notifications = ({ user, token }) => {
       <div style={{background: 'linear-gradient(135deg, rgba(166,77,121,0.2), rgba(79,28,81,0.35))', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 15, padding: 20}}>
         {!Array.isArray(notifications) || notifications.length === 0 ? (
           <div style={{textAlign: 'center', padding: 40, color: '#666'}}>
-            <div style={{fontSize: 48, marginBottom: 20}}>📭</div>
+            <div style={{fontSize: 48, marginBottom: 20}}></div>
             <div style={{fontSize: 18, fontWeight: '600', marginBottom: 10}}>No notifications yet</div>
             <div style={{fontSize: 14}}>You'll receive notifications when items are matched or verified</div>
           </div>
