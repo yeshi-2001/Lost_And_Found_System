@@ -86,7 +86,7 @@ const Login = ({ onLogin }) => {
             .login-input { background: #ede0f7 !important; border: 1px solid rgba(161,22,220,0.4) !important; border-radius: 4px; padding: 0 20px; font-size: clamp(18px, 2vw, 24px); font-family: Calibri; outline: none; width: 100%; height: 60px; color: black; }
             .login-input:-webkit-autofill, .login-input:-webkit-autofill:hover, .login-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #ede0f7 inset !important; box-shadow: 0 0 0px 1000px #ede0f7 inset !important; }
           `}</style>
-          <form onSubmit={handleSubmit} style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
+          <form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
             <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="text"
@@ -94,6 +94,7 @@ const Login = ({ onLogin }) => {
               value={formData.login}
               onChange={handleChange}
               placeholder="Email or Registration number"
+              autoComplete="off"
               className="login-input"
               style={{border: `1px solid ${fieldErrors.login ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
@@ -108,6 +109,7 @@ const Login = ({ onLogin }) => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
+              autoComplete="new-password"
               className="login-input"
               style={{border: `1px solid ${fieldErrors.password ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required

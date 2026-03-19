@@ -185,7 +185,7 @@ const Register = ({ onLogin }) => {
             .reg-input { background: #ede0f7 !important; border: 1px solid rgba(161,22,220,0.4) !important; border-radius: 4px; padding: 0 15px; font-size: 16px; font-family: Calibri; outline: none; width: 100%; height: 50px; color: black; }
             .reg-input:-webkit-autofill, .reg-input:-webkit-autofill:hover, .reg-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #ede0f7 inset !important; box-shadow: 0 0 0px 1000px #ede0f7 inset !important; }
           `}</style>
-          <form onSubmit={handleSubmit} style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px'}}>
+          <form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px'}}>
             <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
             <input
               type="text"
@@ -193,6 +193,7 @@ const Register = ({ onLogin }) => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your full name"
+              autoComplete="off"
               className="reg-input"
               style={{border: `1px solid ${fieldErrors.name ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
@@ -207,6 +208,7 @@ const Register = ({ onLogin }) => {
               value={formData.registration_number}
               onChange={handleChange}
               placeholder="Registration number (e.g., 21com76, 21computerscience123)"
+              autoComplete="off"
               className="reg-input"
               style={{border: `1px solid ${formData.registration_number ? (regNumberValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.registration_number ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
@@ -225,6 +227,7 @@ const Register = ({ onLogin }) => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email (e.g., student@university.edu)"
+              autoComplete="off"
               className="reg-input"
               style={{border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.email ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
@@ -261,6 +264,7 @@ const Register = ({ onLogin }) => {
               onFocus={() => setPasswordFocused(true)}
               onBlur={() => setPasswordFocused(false)}
               placeholder="Create a Strong password"
+              autoComplete="new-password"
               className="reg-input"
               style={{border: `1px solid ${formData.password ? (Object.values(passwordValidation).every(Boolean) ? '#28a745' : '#dc3545') : (fieldErrors.password ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
               required
@@ -296,6 +300,7 @@ const Register = ({ onLogin }) => {
               value={formData.contact_number}
               onChange={handleChange}
               placeholder="Enter your contact number"
+              autoComplete="off"
               className="reg-input"
               style={{border: `1px solid ${fieldErrors.contact_number ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
               required
