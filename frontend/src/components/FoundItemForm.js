@@ -525,13 +525,8 @@ const FoundItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: 'linear-gradient(155deg, #210F37 0%, #4F1C51 40%, #6A1E55 70%, #A64D79 100%)', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
-      {/* Orbs */}
-      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '-10%', right: '-5%', width: '45%', height: '50%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.35) 0%, transparent 70%)', filter: 'blur(60px)'}} />
-        <div style={{position: 'absolute', bottom: '5%', left: '-5%', width: '40%', height: '45%', background: 'radial-gradient(ellipse, rgba(33,15,55,0.5) 0%, transparent 70%)', filter: 'blur(50px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px)'}} />
-      </div>
+    <div style={{minHeight: '100vh', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+
       <div style={{maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30, textAlign: 'center'}}>
           <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: 'white'}}>Report Found Item</h1>

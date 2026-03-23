@@ -624,26 +624,14 @@ const LostItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #210F37 0%, #4F1C51 30%, #6A1E55 60%, #A64D79 100%)', padding: 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
-      {/* Background design layers */}
-      <div style={{position: 'fixed', top: 0, left: window.innerWidth > 768 ? 280 : 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none'}}>
-        {/* Glowing blurred orbs */}
-        <div style={{position: 'absolute', top: '-10%', left: '-5%', width: '60%', height: '55%', background: 'linear-gradient(135deg, rgba(166,77,121,0.45), rgba(106,30,85,0.2))', borderRadius: '50%', filter: 'blur(70px)', transform: 'rotate(-15deg)'}} />
-        <div style={{position: 'absolute', bottom: '-10%', right: '-5%', width: '60%', height: '55%', background: 'linear-gradient(135deg, rgba(79,28,81,0.5), rgba(33,15,55,0.3))', borderRadius: '50%', filter: 'blur(80px)', transform: 'rotate(20deg)'}} />
-        <div style={{position: 'absolute', top: '35%', left: '25%', width: '45%', height: '40%', background: 'radial-gradient(circle, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(60px)'}} />
-        {/* Diagonal line layers */}
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 55px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 75px)'}} />
-        {/* Extra glowing spots */}
-        <div style={{position: 'absolute', top: '8%', right: '12%', width: 280, height: 280, background: 'radial-gradient(circle, rgba(166,77,121,0.4) 0%, transparent 70%)', filter: 'blur(45px)'}} />
-        <div style={{position: 'absolute', bottom: '15%', left: '8%', width: 220, height: 220, background: 'radial-gradient(circle, rgba(79,28,81,0.45) 0%, transparent 70%)', filter: 'blur(55px)'}} />
-      </div>
+    <div style={{minHeight: '100vh', padding: 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+
       <div style={{position: 'relative', zIndex: 1}}>
       <div style={{maxWidth: 800, margin: '0 auto'}}>
         <div style={{marginBottom: 30, textAlign: 'center'}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: 'white', textShadow: '0 2px 12px rgba(166,77,121,0.5)'}}>Report Lost Item</h1>
-          <p style={{fontSize: 18, color: 'rgba(237,200,255,0.9)', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
-          <p style={{fontSize: 16, color: '#e0aaff', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>We'll search our database for matches</p>
+          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: '#000000'}}>Report Lost Item</h1>
+          <p style={{fontSize: 18, color: '#4b5563', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
+          <p style={{fontSize: 16, color: '#9ca3af', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>We'll search our database for matches</p>
         </div>
 
         <form style={{background: '#f5eef8', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>

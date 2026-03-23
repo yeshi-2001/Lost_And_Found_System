@@ -499,13 +499,8 @@ const Profile = ({ user, token, onLogout }) => {
   );
 
   return (
-    <div style={{minHeight: '100vh', background: 'linear-gradient(175deg, #180630 0%, #3a0a5a 35%, #6e1a62 65%, #9e2858 100%)', paddingTop: 60, fontFamily: 'Roboto, sans-serif', position: 'relative'}}>
-      {/* Orbs */}
-      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '-5%', right: '-5%', width: '40%', height: '45%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(60px)'}} />
-        <div style={{position: 'absolute', bottom: '10%', left: '-5%', width: '35%', height: '40%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.4) 0%, transparent 70%)', filter: 'blur(50px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 65px)'}} />
-      </div>
+    <div style={{minHeight: '100vh', paddingTop: 60, fontFamily: 'Roboto, sans-serif', position: 'relative'}}>
+
       {/* Announcement Bar Navigation */}
       <AnnouncementBar />
       

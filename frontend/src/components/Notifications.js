@@ -62,13 +62,8 @@ const Notifications = ({ user, token }) => {
   }
 
   return (
-    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', background: 'linear-gradient(110deg, #1a0a3e 0%, #3d1558 40%, #7a2060 70%, #b03070 100%)', position: 'relative'}}>
-      {/* Orbs */}
-      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '5%', right: '-5%', width: '35%', height: '40%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(50px)'}} />
-        <div style={{position: 'absolute', bottom: '15%', left: '5%', width: '30%', height: '35%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.4) 0%, transparent 70%)', filter: 'blur(40px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 70px)'}} />
-      </div>
+    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', position: 'relative'}}>
+
       <div style={{position: 'relative', zIndex: 1}}>
       <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', color: 'white', fontFamily: 'Roboto Slab, serif'}}>Notifications</h1>

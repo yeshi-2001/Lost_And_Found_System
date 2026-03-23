@@ -59,13 +59,8 @@ const Matches = ({ user, token }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: 'linear-gradient(145deg, #0f0a2e 0%, #2a0a5e 35%, #5a1060 65%, #8b2060 100%)', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative'}}>
-      {/* Orbs */}
-      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '-10%', right: '-5%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(50px)'}} />
-        <div style={{position: 'absolute', bottom: '10%', left: '10%', width: '35%', height: '35%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.35) 0%, transparent 70%)', filter: 'blur(40px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 60px)'}} />
-      </div>
+    <div style={{minHeight: '100vh', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative'}}>
+
       <div style={{maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif', color: 'white'}}>Your Potential Matches</h1>

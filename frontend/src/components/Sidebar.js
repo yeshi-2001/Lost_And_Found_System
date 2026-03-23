@@ -191,10 +191,7 @@ const Sidebar = ({ user, onLogout, token }) => {
           top: 0,
           width: 280,
           height: '100vh',
-          background: 'linear-gradient(160deg, #3a1a5e 0%, #6b2370 35%, #7e2a65 65%, #b85c8a 100%)',
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 1000,
+          background: 'linear-gradient(160deg, #C5B4E3 0%, #9b7fd4 40%, #4a1a7a 70%, #000000 100%)',
           transform: isMobile ? 'translateX(-100%)' : 'translateX(0)',
           transition: 'transform 0.3s ease',
           overflow: 'hidden'
@@ -236,10 +233,7 @@ const Sidebar = ({ user, onLogout, token }) => {
               top: 0,
               width: 280,
               height: '100vh',
-              background: 'linear-gradient(160deg, #3a1a5e 0%, #6b2370 35%, #7e2a65 65%, #b85c8a 100%)',
-              display: 'flex',
-              flexDirection: 'column',
-              zIndex: 1002,
+              background: 'linear-gradient(160deg, #C5B4E3 0%, #9b7fd4 40%, #4a1a7a 70%, #000000 100%)',
               transform: 'translateX(0)',
               transition: 'transform 0.3s ease',
               overflow: 'hidden'

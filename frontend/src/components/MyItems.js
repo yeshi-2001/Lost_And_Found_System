@@ -59,14 +59,9 @@ const MyItems = ({ user, token }) => {
   }
 
   return (
-    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', background: 'linear-gradient(190deg, #2a0845 0%, #5c1070 40%, #4a1a50 70%, #7a2858 100%)', position: 'relative'}}>
+    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', position: 'relative'}}>
 
-      {/* Orbs */}
-      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '0%', right: '-5%', width: '38%', height: '42%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 70%)', filter: 'blur(55px)'}} />
-        <div style={{position: 'absolute', bottom: '5%', left: '5%', width: '32%', height: '38%', background: 'radial-gradient(ellipse, rgba(79,28,81,0.4) 0%, transparent 70%)', filter: 'blur(45px)'}} />
-        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 60px)'}} />
-      </div>
+
 
       {/* Delete Confirmation Modal */}
       {confirmDelete && (

@@ -26,13 +26,8 @@ const Home = ({ user, onLogout }) => {
   };
 
   return (
-    <div style={{width: '100vw', height: '100vh', position: 'relative', background: 'linear-gradient(135deg, #1a0030 0%, #41005B 25%, #602495 55%, #9a00d6 80%, #BF32BA 100%)', overflow: 'hidden'}}>
-      {/* Edgy purple gradient orbs */}
-      <div style={{position: 'absolute', top: '-10%', right: '-5%', width: '50%', height: '55%', background: 'radial-gradient(ellipse, rgba(212,149,255,0.25) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none'}} />
-      <div style={{position: 'absolute', bottom: '5%', left: '-5%', width: '45%', height: '45%', background: 'radial-gradient(ellipse, rgba(154,0,214,0.35) 0%, transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none'}} />
-      <div style={{position: 'absolute', top: '40%', left: '30%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(191,50,186,0.2) 0%, transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none'}} />
-      {/* Diagonal lines overlay */}
-      <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px)', pointerEvents: 'none'}} />
+    <div style={{width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden'}}>
+
 
 
 
