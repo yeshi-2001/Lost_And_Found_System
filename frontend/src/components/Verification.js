@@ -176,7 +176,7 @@ const Verification = ({ token }) => {
         </h2>
         
         {matchInfo && (
-          <div style={{ background: '#e7f3ff', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
+          <div style={{ background: '#EFEBE9', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
             <p><strong>Match Reference:</strong> {matchId}</p>
             <p><strong>Similarity Score:</strong> {Math.round(matchInfo.similarity_score)}%</p>
             <p><strong>Item:</strong> {matchInfo.item_name} ({matchInfo.category})</p>
@@ -244,3 +244,5 @@ const Verification = ({ token }) => {
 };
 
 export default Verification;
+
+

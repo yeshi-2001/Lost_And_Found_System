@@ -32,12 +32,12 @@ const ForgotPassword = () => {
       <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px)', pointerEvents: 'none', zIndex: 0}} />
       <div style={{width: '100%', height: '146px', left: 0, top: 0, position: 'absolute', background: 'rgba(33,15,55,0.5)', zIndex: 1}} />
       <div style={{width: 1119, height: 673, left: 188, top: 74, position: 'absolute', background: 'rgba(245,238,248,0.97)', boxShadow: '0px 4px 20px rgba(0,0,0,0.4)', borderRadius: 20, zIndex: 2}} />
-      <div style={{left: 377, top: 130, position: 'absolute', color: '#03045E', fontSize: 50, fontFamily: 'Calibri', fontWeight: '700', wordWrap: 'break-word'}}>Reset Your</div>
+      <div style={{left: 377, top: 130, position: 'absolute', color: '#3E2723', fontSize: 50, fontFamily: 'Calibri', fontWeight: '700', wordWrap: 'break-word'}}>Reset Your</div>
       <div style={{left: 377, top: 202, position: 'absolute', color: 'black', fontSize: 50, fontFamily: 'Calibri', fontWeight: '700', wordWrap: 'break-word'}}>Password</div>
       <img style={{width: 827, height: 552, left: -49, top: 399, position: 'absolute', opacity: 0.60}} src="../../image/bg.png" />
       <div style={{width: 301, left: 820, top: 144, position: 'absolute', textAlign: 'center'}}><span style={{color: 'black', fontSize: 28, fontFamily: 'Calibri', fontWeight: '400', wordWrap: 'break-word'}}>Enter your email</span><span style={{color: 'black', fontSize: 24, fontFamily: 'Calibri', fontWeight: '400', wordWrap: 'break-word'}}> to receive reset link</span></div>
       <div style={{width: 220, height: 220, left: 113, top: 17, position: 'absolute', background: 'rgba(245,238,248,0.97)', borderRadius: 9999, zIndex: 3}} />
-      <img style={{width: 220, height: 220, left: 113, top: 17, position: 'absolute', objectFit: 'cover', objectPosition: 'center', borderRadius: 9999, zIndex: 4}} src="image/logo.png" />
+      <img style={{width: 220, height: 220, left: 113, top: 17, position: 'absolute', objectFit: 'cover', objectPosition: 'center', borderRadius: 9999, zIndex: 4}} src="image/logo_black.png" />
       <div style={{width: 295, left: 377, top: 294, position: 'absolute', color: 'black', fontSize: 24, fontFamily: 'Calibri', fontWeight: '400', wordWrap: 'break-word'}}>Your trusted space to recover and return rightful owners</div>
       
       {error && <div className="alert alert-error" style={{position: 'absolute', top: 200, left: 760, width: 420, color: 'red', textAlign: 'center'}}>{error}</div>}
@@ -73,3 +73,5 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+
+

@@ -16,7 +16,7 @@ const Navbar = ({ user, onLogout }) => {
             <Link 
               to="/dashboard" 
               style={{
-                backgroundColor: location.pathname === '/dashboard' ? '#001D3D' : 'transparent',
+                backgroundColor: location.pathname === '/dashboard' ? '#2C1810' : 'transparent',
                 fontWeight: location.pathname === '/dashboard' ? 'bold' : 'normal'
               }}
             >
@@ -27,7 +27,7 @@ const Navbar = ({ user, onLogout }) => {
             <Link 
               to="/found-item" 
               style={{
-                backgroundColor: location.pathname === '/found-item' ? '#001D3D' : 'transparent',
+                backgroundColor: location.pathname === '/found-item' ? '#2C1810' : 'transparent',
                 fontWeight: location.pathname === '/found-item' ? 'bold' : 'normal'
               }}
             >
@@ -38,7 +38,7 @@ const Navbar = ({ user, onLogout }) => {
             <Link 
               to="/lost-item" 
               style={{
-                backgroundColor: location.pathname === '/lost-item' ? '#001D3D' : 'transparent',
+                backgroundColor: location.pathname === '/lost-item' ? '#2C1810' : 'transparent',
                 fontWeight: location.pathname === '/lost-item' ? 'bold' : 'normal'
               }}
             >
@@ -49,7 +49,7 @@ const Navbar = ({ user, onLogout }) => {
             <Link 
               to="/matches" 
               style={{
-                backgroundColor: location.pathname === '/matches' ? '#001D3D' : 'transparent',
+                backgroundColor: location.pathname === '/matches' ? '#2C1810' : 'transparent',
                 fontWeight: location.pathname === '/matches' ? 'bold' : 'normal'
               }}
             >
@@ -60,7 +60,7 @@ const Navbar = ({ user, onLogout }) => {
             <Link 
               to="/profile" 
               style={{
-                backgroundColor: location.pathname === '/profile' ? '#001D3D' : 'transparent',
+                backgroundColor: location.pathname === '/profile' ? '#2C1810' : 'transparent',
                 fontWeight: location.pathname === '/profile' ? 'bold' : 'normal'
               }}
             >
@@ -99,3 +99,5 @@ const Navbar = ({ user, onLogout }) => {
 };
 
 export default Navbar;
+
+

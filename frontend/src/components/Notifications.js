@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { notificationAPI } from '../services/api';
+import AppNavbar from './AppNavbar';
 
 const Notifications = ({ user, token }) => {
   const [notifications, setNotifications] = useState([]);
@@ -62,7 +63,11 @@ const Notifications = ({ user, token }) => {
   }
 
   return (
-    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', position: 'relative'}}>
+    <div style={{minHeight: '100vh', background: '#1a0f0d'}}>
+      <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
+      <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: window.innerWidth > 768 ? 30 : 20}}>
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
 
       <div style={{position: 'relative', zIndex: 1}}>
       <div style={{marginBottom: 30}}>
@@ -85,7 +90,7 @@ const Notifications = ({ user, token }) => {
                 onClick={() => !notification.read && markAsRead(notification.id)}
                 style={{
                   padding: 20,
-                  border: `2px solid ${notification.read ? '#e9ecef' : '#03045E'}`,
+                  border: `2px solid ${notification.read ? '#e9ecef' : '#3E2723'}`,
                   borderRadius: 12,
                   background: notification.read ? '#f8f9fa' : '#EBF5FD',
                   cursor: notification.read ? 'default' : 'pointer',
@@ -96,7 +101,7 @@ const Notifications = ({ user, token }) => {
                   <div style={{
                     fontSize: 16, 
                     fontWeight: '600', 
-                    color: notification.read ? '#666' : '#03045E',
+                    color: notification.read ? '#666' : '#3E2723',
                     flex: 1
                   }}>
                     {notification.title}
@@ -120,7 +125,7 @@ const Notifications = ({ user, token }) => {
                   <div style={{
                     marginTop: 10,
                     fontSize: 12,
-                    color: '#03045E',
+                    color: '#3E2723',
                     fontWeight: '500'
                   }}>
                     Click to mark as read
@@ -132,8 +137,11 @@ const Notifications = ({ user, token }) => {
         )}
       </div>
       </div>
+      </div>
     </div>
   );
 };
 
 export default Notifications;
+
+

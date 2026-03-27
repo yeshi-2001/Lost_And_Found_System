@@ -143,25 +143,25 @@ const Register = ({ onLogin }) => {
   };
 
   return (
-    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(170deg, #0e0630 0%, #2d1060 40%, #6b1f7a 70%, #9b2d6f 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden'}}>
+    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(135deg, #0d0705 0%, #1a0f0d 40%, #3E2723 75%, #6D4C41 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden'}}>
       {/* Mesh orbs */}
       <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.35) 0%, transparent 65%)', filter: 'blur(80px)'}} />
-        <div style={{position: 'absolute', bottom: '-10%', right: '-10%', width: '55%', height: '55%', background: 'radial-gradient(ellipse, rgba(33,15,55,0.6) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(ellipse, rgba(215,168,110,0.25) 0%, transparent 65%)', filter: 'blur(80px)'}} />
+        <div style={{position: 'absolute', bottom: '-10%', right: '-10%', width: '55%', height: '55%', background: 'radial-gradient(ellipse, rgba(62,39,35,0.6) 0%, transparent 70%)', filter: 'blur(60px)'}} />
         <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 55px), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px)'}} />
       </div>
-      <div style={{width: '90%', maxWidth: 1200, display: 'flex', padding: '20px 5%', gap: '40px', background: '#f5eef8', borderRadius: 20, boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', position: 'relative', minHeight: '80vh', zIndex: 5}}>
+      <div style={{width: '90%', maxWidth: 1200, display: 'flex', padding: '20px 5%', gap: '40px', background: '#EFEBE9', borderRadius: 20, boxShadow: '0px 4px 4px 3px rgba(0, 0, 0, 0.25)', position: 'relative', minHeight: '80vh', zIndex: 5}}>
         {/* Logo Circle - Left Upper Corner */}
-        <div style={{width: 150, height: 150, background: '#f5eef8', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
-          <img style={{width: '100%', height: '100%', objectFit: 'contain'}} src="image/logo.png" alt="Logo" />
+        <div style={{width: 150, height: 150, background: '#EFEBE9', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
+          <img style={{width: '100%', height: '100%', objectFit: 'contain'}} src="image/logo_black.png" alt="Logo" />
         </div>
         {/* Background Image */}
-        <img style={{position: 'absolute', bottom: 0, left: 0, width: '70%', height: '80%', objectFit: 'cover', opacity: 0.6, zIndex: 0}} src="image/final.png" alt="Background" />
+        <img style={{position: 'absolute', bottom: 0, left: 0, width: '70%', height: '80%', objectFit: 'cover', opacity: 0.6, zIndex: 0}} src="image/bg_new.png" alt="Background" />
         
         {/* Left Side - Welcome Text */}
         <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', zIndex: 1}}>
-          <div style={{color: '#3b0764', fontSize: 'clamp(32px, 4vw, 50px)', fontFamily: 'Calibri', fontWeight: '700', marginBottom: '10px', textAlign: 'center'}}>Welcome Back to</div>
-          <div style={{color: '#3b0764', fontSize: 'clamp(32px, 4vw, 50px)', fontFamily: 'Calibri', fontWeight: '700', marginBottom: '20px', textAlign: 'center'}}>Back2U</div>
+          <div style={{color: '#3E2723', fontSize: 'clamp(32px, 4vw, 50px)', fontFamily: 'Calibri', fontWeight: '700', marginBottom: '10px', textAlign: 'center'}}>Welcome Back to</div>
+          <div style={{color: '#3E2723', fontSize: 'clamp(32px, 4vw, 50px)', fontFamily: 'Calibri', fontWeight: '700', marginBottom: '20px', textAlign: 'center'}}>Back2U</div>
           <div style={{color: 'black', fontSize: 'clamp(18px, 2vw, 24px)', fontFamily: 'Calibri', maxWidth: '400px', textAlign: 'center', animation: 'fadeInSlide 2s ease-in-out'}}>Your trusted space to recover and return rightful owners</div>
           <style>{`
             @keyframes fadeInSlide {
@@ -182,8 +182,8 @@ const Register = ({ onLogin }) => {
           {error && <div style={{width: '100%', maxWidth: '400px', padding: '10px', marginBottom: '15px', background: '#ffebee', border: '1px solid #f44336', borderRadius: '4px', color: '#d32f2f', textAlign: 'center', fontSize: '14px'}}>{error}</div>}
           
           <style>{`
-            .reg-input { background: #ede0f7 !important; border: 1px solid rgba(161,22,220,0.4) !important; border-radius: 4px; padding: 0 15px; font-size: 16px; font-family: Calibri; outline: none; width: 100%; height: 50px; color: black; }
-            .reg-input:-webkit-autofill, .reg-input:-webkit-autofill:hover, .reg-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #ede0f7 inset !important; box-shadow: 0 0 0px 1000px #ede0f7 inset !important; }
+            .reg-input { background: #D7CCC8 !important; border: 1px solid rgba(109,76,65,0.4) !important; border-radius: 4px; padding: 0 15px; font-size: 16px; font-family: Calibri; outline: none; width: 100%; height: 50px; color: #2C1810; }
+            .reg-input:-webkit-autofill, .reg-input:-webkit-autofill:hover, .reg-input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0px 1000px #D7CCC8 inset !important; box-shadow: 0 0 0px 1000px #D7CCC8 inset !important; }
           `}</style>
           <form onSubmit={handleSubmit} autoComplete="off" style={{width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '15px'}}>
             <div style={{display: 'flex', flexDirection: 'column', gap: 4}}>
@@ -195,7 +195,7 @@ const Register = ({ onLogin }) => {
               placeholder="Enter your full name"
               autoComplete="off"
               className="reg-input"
-              style={{border: `1px solid ${fieldErrors.name ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
+              style={{border: `1px solid ${fieldErrors.name ? '#dc3545' : 'rgba(109,76,65,0.4)'}`}}
               required
             />
             {fieldErrors.name && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.name}</div>}
@@ -210,7 +210,7 @@ const Register = ({ onLogin }) => {
               placeholder="Registration number (e.g., 21com76, 21computerscience123)"
               autoComplete="off"
               className="reg-input"
-              style={{border: `1px solid ${formData.registration_number ? (regNumberValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.registration_number ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
+              style={{border: `1px solid ${formData.registration_number ? (regNumberValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.registration_number ? '#dc3545' : 'rgba(109,76,65,0.4)')}`}}
               required
             />
             {(fieldErrors.registration_number || (formData.registration_number && regNumberValidation.message)) && (
@@ -229,7 +229,7 @@ const Register = ({ onLogin }) => {
               placeholder="Enter your email (e.g., student@university.edu)"
               autoComplete="off"
               className="reg-input"
-              style={{border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.email ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
+              style={{border: `1px solid ${formData.email ? (emailValidation.isValid ? '#28a745' : '#dc3545') : (fieldErrors.email ? '#dc3545' : 'rgba(109,76,65,0.4)')}`}}
               required
             />
             {(fieldErrors.email || (formData.email && emailValidation.message)) && (
@@ -244,7 +244,7 @@ const Register = ({ onLogin }) => {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              style={{width: '100%', height: '50px', background: '#ede0f7', border: `1px solid ${fieldErrors.department ? '#dc3545' : 'rgba(161,22,220,0.4)'}`, borderRadius: '4px', padding: '0 15px', fontSize: '16px', fontFamily: 'Calibri', color: formData.department ? 'black' : 'rgba(0,0,0,0.5)', outline: 'none'}}
+              style={{width: '100%', height: '50px', background: '#D7CCC8', border: `1px solid ${fieldErrors.department ? '#dc3545' : 'rgba(109,76,65,0.4)'}`, borderRadius: '4px', padding: '0 15px', fontSize: '16px', fontFamily: 'Calibri', color: formData.department ? '#2C1810' : 'rgba(44,24,16,0.5)', outline: 'none'}}
               required
             >
               <option value="">Select your department</option>
@@ -266,14 +266,14 @@ const Register = ({ onLogin }) => {
               placeholder="Create a Strong password"
               autoComplete="new-password"
               className="reg-input"
-              style={{border: `1px solid ${formData.password ? (Object.values(passwordValidation).every(Boolean) ? '#28a745' : '#dc3545') : (fieldErrors.password ? '#dc3545' : 'rgba(161,22,220,0.4)')}`}}
+              style={{border: `1px solid ${formData.password ? (Object.values(passwordValidation).every(Boolean) ? '#28a745' : '#dc3545') : (fieldErrors.password ? '#dc3545' : 'rgba(109,76,65,0.4)')}`}}
               required
             />
             {fieldErrors.password && !passwordFocused && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.password}</div>}
             
             {passwordFocused && formData.password && (
-              <div style={{background: '#f5eef8', border: '1px solid #ddd', borderRadius: '4px', padding: '10px', fontSize: '12px', fontFamily: 'Calibri', marginTop: '-10px'}}>
-                <div style={{fontWeight: 'bold', marginBottom: '5px', color: '#3b0764'}}>Password Requirements:</div>
+              <div style={{background: '#EFEBE9', border: '1px solid #D7CCC8', borderRadius: '4px', padding: '10px', fontSize: '12px', fontFamily: 'Calibri', marginTop: '-10px'}}>
+                <div style={{fontWeight: 'bold', marginBottom: '5px', color: '#3E2723'}}>Password Requirements:</div>
                 <div style={{color: passwordValidation.length ? '#28a745' : '#dc3545'}}>
                   {passwordValidation.length ? '✓' : '✗'} At least 8 characters
                 </div>
@@ -302,14 +302,14 @@ const Register = ({ onLogin }) => {
               placeholder="Enter your contact number"
               autoComplete="off"
               className="reg-input"
-              style={{border: `1px solid ${fieldErrors.contact_number ? '#dc3545' : 'rgba(161,22,220,0.4)'}`}}
+              style={{border: `1px solid ${fieldErrors.contact_number ? '#dc3545' : 'rgba(109,76,65,0.4)'}`}}
               required
             />
             {fieldErrors.contact_number && <div style={{fontSize: 12, color: '#dc3545'}}>✗ {fieldErrors.contact_number}</div>}
             </div>
             
             {/* Terms and Conditions Checkbox */}
-            <div style={{background: fieldErrors.terms ? 'rgba(220,53,69,0.1)' : 'rgba(148,102,153,0.15)', border: `1px solid ${fieldErrors.terms ? '#dc3545' : '#ddd'}`, borderRadius: '8px', padding: '15px', fontSize: '12px', fontFamily: 'Calibri'}}>
+            <div style={{background: fieldErrors.terms ? 'rgba(220,53,69,0.1)' : 'rgba(109,76,65,0.1)', border: `1px solid ${fieldErrors.terms ? '#dc3545' : '#D7CCC8'}`, borderRadius: '8px', padding: '15px', fontSize: '12px', fontFamily: 'Calibri'}}>
               <label style={{display: 'flex', alignItems: 'flex-start', cursor: 'pointer', color: '#333'}}>
                 <input
                   type="checkbox"
@@ -328,7 +328,7 @@ const Register = ({ onLogin }) => {
                 <span>
                   I have read and agree to the{' '}
                   <span
-                    style={{color: '#3b0764', textDecoration: 'underline', cursor: 'pointer'}}
+                    style={{color: '#3E2723', textDecoration: 'underline', cursor: 'pointer'}}
                     onClick={() => {
                       localStorage.setItem('registrationFormData', JSON.stringify(formData));
                       navigate('/terms');
@@ -343,7 +343,7 @@ const Register = ({ onLogin }) => {
             
             <button 
               type="submit" 
-              style={{width: '100%', height: '55px', background: termsAccepted ? '#3b0764' : '#9CA3AF', borderRadius: '10px', border: 'none', color: 'white', fontSize: '20px', fontFamily: 'Calibri', cursor: termsAccepted ? 'pointer' : 'not-allowed', marginTop: '10px', opacity: termsAccepted ? 1 : 0.6}}
+              style={{width: '100%', height: '55px', background: termsAccepted ? '#3E2723' : '#9CA3AF', borderRadius: '10px', border: 'none', color: 'white', fontSize: '20px', fontFamily: 'Calibri', cursor: termsAccepted ? 'pointer' : 'not-allowed', marginTop: '10px', opacity: termsAccepted ? 1 : 0.6}}
               disabled={loading || !termsAccepted}
             >
               {loading ? 'Signing Up...' : 'Sign Up'}
@@ -351,7 +351,7 @@ const Register = ({ onLogin }) => {
             
             <div style={{textAlign: 'center', color: 'black', fontSize: '16px', fontFamily: 'Calibri', marginTop: '15px'}}>
               Already have an account? 
-              <span style={{color: '#3b0764', cursor: 'pointer', marginLeft: '5px', fontWeight: '500'}} onClick={handleSignInClick}>Sign In</span>
+              <span style={{color: '#3E2723', cursor: 'pointer', marginLeft: '5px', fontWeight: '700'}} onClick={handleSignInClick}>Sign In</span>
             </div>
           </form>
         </div>
@@ -361,3 +361,5 @@ const Register = ({ onLogin }) => {
 };
 
 export default Register;
+
+

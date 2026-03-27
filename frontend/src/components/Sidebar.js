@@ -70,7 +70,7 @@ const Sidebar = ({ user, onLogout, token }) => {
       {/* Logo Section */}
       <div style={{padding: '20px'}}>
         <Link to="/home" style={{textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px'}} onClick={() => setIsMobileOpen(false)}>
-          <img style={{width: 120, height: 120, objectFit: 'contain', marginBottom: 10}} src="/image/logo.png" alt="Logo" />
+          <img style={{width: 120, height: 120, objectFit: 'contain', marginBottom: 10}} src="/image/logo_black.png" alt="Logo" />
           <h1 style={{color: 'white', fontSize: 38, fontWeight: '700', margin: 0, fontFamily: 'Roboto Slab, serif'}}>Back2U</h1>
         </Link>
       </div>
@@ -298,3 +298,5 @@ const Sidebar = ({ user, onLogout, token }) => {
 };
 
 export default Sidebar;
+
+

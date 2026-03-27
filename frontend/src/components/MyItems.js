@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { itemsAPI } from '../services/api';
+import AppNavbar from './AppNavbar';
 
 const MyItems = ({ user, token }) => {
   const [items, setItems] = useState({ found: [], lost: [] });
@@ -59,7 +60,11 @@ const MyItems = ({ user, token }) => {
   }
 
   return (
-    <div style={{marginLeft: window.innerWidth > 768 ? 280 : 0, flex: 1, padding: window.innerWidth > 768 ? 30 : 20, paddingTop: window.innerWidth <= 768 ? 80 : 30, minHeight: '100vh', position: 'relative'}}>
+    <div style={{minHeight: '100vh', background: '#1a0f0d'}}>
+      <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
+      <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: window.innerWidth > 768 ? '50px 30px 30px' : '50px 20px 20px'}}>
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
 
 
 
@@ -91,7 +96,7 @@ const MyItems = ({ user, token }) => {
             padding: '12px 20px',
             border: 'none',
             borderRadius: 8,
-            background: activeTab === 'found' ? '#03045E' : 'transparent',
+            background: activeTab === 'found' ? '#3E2723' : 'transparent',
             color: activeTab === 'found' ? 'white' : '#666',
             fontSize: 16,
             fontWeight: '600',
@@ -108,7 +113,7 @@ const MyItems = ({ user, token }) => {
             padding: '12px 20px',
             border: 'none',
             borderRadius: 8,
-            background: activeTab === 'lost' ? '#03045E' : 'transparent',
+            background: activeTab === 'lost' ? '#3E2723' : 'transparent',
             color: activeTab === 'lost' ? 'white' : '#666',
             fontSize: 16,
             fontWeight: '600',
@@ -214,8 +219,11 @@ const MyItems = ({ user, token }) => {
           </div>
         )}
       </div>
+      </div>
     </div>
   );
 };
 
 export default MyItems;
+
+

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { verificationAPI, returnsAPI } from '../services/api';
+import AppNavbar from './AppNavbar';
 
 const Matches = ({ user, token }) => {
   const navigate = useNavigate();
@@ -59,9 +60,12 @@ const Matches = ({ user, token }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Inter, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative'}}>
-
-      <div style={{maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1}}>
+    <div style={{minHeight: '100vh', fontFamily: 'Inter, sans-serif', background: '#1a0f0d'}}>
+      <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
+      <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: 20}}>
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+      <div style={{maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1, paddingTop: 50}}>
         <div style={{marginBottom: 30}}>
           <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', fontFamily: 'Roboto Slab, serif', color: 'white'}}>Your Potential Matches</h1>
         </div>
@@ -75,14 +79,14 @@ const Matches = ({ user, token }) => {
               We haven't found any potential matches yet. 
               Don't worry, we'll notify you as soon as there's a match!
             </p>
-            <Link to="/lost-item" style={{background: '#03045E', color: 'white', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', display: 'inline-block'}}>
+            <Link to="/lost-item" style={{background: '#3E2723', color: 'white', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', display: 'inline-block'}}>
               Report Another Lost Item
             </Link>
           </div>
         ) : (
           <>
             {matches.some(m => m.user_role === 'owner' && m.status === 'pending_verification') && (
-              <div style={{background: '#EFF6FF', color: '#1F2937', padding: 15, borderRadius: 8, marginBottom: 30}}>
+              <div style={{background: '#EFEBE9', color: '#1F2937', padding: 15, borderRadius: 8, marginBottom: 30}}>
                 <strong>Great news!</strong> We found {matches.filter(m => m.user_role === 'owner' && m.status === 'pending_verification').length} potential match(es) for your lost items. 
                 Click "Verify Ownership" to answer questions and confirm if it's your item.
               </div>
@@ -108,8 +112,8 @@ const Matches = ({ user, token }) => {
                     {match.found_item_name}
                   </h3>
                   <span style={{ 
-                    background: match.user_role === 'owner' ? '#e7f3ff' : '#e8f5e8',
-                    color: match.user_role === 'owner' ? '#0066cc' : '#28a745',
+                    background: match.user_role === 'owner' ? '#EFEBE9' : '#e8f5e8',
+                    color: match.user_role === 'owner' ? '#6D4C41' : '#28a745',
                     padding: '4px 8px',
                     borderRadius: '4px',
                     fontSize: '12px',
@@ -124,7 +128,7 @@ const Matches = ({ user, token }) => {
                     {match.status === 'pending_verification' && (
                       <Link 
                         to={`/verification/${match.id}`}
-                        style={{background: '#03045E', color: 'white', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', fontSize: 14}}
+                        style={{background: '#3E2723', color: 'white', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', fontSize: 14}}
                       >
                         Verify Ownership
                       </Link>
@@ -312,8 +316,8 @@ const Matches = ({ user, token }) => {
               {match.user_role === 'owner' ? (
                 <div>
                   {match.status === 'pending_verification' && (
-                    <div style={{ marginTop: '15px', padding: '15px', background: '#e7f3ff', borderRadius: '8px' }}>
-                      <h5 style={{ margin: '0 0 10px 0', color: '#0066cc' }}>
+                    <div style={{ marginTop: '15px', padding: '15px', background: '#EFEBE9', borderRadius: '8px' }}>
+                      <h5 style={{ margin: '0 0 10px 0', color: '#6D4C41' }}>
                         Next Step: Ownership Verification
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
@@ -336,8 +340,8 @@ const Matches = ({ user, token }) => {
                   )}
                   
                   {(match.status === 'returned_to_owner' || match.status === 'returned_by_finder') && (
-                    <div style={{ marginTop: '15px', padding: '15px', background: '#d1ecf1', borderRadius: '8px' }}>
-                      <h5 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>
+                    <div style={{ marginTop: '15px', padding: '15px', background: '#EFEBE9', borderRadius: '8px' }}>
+                      <h5 style={{ margin: '0 0 10px 0', color: '#3E2723' }}>
                         Case Closed Successfully!
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
@@ -373,8 +377,8 @@ const Matches = ({ user, token }) => {
                   )}
                   
                   {(match.status === 'returned_to_owner' || match.status === 'returned_by_finder') && (
-                    <div style={{ marginTop: '15px', padding: '15px', background: '#d1ecf1', borderRadius: '8px' }}>
-                      <h5 style={{ margin: '0 0 10px 0', color: '#0c5460' }}>
+                    <div style={{ marginTop: '15px', padding: '15px', background: '#EFEBE9', borderRadius: '8px' }}>
+                      <h5 style={{ margin: '0 0 10px 0', color: '#3E2723' }}>
                         Item Successfully Returned!
                       </h5>
                       <p style={{ margin: '0', fontSize: '14px', color: '#333' }}>
@@ -397,7 +401,7 @@ const Matches = ({ user, token }) => {
                 <Link to="/lost-item" style={{background: 'transparent', color: '#374151', border: '2px solid #D1D5DB', padding: '12px 24px', borderRadius: 8, textDecoration: 'none'}}>
                   Report Another Item
                 </Link>
-                <Link to="/dashboard" style={{background: '#03045E', color: 'white', padding: '12px 24px', borderRadius: 8, textDecoration: 'none'}}>
+                <Link to="/dashboard" style={{background: '#3E2723', color: 'white', padding: '12px 24px', borderRadius: 8, textDecoration: 'none'}}>
                   Back to Dashboard
                 </Link>
               </div>
@@ -405,8 +409,11 @@ const Matches = ({ user, token }) => {
           </>
         )}
       </div>
+      </div>
     </div>
   );
 };
 
 export default Matches;
+
+

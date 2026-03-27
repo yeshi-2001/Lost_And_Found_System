@@ -175,7 +175,7 @@ const Profile = ({ user, token, onLogout }) => {
   const styles = {
     container: {
       minHeight: '100vh',
-      background: '#EFF6FF',
+      background: '#EFEBE9',
       padding: '20px',
       fontFamily: 'Calibri, sans-serif'
     },
@@ -189,7 +189,7 @@ const Profile = ({ user, token, onLogout }) => {
     backButton: {
       background: 'none',
       border: 'none',
-      color: '#03045E',
+      color: '#3E2723',
       fontSize: '16px',
       cursor: 'pointer',
       marginBottom: '20px',
@@ -204,7 +204,7 @@ const Profile = ({ user, token, onLogout }) => {
       fontWeight: 'bold'
     },
     section: {
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '30px',
       marginBottom: '20px',
@@ -223,7 +223,7 @@ const Profile = ({ user, token, onLogout }) => {
       width: '150px',
       height: '150px',
       borderRadius: '50%',
-      background: '#03045E',
+      background: '#3E2723',
       color: 'white',
       display: 'flex',
       alignItems: 'center',
@@ -303,7 +303,7 @@ const Profile = ({ user, token, onLogout }) => {
       border: '2px solid #E5E7EB',
       borderRadius: '8px',
       fontSize: '16px',
-      backgroundColor: '#f5eef8',
+      backgroundColor: '#EFEBE9',
       boxSizing: 'border-box'
     },
     error: {
@@ -327,7 +327,7 @@ const Profile = ({ user, token, onLogout }) => {
       transition: 'all 0.2s'
     },
     primaryButton: {
-      background: '#03045E',
+      background: '#3E2723',
       color: 'white'
     },
     secondaryButton: {
@@ -337,8 +337,8 @@ const Profile = ({ user, token, onLogout }) => {
     },
     editButton: {
       background: 'transparent',
-      color: '#03045E',
-      border: '1px solid #03045E',
+      color: '#3E2723',
+      border: '1px solid #3E2723',
       padding: '8px 16px',
       fontSize: '14px'
     },
@@ -372,7 +372,7 @@ const Profile = ({ user, token, onLogout }) => {
       margin: '0'
     },
     contributionCard: {
-      background: 'linear-gradient(135deg, #03045E, #001D3D)',
+      background: 'linear-gradient(135deg, #3E2723, #2C1810)',
       color: 'white',
       padding: '20px',
       borderRadius: '12px',
@@ -421,7 +421,7 @@ const Profile = ({ user, token, onLogout }) => {
       padding: '20px'
     },
     modalContent: {
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '30px',
       maxWidth: '500px',
@@ -467,7 +467,7 @@ const Profile = ({ user, token, onLogout }) => {
       top: 0,
       left: 0,
       right: 0,
-      background: '#03045E',
+      background: '#3E2723',
       color: 'white',
       padding: '12px 20px',
       display: 'flex',
@@ -532,7 +532,7 @@ const Profile = ({ user, token, onLogout }) => {
           {/* LEFT PANEL: Profile Information */}
           <div>
             {/* Profile Header */}
-            <div style={{background: '#f5eef8', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#EFEBE9', borderRadius: 16, padding: 30, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <div style={{display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20}}>
                 <div style={{...styles.avatar, background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)'}}>
                   {profileData.name.split(' ').map(n => n[0]).join('')}
@@ -554,7 +554,7 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
 
             {/* Personal Information Card */}
-            <div style={{background: '#f5eef8', borderRadius: 16, padding: 24, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#EFEBE9', borderRadius: 16, padding: 24, marginBottom: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20}}>
                 <h3 style={{fontSize: 18, fontWeight: '600', margin: 0, color: '#1F2937'}}>Personal Information</h3>
                 {!editMode && (
@@ -704,28 +704,28 @@ const Profile = ({ user, token, onLogout }) => {
 
             {/* Statistics Grid */}
             <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20}}>
-              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+              <div style={{background: '#EFEBE9', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
                 <div style={{fontSize: 32, marginBottom: 8}}>📦</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#3B82F6', marginBottom: 4}}>{profileData.statistics.found_items_active}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Found Items</div>
                 <div style={{background: '#3B82F6', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Active</div>
               </div>
               
-              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
+              <div style={{background: '#EFEBE9', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
                 <div style={{fontSize: 32, marginBottom: 8}}>📢</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#F59E0B', marginBottom: 4}}>{profileData.statistics.lost_items_searching}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Lost Items</div>
                 <div style={{background: '#F59E0B', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>Searching</div>
               </div>
               
-              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+              <div style={{background: '#EFEBE9', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
                 <div style={{fontSize: 32, marginBottom: 8}}>✅</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#10B981', marginBottom: 4}}>{profileData.statistics.successful_returns}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Successful Returns</div>
                 <div style={{background: '#10B981', color: 'white', padding: '2px 8px', borderRadius: 12, fontSize: 10, marginTop: 4, display: 'inline-block'}}>All Time</div>
               </div>
               
-              <div style={{background: '#f5eef8', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+              <div style={{background: '#EFEBE9', padding: 20, borderRadius: 16, boxShadow: '0 4px 12px rgba(0,0,0,0.08)', textAlign: 'center'}}>
                 <div style={{fontSize: 32, marginBottom: 8}}>🎯</div>
                 <div style={{fontSize: 24, fontWeight: 'bold', color: '#8B5CF6', marginBottom: 4}}>{profileData.statistics.total_matches}</div>
                 <div style={{fontSize: 12, color: '#6B7280', fontWeight: '500'}}>Total Matches</div>
@@ -746,7 +746,7 @@ const Profile = ({ user, token, onLogout }) => {
             </div>
 
             {/* Account Actions */}
-            <div style={{background: '#f5eef8', borderRadius: 16, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
+            <div style={{background: '#EFEBE9', borderRadius: 16, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <h3 style={{fontSize: 18, fontWeight: '600', margin: '0 0 16px 0', color: '#1F2937'}}>Account Actions</h3>
               
               <div style={{display: 'flex', flexDirection: 'column', gap: 2}}>
@@ -945,3 +945,5 @@ const Profile = ({ user, token, onLogout }) => {
 };
 
 export default Profile;
+
+

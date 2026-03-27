@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { itemsAPI } from '../services/api';
+import AppNavbar from './AppNavbar';
 
 const LostItemForm = ({ token, user }) => {
   const navigate = useNavigate();
@@ -252,7 +253,7 @@ const LostItemForm = ({ token, user }) => {
     backButton: {
       background: 'none',
       border: 'none',
-      color: '#3b0764',
+      color: '#3E2723',
       fontSize: '16px',
       cursor: 'pointer',
       marginBottom: '20px',
@@ -273,7 +274,7 @@ const LostItemForm = ({ token, user }) => {
     },
     searchNote: {
       fontSize: '16px',
-      color: '#3b0764',
+      color: '#3E2723',
       margin: 0,
       display: 'flex',
       alignItems: 'center',
@@ -283,7 +284,7 @@ const LostItemForm = ({ token, user }) => {
     form: {
       maxWidth: '800px',
       margin: '0 auto',
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '40px',
       boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
@@ -366,7 +367,7 @@ const LostItemForm = ({ token, user }) => {
       textAlign: 'center',
       cursor: 'pointer',
       transition: 'border-color 0.2s',
-      backgroundColor: '#faf5ff',
+      backgroundColor: '#EFEBE9',
       opacity: '0.8'
     },
     imagePreview: {
@@ -455,7 +456,7 @@ const LostItemForm = ({ token, user }) => {
       padding: '12px 32px',
       border: 'none',
       borderRadius: '8px',
-      background: '#3b0764',
+      background: '#3E2723',
       color: 'white',
       fontSize: '16px',
       fontWeight: '600',
@@ -483,7 +484,7 @@ const LostItemForm = ({ token, user }) => {
       padding: '20px'
     },
     modalContent: {
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '40px',
       maxWidth: '500px',
@@ -508,12 +509,12 @@ const LostItemForm = ({ token, user }) => {
             <>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎉</div>
               <h2 style={{ color: '#10B981', marginBottom: '16px' }}>GREAT NEWS!</h2>
-              <h3 style={{ color: '#3b0764', marginBottom: '20px' }}>Potential Match Found!</h3>
+              <h3 style={{ color: '#3E2723', marginBottom: '20px' }}>Potential Match Found!</h3>
               <p style={{ color: '#6B7280', marginBottom: '24px' }}>
                 Someone has reported finding an item that matches your description!
               </p>
               
-              <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#EFEBE9', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 YOUR ITEM</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• {submittedData?.item_name} {submittedData?.brand && `(${submittedData.brand})`}</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• {submittedData?.color} color</p>
@@ -557,11 +558,11 @@ const LostItemForm = ({ token, user }) => {
             <>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>✅</div>
               <h2 style={{ color: '#10B981', marginBottom: '16px' }}>Report Submitted Successfully!</h2>
-              <p style={{ color: '#3b0764', marginBottom: '24px', fontSize: '18px', fontWeight: '600' }}>
+              <p style={{ color: '#3E2723', marginBottom: '24px', fontSize: '18px', fontWeight: '600' }}>
                 We're searching for your item!
               </p>
               
-              <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+              <div style={{ textAlign: 'left', background: '#EFEBE9', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
                 <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 YOUR ITEM</h3>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Item: {submittedData?.item_name}</p>
                 <p style={{ margin: '4px 0', color: '#6B7280' }}>• Brand: {submittedData?.brand || 'Not specified'}</p>
@@ -624,21 +625,30 @@ const LostItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', padding: 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: '#1a0f0d'}}>
+      <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
+      <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: 20}}>
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
 
-      <div style={{position: 'relative', zIndex: 1}}>
-      <div style={{maxWidth: 800, margin: '0 auto'}}>
-        <div style={{marginBottom: 30, textAlign: 'center'}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: '#000000'}}>Report Lost Item</h1>
-          <p style={{fontSize: 18, color: '#4b5563', margin: '0 0 8px 0'}}>We're here to help you find your item!</p>
-          <p style={{fontSize: 16, color: '#9ca3af', margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>We'll search our database for matches</p>
+      <div style={{position: 'relative', zIndex: 1, width: '100%'}}>
+      <div style={{maxWidth: 900, margin: '0 auto', padding: '0 20px'}}>
+        <div style={{marginBottom: 30, paddingTop: 20}}>
+          <div style={{textAlign: 'center'}}>
+            <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 6px 0', color: '#EFEBE9'}}>Report Lost Item</h1>
+            <p style={{fontSize: 18, color: '#D7CCC8', margin: '0 0 4px 0'}}>We're here to help you find your item!</p>
+            <p style={{fontSize: 16, color: '#BCAAA4', margin: 0}}>We'll search our database for matches</p>
+          </div>
         </div>
 
-        <form style={{background: '#f5eef8', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
+        <form style={{background: '#EFEBE9', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'visible'}} onSubmit={handleSubmit}>
+          {/* Logo on top left corner of card */}
+          <div style={{position: 'absolute', top: -39, left: -39, width: 78, height: 78, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', overflow: 'hidden', zIndex: 10}}>
+            <img src="/image/logo_black.png" alt="Logo" style={{width: '95%', height: '95%', objectFit: 'contain'}} />
+          </div>
           <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/bg.png)', backgroundSize: '100% auto', backgroundPosition: 'top center', backgroundRepeat: 'repeat-y', opacity: 0.1, zIndex: 0, pointerEvents: 'none'}} />
         {/* Basic Information */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>BASIC INFORMATION</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -732,7 +742,6 @@ const LostItemForm = ({ token, user }) => {
 
         {/* Where & When */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>WHERE & WHEN</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -831,7 +840,6 @@ const LostItemForm = ({ token, user }) => {
 
         {/* Visual Reference */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>VISUAL REFERENCE (Optional)</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -904,7 +912,6 @@ const LostItemForm = ({ token, user }) => {
 
         {/* Ownership Details */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>OWNERSHIP DETAILS (Important!)</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -959,7 +966,6 @@ const LostItemForm = ({ token, user }) => {
 
         {/* Contact Information */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>CONTACT INFORMATION</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -1010,8 +1016,11 @@ const LostItemForm = ({ token, user }) => {
         </form>
       </div>
       </div>
+      </div>
     </div>
   );
 };
 
 export default LostItemForm;
+
+

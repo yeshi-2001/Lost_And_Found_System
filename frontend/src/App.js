@@ -16,7 +16,6 @@ import ItemCleanup from './components/ItemCleanup';
 import Notifications from './components/Notifications';
 import MyItems from './components/MyItems';
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
 import './App.css';
 
 function AppContent() {
@@ -47,12 +46,11 @@ function AppContent() {
     localStorage.removeItem('user');
   };
 
-  const showSidebar = user && !['/login', '/register', '/terms', '/forgot-password', '/home'].includes(location.pathname) && !location.pathname.startsWith('/reset-password');
+  const publicPaths = ['/login', '/register', '/terms', '/forgot-password', '/home', '/about-us'];
+
 
   return (
     <div className="App">
-      {showSidebar && <Sidebar user={user} onLogout={logout} />}
-      {user && !showSidebar && location.pathname !== '/home' && <Navbar user={user} onLogout={logout} />}
         
         <Routes>
           <Route 
@@ -85,7 +83,7 @@ function AppContent() {
           />
           <Route 
             path="/dashboard" 
-            element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} 
+            element={user ? <Dashboard user={user} onLogout={logout} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/found-item" 
@@ -117,7 +115,7 @@ function AppContent() {
           />
           <Route 
             path="/" 
-            element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} 
+            element={<Navigate to="/home" />} 
           />
         </Routes>
     </div>

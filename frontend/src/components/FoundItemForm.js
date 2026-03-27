@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { itemsAPI } from '../services/api';
+import AppNavbar from './AppNavbar';
 
 const FoundItemForm = ({ token, user }) => {
   const navigate = useNavigate();
@@ -227,7 +228,7 @@ const FoundItemForm = ({ token, user }) => {
     backButton: {
       background: 'none',
       border: 'none',
-      color: '#3b0764',
+      color: '#3E2723',
       fontSize: '16px',
       cursor: 'pointer',
       marginBottom: '20px',
@@ -249,7 +250,7 @@ const FoundItemForm = ({ token, user }) => {
     form: {
       maxWidth: '800px',
       margin: '0 auto',
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '40px',
       boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
@@ -290,7 +291,7 @@ const FoundItemForm = ({ token, user }) => {
       boxSizing: 'border-box'
     },
     inputFocus: {
-      borderColor: '#03045E',
+      borderColor: '#3E2723',
       outline: 'none'
     },
     inputError: {
@@ -331,10 +332,10 @@ const FoundItemForm = ({ token, user }) => {
       textAlign: 'center',
       cursor: 'pointer',
       transition: 'border-color 0.2s',
-      backgroundColor: '#faf5ff'
+      backgroundColor: '#EFEBE9'
     },
     uploadAreaHover: {
-      borderColor: '#3b0764',
+      borderColor: '#3E2723',
       backgroundColor: '#F5F0FF'
     },
     imagePreview: {
@@ -414,7 +415,7 @@ const FoundItemForm = ({ token, user }) => {
       padding: '12px 32px',
       border: 'none',
       borderRadius: '8px',
-      background: '#3b0764',
+      background: '#3E2723',
       color: 'white',
       fontSize: '16px',
       fontWeight: '600',
@@ -439,7 +440,7 @@ const FoundItemForm = ({ token, user }) => {
       padding: '20px'
     },
     modalContent: {
-      background: '#f5eef8',
+      background: '#EFEBE9',
       borderRadius: '16px',
       padding: '40px',
       maxWidth: '500px',
@@ -465,7 +466,7 @@ const FoundItemForm = ({ token, user }) => {
             Thank you for helping our university community!
           </p>
           
-          <div style={{ textAlign: 'left', background: '#faf5ff', padding: '20px', borderRadius: '8px', marginBottom: '24px' }}>
+          <div style={{ textAlign: 'left', background: '#EFEBE9', padding: '20px', borderRadius: '8px', marginBottom: '24px' }}>
             <h3 style={{ margin: '0 0 12px 0', color: '#374151' }}>📋 ITEM DETAILS</h3>
             <p style={{ margin: '4px 0', color: '#6B7280' }}>• Item: {submittedData?.item_name}</p>
             <p style={{ margin: '4px 0', color: '#6B7280' }}>• Brand: {submittedData?.brand || 'Not specified'}</p>
@@ -480,7 +481,7 @@ const FoundItemForm = ({ token, user }) => {
           
           {submittedData?.matches_found ? (
             <div style={{ background: '#F5F0FF', padding: '16px', borderRadius: '8px', marginBottom: '24px' }}>
-              <h3 style={{ margin: '0 0 8px 0', color: '#3b0764' }}>🎯 POTENTIAL MATCHES FOUND!</h3>
+              <h3 style={{ margin: '0 0 8px 0', color: '#3E2723' }}>🎯 POTENTIAL MATCHES FOUND!</h3>
               <p style={{ margin: '0', color: '#1F2937', fontSize: '14px' }}>
                 We found {submittedData.matches.length} potential match(es). The owners will be notified to verify ownership.
               </p>
@@ -525,7 +526,11 @@ const FoundItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', padding: 20, paddingTop: window.innerWidth <= 768 ? 80 : 20, fontFamily: 'Source Sans Pro, sans-serif', marginLeft: window.innerWidth > 768 ? 280 : 0, position: 'relative', overflow: 'hidden'}}>
+    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: '#1a0f0d'}}>
+      <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
+      <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: 20}}>
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
 
       <div style={{maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1}}>
         <div style={{marginBottom: 30, textAlign: 'center'}}>
@@ -533,11 +538,10 @@ const FoundItemForm = ({ token, user }) => {
           <p style={{fontSize: 18, color: 'rgba(237,200,255,0.85)', margin: 0}}>Help a fellow student find their item</p>
         </div>
 
-        <form style={{background: '#f5eef8', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
+        <form style={{background: '#EFEBE9', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
           <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/bg.png)', backgroundSize: '100% auto', backgroundPosition: 'top center', backgroundRepeat: 'repeat-y', opacity: 0.1, zIndex: 0, pointerEvents: 'none'}} />
         {/* Basic Information */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>BASIC INFORMATION</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -629,7 +633,6 @@ const FoundItemForm = ({ token, user }) => {
 
         {/* Location & Date */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>LOCATION & DATE</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -705,7 +708,6 @@ const FoundItemForm = ({ token, user }) => {
 
         {/* Visual Evidence */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>VISUAL EVIDENCE</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -763,7 +765,6 @@ const FoundItemForm = ({ token, user }) => {
 
         {/* Detailed Information */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>DETAILED INFORMATION</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -791,7 +792,6 @@ const FoundItemForm = ({ token, user }) => {
 
         {/* Contact Information */}
         <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>CONTACT INFORMATION</h3>
           
           <div style={styles.fieldGroup}>
             <label style={styles.label}>
@@ -837,8 +837,11 @@ const FoundItemForm = ({ token, user }) => {
         </div>
         </form>
       </div>
+      </div>
     </div>
   );
 };
 
 export default FoundItemForm;
+
+

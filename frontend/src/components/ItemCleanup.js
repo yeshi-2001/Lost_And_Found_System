@@ -93,7 +93,7 @@ const ItemCleanup = ({ user, token }) => {
 
   if (loading) {
     return (
-      <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, fontFamily: 'Inter, sans-serif'}}>
+      <div style={{minHeight: '100vh', background: '#EFEBE9', padding: 20, fontFamily: 'Inter, sans-serif'}}>
         <div style={{maxWidth: 800, margin: '0 auto'}}>
           <p>Loading cleanup options...</p>
         </div>
@@ -102,12 +102,12 @@ const ItemCleanup = ({ user, token }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', background: '#EFF6FF', padding: 20, fontFamily: 'Inter, sans-serif'}}>
+    <div style={{minHeight: '100vh', background: '#EFEBE9', padding: 20, fontFamily: 'Inter, sans-serif'}}>
       <div style={{maxWidth: 800, margin: '0 auto'}}>
         <div style={{marginBottom: 30}}>
           <Link 
             to="/dashboard" 
-            style={{background: 'none', border: 'none', color: '#03045E', fontSize: 16, cursor: 'pointer', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none'}}
+            style={{background: 'none', border: 'none', color: '#3E2723', fontSize: 16, cursor: 'pointer', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none'}}
           >
             ← Back to Dashboard
           </Link>
@@ -122,7 +122,7 @@ const ItemCleanup = ({ user, token }) => {
         )}
 
         <div style={{background: 'white', borderRadius: 16, padding: 30, boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginBottom: 20}}>
-          <h2 style={{fontSize: 24, fontWeight: '700', marginBottom: 20, color: '#03045E'}}>Cleanup Summary</h2>
+          <h2 style={{fontSize: 24, fontWeight: '700', marginBottom: 20, color: '#3E2723'}}>Cleanup Summary</h2>
           
           {cleanupData && cleanupData.total_items > 0 ? (
             <>
@@ -191,16 +191,16 @@ const ItemCleanup = ({ user, token }) => {
           ) : (
             <div style={{textAlign: 'center', padding: 40}}>
               <div style={{fontSize: 48, marginBottom: 20}}>✨</div>
-              <h3 style={{color: '#03045E', marginBottom: 10}}>Your account is clean!</h3>
+              <h3 style={{color: '#3E2723', marginBottom: 10}}>Your account is clean!</h3>
               <p style={{color: '#666'}}>No items need cleanup at this time.</p>
             </div>
           )}
         </div>
 
         <div style={{background: 'white', borderRadius: 16, padding: 30, boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <h3 style={{fontSize: 20, fontWeight: '700', marginBottom: 15, color: '#03045E'}}>ℹ️ Important Information</h3>
+          <h3 style={{fontSize: 20, fontWeight: '700', marginBottom: 15, color: '#3E2723'}}>ℹ️ Important Information</h3>
           
-          <div style={{background: '#EFF6FF', padding: 15, borderRadius: 8, marginBottom: 15}}>
+          <div style={{background: '#EFEBE9', padding: 15, borderRadius: 8, marginBottom: 15}}>
             <h4 style={{margin: '0 0 10px 0', color: '#1E40AF'}}>🔄 Soft Delete (Reversible)</h4>
             <p style={{margin: 0, fontSize: 14, color: '#1E40AF'}}>
               Deleted items are hidden but can be restored within 30 days. After 30 days, they're permanently removed.
@@ -231,3 +231,5 @@ const ItemCleanup = ({ user, token }) => {
 };
 
 export default ItemCleanup;
+
+

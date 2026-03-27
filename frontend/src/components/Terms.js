@@ -17,25 +17,25 @@ const Terms = () => {
   };
 
   return (
-    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(135deg, #4F1C51 0%, #210F37 50%, #6A1E55 100%)', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden'}}>
+    <div style={{width: '100vw', minHeight: '100vh', background: 'linear-gradient(135deg, #3E2723 0%, #5D3A2A 45%, #A07850 80%, #EFEBE9 100%)', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden'}}>
       {/* Radial burst orbs */}
       <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
-        <div style={{position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '80%', height: '60%', background: 'radial-gradient(ellipse, rgba(166,77,121,0.3) 0%, transparent 65%)', filter: 'blur(70px)'}} />
-        <div style={{position: 'absolute', bottom: '-5%', right: '-5%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(106,30,85,0.5) 0%, transparent 70%)', filter: 'blur(40px)'}} />
+        <div style={{position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '80%', height: '60%', background: 'radial-gradient(ellipse, rgba(215,168,110,0.25) 0%, transparent 65%)', filter: 'blur(70px)'}} />
+        <div style={{position: 'absolute', bottom: '-5%', right: '-5%', width: '40%', height: '40%', background: 'radial-gradient(ellipse, rgba(62,39,35,0.6) 0%, transparent 70%)', filter: 'blur(40px)'}} />
         <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 70px)'}} />
       </div>
       {/* Header */}
-      <div style={{width: '100%', height: '50vh', background: 'rgba(33,15,55,0.5)', position: 'relative', flexShrink: 0, zIndex: 1}}>
+      <div style={{width: '100%', height: '50vh', background: 'rgba(62,39,35,0.5)', position: 'relative', flexShrink: 0, zIndex: 1}}>
       </div>
       
       {/* Main Content */}
-      <div style={{background: 'rgba(245,238,248,0.97)', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 20px rgba(0,0,0,0.4)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
+      <div style={{background: 'rgba(239,235,233,0.97)', margin: '0 auto', marginTop: '-35vh', borderRadius: 20, boxShadow: '0px 4px 20px rgba(0,0,0,0.4)', position: 'relative', zIndex: 5, marginBottom: '40px', width: 'fit-content', maxWidth: '90%'}}>
         {/* Logo Circle - Left Upper Corner */}
-        <div style={{width: 150, height: 150, background: 'rgba(245,238,248,0.97)', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
-          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo.png" alt="Logo" />
+        <div style={{width: 150, height: 150, background: 'rgba(239,235,233,0.97)', borderRadius: '50%', zIndex: 2000, boxShadow: '0 4px 8px rgba(0,0,0,0.3)', position: 'absolute', top: '-30px', left: '-30px'}}>
+          <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'translateY(-5px)'}} src="image/logo_black.png" alt="Logo" />
         </div>
         <div style={{maxWidth: '700px', margin: '0 auto', padding: '40px 30px'}}>
-          <h1 style={{color: '#03045E', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
+          <h1 style={{color: '#3E2723', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
             Terms & Conditions - Back2U
           </h1>
           
@@ -47,7 +47,7 @@ const Terms = () => {
           </div>
 
           <div style={{marginBottom: '30px', lineHeight: '1.6', color: '#333'}}>
-            <h3 style={{color: '#03045E', fontSize: '24px', marginBottom: '15px'}}>Data Accuracy Requirements</h3>
+            <h3 style={{color: '#3E2723', fontSize: '24px', marginBottom: '15px'}}>Data Accuracy Requirements</h3>
             <ul style={{paddingLeft: '20px', marginBottom: '20px'}}>
               <li style={{marginBottom: '8px'}}>Users must provide correct and truthful information</li>
               <li style={{marginBottom: '8px'}}>Accurate mobile number is mandatory for match notifications</li>
@@ -84,7 +84,7 @@ const Terms = () => {
               }
             `}</style>
             
-            <h3 style={{color: '#03045E', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>User Responsibilities</h3>
+            <h3 style={{color: '#3E2723', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>User Responsibilities</h3>
             <ul style={{paddingLeft: '20px', marginBottom: '20px'}}>
               <li style={{marginBottom: '8px'}}>Report items honestly and accurately</li>
               <li style={{marginBottom: '8px'}}>Describe lost/found items truthfully</li>
@@ -95,7 +95,7 @@ const Terms = () => {
               <li style={{marginBottom: '8px'}}>Not misuse the system for fraudulent claims</li>
             </ul>
             
-            <h3 style={{color: '#03045E', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>Privacy & Data Protection</h3>
+            <h3 style={{color: '#3E2723', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>Privacy & Data Protection</h3>
             <ul style={{paddingLeft: '20px', marginBottom: '20px'}}>
               <li style={{marginBottom: '8px'}}>Contact information only shared after verification</li>
               <li style={{marginBottom: '8px'}}>Found items remain private (not publicly listed)</li>
@@ -104,7 +104,7 @@ const Terms = () => {
               <li style={{marginBottom: '8px'}}>Users can request data deletion</li>
             </ul>
             
-            <h3 style={{color: '#03045E', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>Consequences of False Information</h3>
+            <h3 style={{color: '#3E2723', fontSize: '24px', marginTop: '30px', marginBottom: '15px'}}>Consequences of False Information</h3>
             <ul style={{paddingLeft: '20px', marginBottom: '20px'}}>
               <li style={{marginBottom: '8px'}}>Account may be suspended or terminated</li>
               <li style={{marginBottom: '8px'}}>Loss of access to platform</li>
@@ -112,7 +112,7 @@ const Terms = () => {
               <li style={{marginBottom: '8px'}}>Legal action for fraud or theft attempts</li>
             </ul>
 
-            <div style={{backgroundColor: '#d1ecf1', border: '1px solid #bee5eb', borderRadius: '6px', padding: '15px', color: '#0c5460', marginTop: '20px'}}>
+            <div style={{backgroundColor: '#EFEBE9', border: '1px solid #D7CCC8', borderRadius: '6px', padding: '15px', color: '#3E2723', marginTop: '20px'}}>
               <strong>By accepting these terms:</strong>
               <br />• You acknowledge that you have read and understood all requirements
               <br />• You agree to provide only accurate and truthful information
@@ -122,7 +122,7 @@ const Terms = () => {
           </div>
           
           {/* Terms Acceptance Checkbox */}
-          <div style={{backgroundColor: 'rgba(79,28,81,0.08)', border: '2px solid #6A1E55', borderRadius: '12px', padding: '25px', marginTop: '30px'}}>
+          <div style={{backgroundColor: 'rgba(109,76,65,0.08)', border: '2px solid #6D4C41', borderRadius: '12px', padding: '25px', marginTop: '30px'}}>
             <label style={{display: 'flex', alignItems: 'flex-start', cursor: 'pointer', fontSize: '16px', fontWeight: '500'}}>
               <input
                 type="checkbox"
@@ -130,7 +130,7 @@ const Terms = () => {
                 onChange={(e) => setAgreed(e.target.checked)}
                 style={{marginRight: '12px', marginTop: '3px', transform: 'scale(1.2)'}}
               />
-              <span style={{color: '#03045E'}}>
+              <span style={{color: '#3E2723'}}>
                 I have read and agree to these Terms & Conditions
               </span>
             </label>
@@ -146,7 +146,7 @@ const Terms = () => {
             <button 
               onClick={handleAccept}
               disabled={!agreed}
-              style={{padding: '15px 30px', backgroundColor: agreed ? '#03045E' : '#9CA3AF', color: 'white', border: 'none', borderRadius: '8px', cursor: agreed ? 'pointer' : 'not-allowed', fontSize: '16px', fontWeight: '500', opacity: agreed ? 1 : 0.6}}
+              style={{padding: '15px 30px', backgroundColor: agreed ? '#3E2723' : '#9CA3AF', color: 'white', border: 'none', borderRadius: '8px', cursor: agreed ? 'pointer' : 'not-allowed', fontSize: '16px', fontWeight: '500', opacity: agreed ? 1 : 0.6}}
             >
               I Agree & Continue
             </button>
@@ -158,3 +158,5 @@ const Terms = () => {
 };
 
 export default Terms;
+
+

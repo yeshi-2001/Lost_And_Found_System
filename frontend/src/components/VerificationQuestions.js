@@ -113,7 +113,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
       <h2 style={{ 
         textAlign: 'center', 
         marginBottom: '20px',
-        color: '#03045E'
+        color: '#3E2723'
       }}>
         Verify Ownership
       </h2>
@@ -142,7 +142,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
             marginBottom: '10px',
             fontSize: '15px',
             fontWeight: '600',
-            color: '#03045E'
+            color: '#3E2723'
           }}>
             Question {index + 1} of {questions.length}
           </label>
@@ -197,7 +197,7 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
           fontSize: '16px',
           fontWeight: '600',
           color: 'white',
-          background: submitting ? '#9CA3AF' : '#03045E',
+          background: submitting ? '#9CA3AF' : '#3E2723',
           border: 'none',
           borderRadius: '8px',
           cursor: submitting ? 'not-allowed' : 'pointer',
@@ -220,3 +220,5 @@ function VerificationQuestions({ matchId, onVerificationComplete }) {
 }
 
 export default VerificationQuestions;
+
+
