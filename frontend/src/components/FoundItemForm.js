@@ -526,19 +526,33 @@ const FoundItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: '#1a0f0d'}}>
+    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: 'linear-gradient(135deg, #3E2723 0%, #5D3A2A 45%, #A07850 80%, #EFEBE9 100%)'}}>
+      {/* Mesh orbs - same as login page */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(ellipse, rgba(215,168,110,0.25) 0%, transparent 65%)', filter: 'blur(80px)'}} />
+        <div style={{position: 'absolute', bottom: '-10%', right: '-10%', width: '55%', height: '55%', background: 'radial-gradient(ellipse, rgba(62,39,35,0.6) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 55px), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px)'}} />
+      </div>
       <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
       <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: 20}}>
-        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
-        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#3E2723', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#3E2723', zIndex: 9}} />
+        {/* Grid pattern overlay */}
+        <div style={{position: 'absolute', inset: 0, borderRadius: '24px 24px 0 0', backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 55px), repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 80px)', pointerEvents: 'none', zIndex: 0}} />
 
-      <div style={{maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1}}>
-        <div style={{marginBottom: 30, textAlign: 'center'}}>
-          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 10px 0', color: 'white'}}>Report Found Item</h1>
-          <p style={{fontSize: 18, color: 'rgba(237,200,255,0.85)', margin: 0}}>Help a fellow student find their item</p>
+      <div style={{position: 'relative', zIndex: 1, width: '100%'}}>
+      <div style={{maxWidth: 900, margin: '0 auto', padding: '0 20px'}}>
+        <div style={{marginBottom: 30, paddingTop: 20, textAlign: 'center'}}>
+          <h1 style={{fontSize: 32, fontWeight: '800', margin: '0 0 6px 0', color: '#EFEBE9'}}>Report Found Item</h1>
+          <p style={{fontSize: 18, color: '#D7CCC8', margin: '0 0 4px 0'}}>Help a fellow student find their item</p>
+          <p style={{fontSize: 16, color: '#BCAAA4', margin: 0}}>Your report helps reunite items with their owners</p>
         </div>
 
-        <form style={{background: '#EFEBE9', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'hidden'}} onSubmit={handleSubmit}>
+        <form style={{background: '#EFEBE9', borderRadius: 16, padding: 40, boxShadow: '0 10px 25px rgba(0,0,0,0.1)', position: 'relative', overflow: 'visible'}} onSubmit={handleSubmit}>
+          {/* Logo on top left corner of card */}
+          <div style={{position: 'absolute', top: -39, left: -39, width: 78, height: 78, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', overflow: 'hidden', zIndex: 10}}>
+            <img src="/image/logo_black.png" alt="Logo" style={{width: '95%', height: '95%', objectFit: 'contain'}} />
+          </div>
           <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url(/image/bg.png)', backgroundSize: '100% auto', backgroundPosition: 'top center', backgroundRepeat: 'repeat-y', opacity: 0.1, zIndex: 0, pointerEvents: 'none'}} />
         {/* Basic Information */}
         <div style={styles.section}>
@@ -836,6 +850,7 @@ const FoundItemForm = ({ token, user }) => {
           </button>
         </div>
         </form>
+      </div>
       </div>
       </div>
     </div>

@@ -115,6 +115,14 @@ def verify_answers():
                 "error": "No verification questions found"
             }), 404
         
+        # Only the lost item owner can verify ownership
+        user_id = int(get_jwt_identity())
+        if match.lost_item.user_id != user_id:
+            return jsonify({
+                "success": False,
+                "error": "Only the lost item owner can verify ownership"
+            }), 403
+        
         found_item = FoundItem.query.get(match.found_item_id)
         if not found_item:
             return jsonify({
@@ -142,6 +150,38 @@ def verify_answers():
         # Update match status based on verification
         if verification_result['verified']:
             match.status = 'verified'
+            # Notify finder that owner was verified and will contact them
+            try:
+                from app.services.email_service import EmailService
+                from app.models.user import User
+                email_service = EmailService()
+                finder = User.query.get(found_item.user_id)
+                owner = User.query.get(match.lost_item.user_id)
+                if finder and owner:
+                    html = f"""
+                    <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                    <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                      <h1 style="color:white;margin:0;">&#9989; Ownership Verified!</h1>
+                    </div>
+                    <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                      <p>Hi <strong>{finder.name}</strong>,</p>
+                      <p>The owner of <strong>{found_item.item_name}</strong> has successfully verified their ownership.</p>
+                      <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                        <p style="margin:0;"><strong>Owner Name:</strong> {owner.name}</p>
+                        <p style="margin:5px 0 0;"><strong>Owner Email:</strong> {owner.email}</p>
+                        <p style="margin:5px 0 0;"><strong>Owner Phone:</strong> {owner.contact_number}</p>
+                      </div>
+                      <p>&#128222; <strong>{owner.name}</strong> will be contacting you soon to arrange the handover. Please be available!</p>
+                      <p>Thank you for your honesty and for helping return this item to its rightful owner.</p>
+                      <div style="text-align:center;margin:25px 0;">
+                        <a href="http://localhost:3000/matches" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">View Matches</a>
+                      </div>
+                      <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                    </div></body></html>
+                    """
+                    email_service.send_email(finder.email, f'Owner Verified - {owner.name} Will Contact You Soon', html)
+            except Exception as e:
+                print(f"Finder notification email error: {e}")
         else:
             match.status = 'verification_failed'
         

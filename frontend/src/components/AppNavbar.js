@@ -39,9 +39,8 @@ const AppNavbar = ({ user, onLogout }) => {
         ))}
       </div>
 
-      {/* Right: logout */}
+      {/* Right: placeholder for balance */}
       <div style={{display: 'flex', alignItems: 'center', gap: 12, minWidth: 160, justifyContent: 'flex-end'}}>
-        <button onClick={onLogout} style={{padding: '7px 16px', borderRadius: 20, border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'white', fontSize: 13, fontWeight: '600', cursor: 'pointer'}}>Log Out</button>
       </div>
     </div>
   );

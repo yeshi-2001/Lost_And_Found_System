@@ -29,7 +29,37 @@ class NotificationService:
         db.session.add(notification)
         db.session.commit()
         
-        # TODO: Send SMS and email
+        # Send email notification
+        try:
+            from app.services.email_service import EmailService
+            from app.models.user import User
+            email_service = EmailService()
+            user = User.query.get(user_id)
+            if user:
+                html = f"""
+                <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                  <h1 style="color:white;margin:0;">&#127881; Match Found!</h1>
+                </div>
+                <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                  <p>Hi <strong>{user.name}</strong>,</p>
+                  <p>We found a potential match for your lost item <strong>{lost_item.item_name}</strong>!</p>
+                  <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:0;"><strong>Match Score:</strong> {round(float(match.similarity_score))}%</p>
+                    <p style="margin:5px 0 0;"><strong>Found at:</strong> {found_item.location}</p>
+                    <p style="margin:5px 0 0;"><strong>Found on:</strong> {found_item.date_found}</p>
+                  </div>
+                  <div style="text-align:center;margin:25px 0;">
+                    <a href="http://localhost:3000/matches" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">Verify Ownership Now</a>
+                  </div>
+                  <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                </div>
+                </body></html>
+                """
+                email_service.send_email(user.email, f'Match Found for {lost_item.item_name} - Back2U', html)
+        except Exception as e:
+            print(f"Match notification email error: {e}")
+        
         return notification
     
     def send_verification_ready_notification(self, user_id, match):
@@ -90,6 +120,63 @@ class NotificationService:
         db.session.add(owner_notification)
         db.session.add(finder_notification)
         db.session.commit()
+        
+        # Send emails to both parties
+        try:
+            from app.services.email_service import EmailService
+            email_service = EmailService()
+            owner = lost_item.user
+            finder = found_item.user
+            
+            if owner:
+                owner_html = f"""
+                <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                  <h1 style="color:white;margin:0;">&#127881; Your Item is Verified!</h1>
+                </div>
+                <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                  <p>Hi <strong>{owner.name}</strong>,</p>
+                  <p>You have been verified as the owner of <strong>{lost_item.item_name}</strong>. Here are the finder's contact details:</p>
+                  <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:0;"><strong>Name:</strong> {finder.name if finder else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Email:</strong> {finder.email if finder else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Phone:</strong> {finder.contact_number if finder else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Registration:</strong> {finder.registration_number if finder else 'N/A'}</p>
+                  </div>
+                  <p>Please contact the finder to arrange pickup of your item.</p>
+                  <div style="text-align:center;margin:25px 0;">
+                    <a href="http://localhost:3000/matches" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">View Matches</a>
+                  </div>
+                  <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                </div></body></html>
+                """
+                email_service.send_email(owner.email, f'Ownership Verified - Contact Details for {lost_item.item_name}', owner_html)
+            
+            if finder:
+                finder_html = f"""
+                <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                  <h1 style="color:white;margin:0;">&#9989; Owner Verified!</h1>
+                </div>
+                <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                  <p>Hi <strong>{finder.name}</strong>,</p>
+                  <p>The owner of <strong>{found_item.item_name}</strong> has been verified. Here are their contact details:</p>
+                  <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:0;"><strong>Name:</strong> {owner.name if owner else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Email:</strong> {owner.email if owner else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Phone:</strong> {owner.contact_number if owner else 'N/A'}</p>
+                    <p style="margin:5px 0 0;"><strong>Registration:</strong> {owner.registration_number if owner else 'N/A'}</p>
+                  </div>
+                  <p>The owner will contact you soon to arrange pickup. Thank you for helping!</p>
+                  <div style="text-align:center;margin:25px 0;">
+                    <a href="http://localhost:3000/matches" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">View Matches</a>
+                  </div>
+                  <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                </div></body></html>
+                """
+                email_service.send_email(finder.email, f'Owner Verified - Contact Details Shared for {found_item.item_name}', finder_html)
+        except Exception as e:
+            print(f"Verification success email error: {e}")
         
         return owner_notification, finder_notification
     

@@ -163,6 +163,7 @@ const Dashboard = ({ user, onLogout }) => {
   }
 
   return (
+    <>
     <div style={{display: 'flex', minHeight: '100vh', fontFamily: 'Roboto, sans-serif', background: '#1a0f0d'}}>
       {/* Main Content */}
       <div style={{marginLeft: 0, flex: 1, padding: 0, overflow: 'auto', position: 'relative', background: 'none'}} onClick={() => setShowResults(false)}>
@@ -209,7 +210,7 @@ const Dashboard = ({ user, onLogout }) => {
 
         {/* Welcome text on Layer 1 */}
         <div style={{padding: '30px 30px 60px', position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20}}>
-          <div style={{width: 73, height: 73, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', overflow: 'hidden', flexShrink: 0}}>
+          <div style={{width: 73, height: 73, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', overflow: 'hidden', flexShrink: 0, cursor: 'pointer'}} onClick={() => navigate('/home')}>
             <img src="/image/logo_black.png" alt="Logo" style={{width: 77, height: 77, objectFit: 'contain', display: 'block', margin: 'auto'}} />
           </div>
           <div>
@@ -224,7 +225,7 @@ const Dashboard = ({ user, onLogout }) => {
 
         {/* Layer 3 - content card, lightest layer */}
         <div style={{borderRadius: 20, background: 'linear-gradient(160deg, #8D6E63 0%, #A1887F 30%, #BCAAA4 65%, #EFEBE9 100%)', boxShadow: '0 4px 24px rgba(0,0,0,0.18)', padding: window.innerWidth > 768 ? 24 : 16, position: 'relative', overflow: 'hidden'}}>
-          <div style={{position: 'absolute', inset: 0, backgroundImage: "url('/image/bg_new.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.3, zIndex: 0, pointerEvents: 'none', borderRadius: 20}} />
+          <div style={{position: 'absolute', inset: 0, backgroundImage: "url('/image/bg_new.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.2, zIndex: 0, pointerEvents: 'none', borderRadius: 20}} />
           <div style={{position: 'relative', zIndex: 1}}>
 
           {welcomeInfo.change_details.length > 0 && (
@@ -318,124 +319,106 @@ const Dashboard = ({ user, onLogout }) => {
                   Recent Found
                 </button>
               </div>
-              <Link to="/my-items" style={{fontSize: 13, color: '#3E2723', fontWeight: '600', textDecoration: 'none', opacity: 0.8}}>View All →</Link>
+              <Link to="/my-items" style={{fontSize: 13, color: 'white', fontWeight: '600', textDecoration: 'none', background: '#3E2723', padding: '6px 16px', borderRadius: 20, border: '1px solid rgba(255,255,255,0.2)'}}>View All</Link>
             </div>
 
             {/* Tab Content */}
-            <div style={{background: 'rgba(62,39,35,0.25)', borderRadius: 16, overflow: 'hidden'}}>
+            <div style={{background: 'rgba(30,15,10,0.55)', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)'}}>
               {/* Table Header */}
-              <div style={{display: 'grid', gridTemplateColumns: '2fr 1.2fr 1.2fr 1fr 0.8fr', padding: '10px 16px', background: 'rgba(62,39,35,0.2)', borderBottom: '1px solid rgba(62,39,35,0.2)'}}>
-                <span style={{fontSize: 11, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 0.8}}>Item</span>
-                <span style={{fontSize: 11, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 0.8}}>Category</span>
-                <span style={{fontSize: 11, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 0.8}}>Location</span>
-                <span style={{fontSize: 11, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 0.8}}>Date</span>
-                <span style={{fontSize: 11, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 0.8}}>Status</span>
+              <div style={{display: 'grid', gridTemplateColumns: '2fr 1.2fr 1.2fr 1fr', padding: '12px 16px', background: 'rgba(20,8,4,0.7)', borderBottom: '1px solid rgba(255,255,255,0.15)'}}>
+                <span style={{fontSize: 12, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 1}}>Item</span>
+                <span style={{fontSize: 12, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 1}}>Category</span>
+                <span style={{fontSize: 12, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 1}}>Location</span>
+                <span style={{fontSize: 12, fontWeight: '700', color: '#EFEBE9', textTransform: 'uppercase', letterSpacing: 1}}>Date</span>
               </div>
 
               {/* Rows */}
               {(activeRecentTab === 'lost' ? recentItems.lost : recentItems.found).length > 0 ? (
                 (activeRecentTab === 'lost' ? recentItems.lost : recentItems.found).map((item, index, arr) => (
                   <div key={item.id || index}
-                    style={{display: 'grid', gridTemplateColumns: '2fr 1.2fr 1.2fr 1fr 0.8fr', padding: '12px 16px', borderBottom: index < arr.length - 1 ? '1px solid rgba(62,39,35,0.18)' : 'none', alignItems: 'center', transition: 'background 0.15s', cursor: 'default'}}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(62,39,35,0.15)'}
+                    style={{display: 'grid', gridTemplateColumns: '2fr 1.2fr 1.2fr 1fr', padding: '12px 16px', borderBottom: index < arr.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none', alignItems: 'center', transition: 'background 0.15s', cursor: 'default'}}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
                       <span style={{fontSize: 18}}>{activeRecentTab === 'lost' ? '🔍' : '📦'}</span>
-                      <span style={{fontSize: 14, fontWeight: '600', color: '#EFEBE9'}}>{item.item_name || 'Unknown Item'}</span>
+                      <span style={{fontSize: 14, fontWeight: '600', color: '#FFFFFF'}}>{item.item_name || 'Unknown Item'}</span>
                     </div>
-                    <span style={{fontSize: 13, color: '#D7CCC8'}}>{item.category || '—'}</span>
-                    <span style={{fontSize: 13, color: '#D7CCC8'}}>{item.location || item.location_found || item.location_lost || '—'}</span>
-                    <span style={{fontSize: 12, color: '#BCAAA4'}}>{item.date_found || item.date_lost ? new Date(item.date_found || item.date_lost).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) : '—'}</span>
-                    <span style={{display: 'inline-block', padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: '700', background: activeRecentTab === 'lost' ? 'rgba(220,53,69,0.12)' : 'rgba(40,167,69,0.12)', color: activeRecentTab === 'lost' ? '#dc3545' : '#28a745'}}>
-                      {activeRecentTab === 'lost' ? 'Lost' : 'Found'}
-                    </span>
+                    <span style={{fontSize: 13, color: '#EFEBE9'}}>{item.category || '—'}</span>
+                    <span style={{fontSize: 13, color: '#EFEBE9'}}>{item.location || item.location_found || item.location_lost || '—'}</span>
+                    <span style={{fontSize: 12, color: '#D7CCC8'}}>{item.date_found || item.date_lost ? new Date(item.date_found || item.date_lost).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) : '—'}</span>
                   </div>
                 ))
               ) : (
-                <div style={{padding: '30px 16px', textAlign: 'center', color: '#D7CCC8', fontSize: 13}}>
+                <div style={{padding: '30px 16px', textAlign: 'center', color: '#EFEBE9', fontSize: 13}}>
                   {activeRecentTab === 'lost' ? '🔍 No lost items reported yet' : '📦 No found items reported yet'}
                 </div>
               )}
             </div>
           </div>
 
-          {/* Statistics - moved to bottom */}
+          {/* Statistics */}
           <div style={{background: 'rgba(255,255,255,0.3)', borderRadius: 16, padding: 24, marginBottom: 24, border: '1px solid rgba(255,255,255,0.4)'}}>
             <h2 style={{color: '#3E2723', fontSize: 20, fontWeight: '800', marginBottom: 20}}>Your Statistics</h2>
-          {/* Bar Chart */}
-          {(() => {
-            const chartData = [
-              { label: 'Items Found', value: stats.foundItems, color: '#4ade80' },
-              { label: 'Items Lost', value: stats.lostItems, color: '#ec4899' },
-              { label: 'Potential Matches', value: stats.matches, color: '#8b5cf6' }
-            ];
-            const maxVal = Math.max(...chartData.map(d => d.value), 1);
-            const chartH = 120;
-            const barW = 60;
-            const gap = 40;
-            const svgW = chartData.length * (barW + gap);
-            return (
-              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <svg width="100%" viewBox={`0 0 ${svgW} ${chartH + 40}`} style={{maxWidth: 400}}>
-                  {chartData.map((d, i) => {
-                    const barH = Math.max((d.value / maxVal) * chartH, 4);
-                    const x = i * (barW + gap) + gap / 2;
-                    const y = chartH - barH;
-                    return (
-                      <g key={i}>
-                        <rect x={x} y={y} width={barW} height={barH} rx={6} fill={d.color} opacity={0.9} />
-                        <text x={x + barW / 2} y={y - 6} textAnchor="middle" fill="#3E2723" fontSize={13} fontWeight="700">{d.value}</text>
-                        <text x={x + barW / 2} y={chartH + 18} textAnchor="middle" fill="#5D4037" fontSize={10}>{d.label.split(' ').map((w, wi) => <tspan key={wi} x={x + barW / 2} dy={wi === 0 ? 0 : 13}>{w}</tspan>)}</text>
-                      </g>
-                    );
-                  })}
-                  <line x1={0} y1={chartH} x2={svgW} y2={chartH} stroke="rgba(62,39,35,0.2)" strokeWidth={1} />
-                </svg>
-              </div>
-            );
-          })()}
-        </div>
-        
-        </div>
-        </div> {/* end inner zIndex wrapper */}
-        </div> {/* end layer 3 */}
-        </div> {/* end layer 2 */}
-      </div>
-
-      <DeleteConfirmation
-        isOpen={deleteModal.isOpen}
-        onClose={() => setDeleteModal({ isOpen: false, itemId: null, itemType: null, itemName: '' })}
-        onConfirm={confirmDelete}
-        itemName={deleteModal.itemName}
-        itemType={deleteModal.itemType}
-      />
-
-      {/* Delete Account Modal */}
-      {showDeleteModal && (
-        <div style={{position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: 20}}>
-          <div style={{background: '#EFEBE9', border: '1px solid rgba(255,68,68,0.4)', borderRadius: 16, padding: 30, maxWidth: 420, width: '100%', textAlign: 'center'}}>
-            <h3 style={{color: '#ff4444', fontSize: 20, margin: '0 0 12px 0'}}>Delete Account</h3>
-            <p style={{color: '#5D4037', marginBottom: 16}}>Are you sure you want to permanently delete your account?</p>
-            <p style={{color: '#ff4444', fontWeight: 'bold', fontSize: 13, marginBottom: 16}}>This action CANNOT be undone!</p>
-            <input
-              type="password"
-              placeholder="Enter your password to confirm"
-              value={deletePassword}
-              onChange={(e) => setDeletePassword(e.target.value)}
-              style={{width: '100%', padding: '10px 14px', borderRadius: 8, border: '1px solid #D7CCC8', background: '#D7CCC8', color: '#2C1810', fontSize: 14, marginBottom: 20, boxSizing: 'border-box', outline: 'none'}}
-            />
-            <div style={{display: 'flex', gap: 12, justifyContent: 'center'}}>
-              <button style={{padding: '10px 24px', borderRadius: 8, border: '1px solid #6D4C41', background: 'transparent', color: '#3E2723', fontSize: 14, cursor: 'pointer'}} onClick={() => { setShowDeleteModal(false); setDeletePassword(''); }}>Cancel</button>
-              <button style={{padding: '10px 24px', borderRadius: 8, border: 'none', background: '#ff4444', color: 'white', fontSize: 14, fontWeight: '600', cursor: 'pointer'}} onClick={handleDeleteAccount}>Delete Account</button>
+            <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16}}>
+              {[
+                { label: 'Items Found', value: stats.foundItems, color: '#4ade80', bg: 'rgba(74,222,128,0.15)', icon: '📦' },
+                { label: 'Items Lost', value: stats.lostItems, color: '#ec4899', bg: 'rgba(236,72,153,0.15)', icon: '🔍' },
+                { label: 'Matches', value: stats.matches, color: '#A1887F', bg: 'rgba(161,136,127,0.2)', icon: '🤝' }
+              ].map((stat, i) => (
+                <div key={i} style={{background: stat.bg, borderRadius: 14, padding: '20px 16px', textAlign: 'center', border: `1px solid ${stat.color}40`}}>
+                  <div style={{fontSize: 28, marginBottom: 8}}>{stat.icon}</div>
+                  <div style={{fontSize: 36, fontWeight: '900', color: stat.color, lineHeight: 1, marginBottom: 6}}>{stat.value}</div>
+                  <div style={{fontSize: 13, fontWeight: '600', color: '#3E2723'}}>{stat.label}</div>
+                  {/* Mini bar */}
+                  <div style={{marginTop: 12, background: 'rgba(62,39,35,0.15)', borderRadius: 4, height: 6, overflow: 'hidden'}}>
+                    <div style={{height: '100%', borderRadius: 4, background: stat.color, width: `${Math.min((stat.value / (Math.max(stats.foundItems, stats.lostItems, stats.matches, 1))) * 100, 100)}%`, transition: 'width 0.6s ease'}} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+        
+          </div> {/* end zIndex:1 wrapper */}
+        </div> {/* end layer 3 */}
+        </div> {/* end layer 2 */}
+      </div> {/* end main content */}
+    </div> {/* end outer */}
+
+    <DeleteConfirmation
+      isOpen={deleteModal.isOpen}
+      onClose={() => setDeleteModal({ isOpen: false, itemId: null, itemType: null, itemName: '' })}
+      onConfirm={confirmDelete}
+      itemName={deleteModal.itemName}
+      itemType={deleteModal.itemType}
+    />
+
+    {/* Delete Account Modal */}
+    {showDeleteModal && (
+      <div style={{position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: 20}}>
+        <div style={{background: '#EFEBE9', border: '1px solid rgba(255,68,68,0.4)', borderRadius: 16, padding: 30, maxWidth: 420, width: '100%', textAlign: 'center'}}>
+          <h3 style={{color: '#ff4444', fontSize: 20, margin: '0 0 12px 0'}}>Delete Account</h3>
+          <p style={{color: '#5D4037', marginBottom: 16}}>Are you sure you want to permanently delete your account?</p>
+          <p style={{color: '#ff4444', fontWeight: 'bold', fontSize: 13, marginBottom: 16}}>This action CANNOT be undone!</p>
+          <input
+            type="password"
+            placeholder="Enter your password to confirm"
+            value={deletePassword}
+            onChange={(e) => setDeletePassword(e.target.value)}
+            style={{width: '100%', padding: '10px 14px', borderRadius: 8, border: '1px solid #D7CCC8', background: '#D7CCC8', color: '#2C1810', fontSize: 14, marginBottom: 20, boxSizing: 'border-box', outline: 'none'}}
+          />
+          <div style={{display: 'flex', gap: 12, justifyContent: 'center'}}>
+            <button style={{padding: '10px 24px', borderRadius: 8, border: '1px solid #6D4C41', background: 'transparent', color: '#3E2723', fontSize: 14, cursor: 'pointer'}} onClick={() => { setShowDeleteModal(false); setDeletePassword(''); }}>Cancel</button>
+            <button style={{padding: '10px 24px', borderRadius: 8, border: 'none', background: '#ff4444', color: 'white', fontSize: 14, fontWeight: '600', cursor: 'pointer'}} onClick={handleDeleteAccount}>Delete Account</button>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+    </>
   );
 };
 
 export default Dashboard;
+
 
 

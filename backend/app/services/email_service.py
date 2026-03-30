@@ -16,28 +16,29 @@ class EmailService:
     
     def send_email(self, to_email: str, subject: str, html_content: str):
         """Send email using Gmail SMTP"""
-        # Check if Gmail credentials are configured
         if not self.email or not self.password:
             print("Gmail credentials not configured - emails will be skipped")
             return False
+        
+        # Remove spaces from app password
+        password = self.password.replace(' ', '')
             
         try:
-            # Create email message with HTML content
             msg = MIMEMultipart('alternative')
             msg['Subject'] = subject
             msg['From'] = self.from_email
             msg['To'] = to_email
             
-            # Attach HTML content
             html_part = MIMEText(html_content, 'html')
             msg.attach(html_part)
             
-            # Connect to Gmail SMTP server
+            print(f"Sending email to {to_email} with subject: {subject}")
             server = smtplib.SMTP(self.smtp_server, self.smtp_port)
-            server.starttls()  # Enable TLS encryption
-            server.login(self.email, self.password)  # Login with app password
-            server.send_message(msg)  # Send the email
-            server.quit()  # Close connection
+            server.starttls()
+            server.login(self.email, password)
+            server.send_message(msg)
+            server.quit()
+            print(f"Email sent successfully to {to_email}")
             return True
         except Exception as e:
             print(f"Error sending email: {e}")

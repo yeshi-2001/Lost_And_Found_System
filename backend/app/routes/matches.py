@@ -138,6 +138,37 @@ def get_contact_info(match_id):
         contact_user = match.lost_item.user
         role = 'owner'
     
+    # Send email to finder when owner views their contact
+    if match.lost_item.user_id == user_id:
+        try:
+            from app.services.email_service import EmailService
+            from app.models.user import User
+            email_service = EmailService()
+            finder = User.query.get(match.found_item.user_id)
+            owner = User.query.get(user_id)
+            if finder and owner:
+                html = f"""
+                <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                  <h1 style="color:white;margin:0;">&#128222; Owner Will Contact You!</h1>
+                </div>
+                <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                  <p>Hi <strong>{finder.name}</strong>,</p>
+                  <p><strong>{owner.name}</strong> has just viewed your contact details for the item <strong>{match.found_item.item_name}</strong>.</p>
+                  <p>They will be reaching out to you very soon to arrange the handover. Please keep an eye on your phone and email!</p>
+                  <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:0;"><strong>Owner Name:</strong> {owner.name}</p>
+                    <p style="margin:5px 0 0;"><strong>Owner Email:</strong> {owner.email}</p>
+                    <p style="margin:5px 0 0;"><strong>Owner Phone:</strong> {owner.contact_number}</p>
+                  </div>
+                  <p>Thank you for being a good Samaritan! &#127775;</p>
+                  <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                </div></body></html>
+                """
+                email_service.send_email(finder.email, f'{owner.name} Has Viewed Your Contact - Back2U', html)
+        except Exception as e:
+            print(f"Contact view email error: {e}")
+
     return jsonify({
         'contact_name': contact_user.name,
         'contact_number': contact_user.contact_number,

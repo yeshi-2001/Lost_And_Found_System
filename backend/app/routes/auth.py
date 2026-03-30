@@ -48,6 +48,33 @@ def register():
     db.session.add(user)
     db.session.commit()
     
+    # Send welcome email
+    try:
+        from app.services.email_service import EmailService
+        email_service = EmailService()
+        html = f"""
+        <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+        <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+          <h1 style="color:white;margin:0;">Welcome to Back2U! 🎓</h1>
+        </div>
+        <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+          <p>Hi <strong>{user.name}</strong>,</p>
+          <p>Your account has been successfully created. You can now report lost or found items and our AI will help match them!</p>
+          <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+            <p style="margin:0;"><strong>Registration Number:</strong> {user.registration_number}</p>
+            <p style="margin:5px 0 0;"><strong>Department:</strong> {user.department}</p>
+          </div>
+          <div style="text-align:center;margin:25px 0;">
+            <a href="http://localhost:3000/login" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">Go to Dashboard</a>
+          </div>
+          <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+        </div>
+        </body></html>
+        """
+        email_service.send_email(user.email, 'Welcome to Back2U - Registration Successful!', html)
+    except Exception as e:
+        print(f"Welcome email error: {e}")
+    
     # Create access token
     access_token = create_access_token(identity=str(user.id))
     

@@ -88,13 +88,71 @@ def create_lost_item():
         db.session.add(lost_item)
         db.session.commit()
         
+        # Send item uploaded email
+        try:
+            from app.services.email_service import EmailService
+            from app.models.user import User
+            email_service = EmailService()
+            reporter = User.query.get(user_id)
+            if reporter:
+                html = f"""
+                <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                  <h1 style="color:white;margin:0;">Lost Item Reported 🔍</h1>
+                </div>
+                <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                  <p>Hi <strong>{reporter.name}</strong>,</p>
+                  <p>Your lost item report has been submitted. We are now searching our database for potential matches!</p>
+                  <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:0;"><strong>Item:</strong> {item_name}</p>
+                    <p style="margin:5px 0 0;"><strong>Category:</strong> {category}</p>
+                    <p style="margin:5px 0 0;"><strong>Location:</strong> {location}</p>
+                    <p style="margin:5px 0 0;"><strong>Reference ID:</strong> {reference_id}</p>
+                  </div>
+                  <p>We will notify you immediately if a match is found.</p>
+                  <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                </div>
+                </body></html>
+                """
+                email_service.send_email(reporter.email, f'Lost Item Report Submitted - {item_name}', html)
+        except Exception as e:
+            print(f"Lost item email error: {e}")
+        
         # Find matches automatically
         matches = []
         try:
             matches = matching_service.find_matches_for_lost_item(lost_item)
-            # Send notifications to user
             for match in matches:
                 notification_service.send_match_notification(user_id, match)
+                # Send match found email
+                try:
+                    from app.services.email_service import EmailService
+                    from app.models.user import User
+                    email_service = EmailService()
+                    reporter = User.query.get(user_id)
+                    if reporter:
+                        html = f"""
+                        <html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                        <div style="background:linear-gradient(135deg,#3E2723,#6D4C41);padding:30px;border-radius:10px 10px 0 0;text-align:center;">
+                          <h1 style="color:white;margin:0;">🎉 Match Found!</h1>
+                        </div>
+                        <div style="background:#EFEBE9;padding:30px;border-radius:0 0 10px 10px;">
+                          <p>Hi <strong>{reporter.name}</strong>,</p>
+                          <p>Great news! We found a potential match for your lost item <strong>{item_name}</strong>!</p>
+                          <div style="background:#D7CCC8;padding:15px;border-radius:8px;margin:20px 0;">
+                            <p style="margin:0;"><strong>Match Score:</strong> {round(match.similarity_score)}%</p>
+                            <p style="margin:5px 0 0;"><strong>Found at:</strong> {match.found_item.location}</p>
+                          </div>
+                          <div style="text-align:center;margin:25px 0;">
+                            <a href="http://localhost:3000/matches" style="background:#3E2723;color:white;padding:12px 30px;text-decoration:none;border-radius:8px;font-weight:bold;">Verify Ownership</a>
+                          </div>
+                          <p style="color:#6D4C41;font-size:13px;">Back2U Team</p>
+                        </div>
+                        </body></html>
+                        """
+                        email_service.send_email(reporter.email, f'Match Found for Your Lost Item - {item_name}', html)
+                except Exception as e:
+                    print(f"Match email error: {e}")
         except Exception as e:
             print(f"ERROR: Matching failed: {e}")
         

@@ -625,11 +625,19 @@ const LostItemForm = ({ token, user }) => {
   }
 
   return (
-    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: '#1a0f0d'}}>
+    <div style={{minHeight: '100vh', fontFamily: 'Source Sans Pro, sans-serif', background: 'linear-gradient(135deg, #3E2723 0%, #5D3A2A 45%, #A07850 80%, #EFEBE9 100%)'}}>
+      {/* Mesh orbs - same as login page */}
+      <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0}}>
+        <div style={{position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(ellipse, rgba(215,168,110,0.25) 0%, transparent 65%)', filter: 'blur(80px)'}} />
+        <div style={{position: 'absolute', bottom: '-10%', right: '-10%', width: '55%', height: '55%', background: 'radial-gradient(ellipse, rgba(62,39,35,0.6) 0%, transparent 70%)', filter: 'blur(60px)'}} />
+        <div style={{position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 55px), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px)'}} />
+      </div>
       <AppNavbar user={user} onLogout={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = '/login'; }} />
       <div style={{marginTop: -32, borderRadius: '24px 24px 0 0', background: 'linear-gradient(160deg, #4E342E 0%, #6D4C41 40%, #A1887F 80%, #D7CCC8 100%)', minHeight: 'calc(100vh - 48px)', boxShadow: '0 -6px 30px rgba(0,0,0,0.25)', position: 'relative', zIndex: 10, padding: 20}}>
-        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
-        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, left: 0, width: 24, height: 32, background: '#3E2723', zIndex: 9}} />
+        <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#3E2723', zIndex: 9}} />
+        {/* Grid pattern overlay */}
+        <div style={{position: 'absolute', inset: 0, borderRadius: '24px 24px 0 0', backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 55px), repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 80px)', pointerEvents: 'none', zIndex: 0}} />
 
       <div style={{position: 'relative', zIndex: 1, width: '100%'}}>
       <div style={{maxWidth: 900, margin: '0 auto', padding: '0 20px'}}>

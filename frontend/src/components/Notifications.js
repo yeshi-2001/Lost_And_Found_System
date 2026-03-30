@@ -70,7 +70,7 @@ const Notifications = ({ user, token }) => {
         <div style={{position: 'absolute', top: -32, right: 0, width: 24, height: 32, background: '#1a0f0d', zIndex: 9}} />
 
       <div style={{position: 'relative', zIndex: 1}}>
-      <div style={{marginBottom: 30}}>
+      <div style={{marginBottom: 30, textAlign: 'center', paddingTop: 50}}>
           <h1 style={{fontSize: 32, fontWeight: '700', margin: '0 0 10px 0', color: 'white', fontFamily: 'Roboto Slab, serif'}}>Notifications</h1>
           <p style={{fontSize: 18, color: 'rgba(237,200,255,0.8)', margin: 0}}>Stay updated with your lost and found activities</p>
         </div>
