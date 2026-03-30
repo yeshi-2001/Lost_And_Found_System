@@ -15,7 +15,6 @@ import Verification from './components/Verification';
 import ItemCleanup from './components/ItemCleanup';
 import Notifications from './components/Notifications';
 import MyItems from './components/MyItems';
-import Navbar from './components/Navbar';
 import './App.css';
 
 function AppContent() {
